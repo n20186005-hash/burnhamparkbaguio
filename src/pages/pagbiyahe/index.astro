@@ -1,0 +1,242 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE } from '../../consts';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Pagbiyahe at Paradahan · Paano Pumunta sa Burnham Park',
+	description:
+		'Mula sa Manila: jeepney, taksi, Grab, bus, at eroplano patungong Baguio. Tunay na kalagayan ng paradahan sa paligid ng Burnham Park.',
+	dateModified: new Date().toISOString().split('T')[0],
+	mainEntityOfPage: `${SITE.siteUrl}/pagbiyahe/`,
+	author: { '@type': 'Organization', name: SITE.author },
+	image: SITE.siteUrl + '/og-default.svg',
+};
+---
+
+<PageLayout page="pagbiyahe" structuredData={structuredData}>
+	<div class="prose-fil !max-w-none">
+		<span class="eyebrow">🚌 Pagbiyahe</span>
+		<h2 class="!mt-2">Paano Pumunta sa Burnham Park mula sa kahit saang dako?</h2>
+		<p>
+			Dahil nasa <strong>gitna ng Lungsod ng Baguio</strong> ang Burnham Park, halos lahat ng sasakyang pampubliko ay dumadaan dito.
+			Narito ang pinakamalinaw na gabay ayon sa paraan ng iyong pagbiyahe.
+		</p>
+
+		<h2>Kung Magmamaneho (Mula Manila patungong Baguio)</h2>
+		<p>
+			May dalawang pangunahing daanan patungong Baguio mula sa Metro Manila. Piliin ang isa ayon sa lagay ng panahon at iyong karanasan sa pagmamaneho sa bundok:
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6 mb-12">
+		<div class="card p-6 bg-gradient-to-br from-pine-50 to-cold-50">
+			<h3 class="text-xl font-bold text-pine-950 mb-3">🛣️ Kennon Road</h3>
+			<ul class="space-y-2 text-sm text-cold-700 list-disc ms-5">
+				<li><strong>Pinakamaikli at pinakagandang tanawin</strong> — zigzag sa gilid ng bundok</li>
+				<li>~4–5 oras biyahe mula Manila (traffic-free)</li>
+				<li>Maraming hairpin turn — hindi inirerekomenda sa baguhan</li>
+				<li>Panganib tuwing tag-ulan: <strong>posibleng magsara dahil sa landslide</strong></li>
+				<li>Toll fee + Baguio entry fee (depende)</li>
+			</ul>
+		</div>
+
+		<div class="card p-6 bg-gradient-to-br from-lagoon-50 to-cold-50">
+			<h3 class="text-xl font-bold text-lagoon-800 mb-3">🚗 Marcos Highway (Aspiras-Palispis)</h3>
+			<ul class="space-y-2 text-sm text-cold-700 list-disc ms-5">
+				<li><strong>Mas malawak, mas ligtas</strong> — mainam para sa mga baguhan at pamilya</li>
+				<li>~5–6 oras biyahe (mas mahaba kaysa Kennon)</li>
+				<li>Mas kaunting panganib ng landslide</li>
+				<li>⭐ <strong>Inirerekomenda tuwing Hunyo–Oktubre</strong> (tag-ulan)</li>
+				<li>Maraming gasolinahan at rest area</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h2>Kung Pampublikong Sasakyan</h2>
+
+		<h3>1. Bus mula Manila (Long-Distance)</h3>
+		<p>
+			Ito ang pinakasikat at pinakamatipid na paraan. Halos lahat ng bus papuntang Baguio ay magtatapos sa
+			<em>Dangwa Bus Terminal</em> o <em>Governor Pack Road</em> — mga 10–15 minutong lakad na lamang mula sa Burnham Park.
+		</p>
+	</div>
+
+	<div class="card p-5 sm:p-6 mt-6 mb-12">
+		<table>
+			<thead>
+				<tr>
+					<th>Opisyal na Bus</th>
+					<th>Terminal sa Manila</th>
+					<th>Tipikal na Tagal</th>
+					<th>Tandaan</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Victory Liner</td>
+					<td>Cubao, Pasay, Avenida</td>
+					<td>~6 oras</td>
+					<td>Pinakamaraming biyahe — araw at gabi</td>
+				</tr>
+				<tr>
+					<td>Genesis Transport</td>
+					<td>Cubao, Avenida</td>
+					<td>~6 oras</td>
+					<td>May JoyBus na premiere class (mas mahal)</td>
+				</tr>
+				<tr>
+					<td>Partas</td>
+					<td>Cubao, Pasay</td>
+					<td>~6.5 oras</td>
+					<td>May mga biyaheng gabi para makaiwas sa trapik</td>
+				</tr>
+				<tr>
+					<td>Solid North</td>
+					<td>Cubao, Avenida</td>
+					<td>~6 oras</td>
+					<td>Mas maraming biyahe sa umaga</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="text-xs text-cold-600 mt-4 leading-relaxed">
+			⚠️ Maaaring magbago ang iskedyul at presyo — laging suriin ang opisyal na website o Facebook ng bus bago ang biyahe.
+		</p>
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h3>2. Jeepney · Ang Sasakyang Pambansa ng Baguio</h3>
+		<p>
+			Kapag nasa Baguio ka na, <strong>Jeepney</strong> ang pinakamabilis at pinakamatipid na paraan patungong Burnham Park.
+			Tumingin lamang sa <strong>harap na karatula</strong> ng jeep:
+		</p>
+	</div>
+
+	<div class="card p-5 sm:p-7 mt-6 mb-12 bg-gradient-to-br from-rose-sand-50 via-cold-50 to-pine-50 border-rose-sand-100">
+		<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-800 mb-3">
+			✅ Mga karatulang dapat mong hanapin (pumunta sa Burnham Park):
+		</p>
+		<div class="flex flex-wrap gap-2 sm:gap-3 mb-5">
+			<span class="chip !bg-pine-900 !text-white !border-pine-800 text-sm px-4 py-2">BURNAM PARK</span>
+			<span class="chip !bg-pine-900 !text-white !border-pine-800 text-sm px-4 py-2">SESSION ROAD</span>
+			<span class="chip !bg-pine-900 !text-white !border-pine-800 text-sm px-4 py-2">BAGUIO PUBLIC MARKET</span>
+			<span class="chip !bg-pine-900 !text-white !border-pine-800 text-sm px-4 py-2">CITY HALL</span>
+		</div>
+		<ul class="space-y-2 text-sm text-cold-800 list-disc ms-5 leading-relaxed">
+			<li><strong>Karaniwang pamasahe:</strong> nasa ₱13–15 (depende sa distansya, maaaring magbago)</li>
+			<li>Bumaba sa <strong>Jose Abad Santos Drive</strong> o Harrison Road (pinakamalapit na hintuan)</li>
+			<li>Kung hindi sigurado, sabihin sa drayber: <em>"Para po sa Burnham Park, pakisabi naman po"</em></li>
+			<li>⚠️ Limitado ang jeepney tuwing gabi — maagang umuuwi ang mga drayber, kaya gumamit ng Grab o taxi pagkalipas ng 9 ng gabi</li>
+		</ul>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 mb-12">
+		<div class="card p-6">
+			<div class="text-3xl mb-2">🚕</div>
+			<h3 class="text-lg font-bold text-pine-950 mb-2">Taksi o Grab</h3>
+			<ul class="text-sm text-cold-700 space-y-1.5 list-disc ms-5">
+				<li>Metered Taxi ang pinakakaraniwan</li>
+				<li><strong>Session Rd → Burnham:</strong> ~5 min, ₱40–60</li>
+				<li><strong>Camp John Hay → Parke:</strong> ~10 min, ₱80–100</li>
+				<li>Grab app: available din, tiyakin ang lokasyon</li>
+			</ul>
+		</div>
+
+		<div class="card p-6">
+			<div class="text-3xl mb-2">🛺</div>
+			<h3 class="text-lg font-bold text-pine-950 mb-2">Tricycle (Toto)</h3>
+			<ul class="text-sm text-cold-700 space-y-1.5 list-disc ms-5">
+				<li>Para sa mga maiikling lakad (1 km pababa)</li>
+				<li>Mas mahal kaysa jeep ngunit mabilis</li>
+				<li>Magtanong ng presyo bago sumakay (makipagkasundo muna)</li>
+				<li>Hindi mairerekomenda para sa maraming gamit</li>
+			</ul>
+		</div>
+
+		<div class="card p-6">
+			<div class="text-3xl mb-2">✈️</div>
+			<h3 class="text-lg font-bold text-pine-950 mb-2">Eroplano (Loakan Airport · BAG)</h3>
+			<ul class="text-sm text-cold-700 space-y-1.5 list-disc ms-5">
+				<li>Lokasyon: ~6 km sa timog ng parke</li>
+				<li>Biyahe: 15–20 min (taxi o Grab)</li>
+				<li>Ruta: Manila, Cebu, Davao, Cagayan de Oro</li>
+				<li>Airlines: Cebu Pacific, PAL, AirAsia</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h3>3. Paglalakad o Pagbibisikleta</h3>
+		<ul>
+			<li><strong>Session Rd patungong parke:</strong> ~10–15 minutong pagbaba (dali-dali lang)</li>
+			<li><strong>Baguio Cathedral → parke:</strong> mga 8 minuto</li>
+			<li><strong>SM City Baguio → parke:</strong> 10–15 minuto sa tabing kalsada (maaari ring jeep 2 hinto)</li>
+			<li>Camp John Hay → parke: medyo malayo, ~45–60 minuto — gamit ang bisikleta o Grab</li>
+		</ul>
+
+		<h2>Paradahan · Ang Pinakamahalagang Paalala</h2>
+		<p>
+			⚠️ <strong>Isa sa pinakamalaking hamon sa Burnham Park</strong> ay ang paghahanap ng paradahan. Ito ay
+			may mahabang kasaysayan ng pagtatalo sa pagitan ng gobyerno at mga tagapangalaga ng kalikasan. Narito ang totoong kalagayan:
+		</p>
+	</div>
+
+	<div class="card p-5 sm:p-6 mt-6 mb-8 border-l-4 border-l-yellow-400 bg-yellow-50/40 shadow-soft">
+		<p class="font-bold text-yellow-900 mb-2">⚠️ Mahalagang Katotohanan</p>
+		<p class="text-sm text-cold-800 leading-relaxed mb-0">
+			Wala nang malawak na pampublikong paradahan SA LOOB ng parke (maraming proyekto ang hinarang ng mga grupo ng kalikasan).
+			Ang mga <strong>paradahan sa tabi ng kalsada</strong> (Jose Abad Santos, Harrison Road, Lake Drive, Session Road) ay limitado — mabilis mapuno tuwing katapusan at pista.
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+		<div class="card p-6 bg-green-50/50 border-green-100">
+			<div class="text-3xl mb-2">🟢</div>
+			<h3 class="font-bold text-pine-950 mb-2">Malapit na Paradahan</h3>
+			<ul class="text-sm space-y-1.5 text-cold-700 list-disc ms-5">
+				<li>Metered street parking (Jose Abad Santos Dr)</li>
+				<li>2–5 minutong lakad patungong pasukan</li>
+				<li>May bayad bawat oras o buong araw</li>
+			</ul>
+		</div>
+
+		<div class="card p-6 bg-lagoon-50/50 border-lagoon-100">
+			<div class="text-3xl mb-2">🔵</div>
+			<h3 class="font-bold text-pine-950 mb-2">Kapag Puno na: SM Baguio</h3>
+			<ul class="text-sm space-y-1.5 text-cold-700 list-disc ms-5">
+				<li>Multi-storey parking, maraming bakante</li>
+				<li>10–15 min lakad o 2 jeepney stops</li>
+				<li>May PWD ramps at elevator</li>
+				<li>⭐ Inirerekomendang Plan B</li>
+			</ul>
+		</div>
+
+		<div class="card p-6 bg-rose-sand-50/60 border-rose-sand-100">
+			<div class="text-3xl mb-2">🟡</div>
+			<h3 class="font-bold text-pine-950 mb-2">Iba Pang Opsyon</h3>
+			<ul class="text-sm space-y-1.5 text-cold-700 list-disc ms-5">
+				<li>Baguio City Hall vicinity pay parking</li>
+				<li>Nearby hotels guest parking (kung ikaw ay naka-check in)</li>
+				<li>Bagong multi-storey parking malapit sa parke — <em>kailangang i-verify sa lugar</em></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h3>Mga Paalala sa Paradahan para sa PWD at mga Nakasakay ng Wheelchair</h3>
+		<ul>
+			<li>Malaking bahagi ng Baguio ay may <strong>dalisdis na kalsada</strong> — maingat sa paglalakad.</li>
+			<li>SM City Baguio ang pinakamainam na paradahan para sa may kapansanan: standard ang PWD slots at may elevator.</li>
+			<li>Kung kayo ay may sariling sasakyan, subukang makarating bago mag-9 ng umaga para makakuha ng bakante.</li>
+		</ul>
+
+		<h2>Paalala Bago Umuwi (Balik Biyahe)</h2>
+		<ul>
+			<li>Tuwing <strong>Pebrero (Panagbenga), Semana Santa, at Pasko</strong> — siksikan sa trapik. Maglaan ng <strong>dagdag 2–3 oras</strong> patungong bus terminal o airport.</li>
+			<li>Tuwing tag-ulan (Hunyo–Oktubre), iwasan ang Kennon Road — gamitin ang Marcos Highway.</li>
+			<li>Kukuha ng jeep pag gabi? Mas mabuting Grab o Taxi na lamang — mababawasan na ang biyahe ng jeep pagkalipas ng 9 ng gabi.</li>
+		</ul>
+	</div>
+</PageLayout>

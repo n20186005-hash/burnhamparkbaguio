@@ -1,0 +1,185 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE, HOTELS } from '../../consts';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Matutuluyan Malapit sa Burnham Park · Hotel at Pension',
+	description:
+		'Mga hotel na 2 minutong lakad lamang, matipid na opsyon, at mga magagandang heritage stay — na inayos ayon sa layo, presyo, at angkop sa pamilya.',
+	dateModified: new Date().toISOString().split('T')[0],
+	mainEntityOfPage: `${SITE.siteUrl}/matutuluyan/`,
+	author: { '@type': 'Organization', name: SITE.author },
+	image: SITE.siteUrl + '/og-default.svg',
+	hasPart: HOTELS.map((h) => ({
+		'@type': 'LodgingBusiness',
+		name: h.name,
+		priceRange: h.price,
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: 'Baguio',
+			addressRegion: 'Benguet',
+			addressCountry: 'PH',
+		},
+	})),
+};
+
+const tierBadge = (t: string) =>
+	t === 'walkable'
+		? { t: '🚶 Malapit na Malapit · 5 min bababa', cls: 'bg-pine-50 text-pine-800 border-pine-200' }
+		: t === 'budget'
+		? { t: '💸 Matipid na Opsyon', cls: 'bg-yellow-50 text-yellow-900 border-yellow-200' }
+		: { t: '✨ Maganda at Tanawin', cls: 'bg-lagoon-50 text-lagoon-800 border-lagoon-200' };
+
+const areas = [
+	{
+		name: '📍 Hilaga at Silangan ng Parke (Jose Abad Santos, Harrison Road)',
+		badge: '⭐ UNANG PILI',
+		pros: ['1–5 minutong lakad lamang patungong parke', 'Maraming restawran at jeepney stop', 'Pinakamadaling mahanap'],
+		cons: ['Maaaring maingay tuwing katapusan', 'Mas mahal ang presyo kaysa sa malayo'],
+		who: 'Lahat ng bisita — lalo na kung unang beses sa Baguio',
+	},
+	{
+		name: '📍 Session Road Hanggang Gitna ng Lungsod',
+		badge: '🥈 PANGALAWANG PILI',
+		pros: ['10–15 minutong lakad paibaba patungong parke', 'Sentro ng pagkain at pamimili', 'Maraming opsyon sa anumang presyo'],
+		cons: ['Maaaring umakyat ng paakyat daan pabalik', 'Mas maraming tao kaysa sa parke mismo'],
+		who: 'Gusto mong makakita ng maraming kainan at shop pagkatapos maglakad sa parke',
+	},
+	{
+		name: '📍 Camp John Hay at Mines View Park',
+		badge: '🌲 PARA SA GUSTO NG TAHIMIK',
+		pros: ['Napakagandang kapaligiran ng mga pino', 'Tahimik at malayo sa trapik', 'Magagandang tanawin'],
+		cons: ['10–15 minutong biyahe (taksi o Grab) patungong parke', 'Mas mahal ang mga hotel', 'Kailangan ng sariling sasakyan o Grab'],
+		who: 'Magkapareha o pamilyang nais ng bakasyong tahimik',
+	},
+];
+---
+
+<PageLayout page="matutuluyan" structuredData={structuredData}>
+	<div class="prose-fil !max-w-none">
+		<span class="eyebrow">🏨 Saan Matutuluyan</span>
+		<h2 class="!mt-2">Anong mga hotel ang pinakamalapit sa Burnham Park?</h2>
+		<p>
+			Ang pagpili ng matutuluyan ay nakasalalay sa tatlong bagay: <strong>layo sa parke</strong>, <strong>presyo</strong>, at <strong>kung sino ang kasama mo</strong>
+			(pamilya, magkapareha, o mag-isa). Narito ang mga pinakamagandang opsyon na inayos namin para sa iyo:
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 my-10">
+		{
+			areas.map((a) => (
+				<article class="card p-6 h-full flex flex-col">
+					<span class="inline-block mb-4 text-[10px] font-bold uppercase tracking-[0.2em] bg-pine-900 text-white rounded-full px-3 py-1 w-fit">
+						{a.badge}
+					</span>
+					<h3 class="text-lg sm:text-xl font-bold text-pine-950 mb-4 leading-tight">{a.name}</h3>
+					<div class="space-y-4 mb-4">
+						<div>
+							<p class="text-xs font-bold uppercase tracking-widest text-green-800 mb-2">✨ Mga Kalamangan</p>
+							<ul class="space-y-1.5 text-sm text-cold-700 list-disc ms-5">
+								{a.pros.map((p) => <li>{p}</li>)}
+							</ul>
+						</div>
+						<div>
+							<p class="text-xs font-bold uppercase tracking-widest text-red-800 mb-2">⚠️ Mga Hamon</p>
+							<ul class="space-y-1.5 text-sm text-cold-700 list-disc ms-5">
+								{a.cons.map((p) => <li>{p}</li>)}
+							</ul>
+						</div>
+					</div>
+					<div class="mt-auto">
+						<p class="text-[11px] font-bold uppercase tracking-widest text-cold-500 mb-1">Pinaka-angkop Para sa</p>
+						<p class="text-sm font-medium text-pine-900">{a.who}</p>
+					</div>
+				</article>
+			))
+		}
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h2>9 na Pinakamagandang Hotel at Pension (Lapit sa Burnham Park)</h2>
+		<p>
+			Inayos namin ang mga hotel ayon sa tatlong kategorya. Ang bawat isa ay may distansya, presyo, at mga benepisyo.
+		</p>
+	</div>
+
+	<div class="space-y-5 sm:space-y-6 my-10">
+		{
+			HOTELS.map((h, i) => {
+				const tb = tierBadge(h.tier);
+				return (
+					<article class="card card-hover p-5 sm:p-7 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+						<div class="lg:col-span-5 relative aspect-[16/10] overflow-hidden rounded-2xl">
+							<img
+								src={`https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(h.name + ' Baguio hotel room view overlooking pine trees Burnham Park mountains sunrise cozy interior')}&image_size=landscape_16_9`}
+								alt={`${h.name} — matutuluyan ${h.tier} malapit sa Burnham Park, Baguio`}
+								class="h-full w-full object-cover"
+								style="border-radius:0"
+								loading="lazy"
+							/>
+						</div>
+						<div class="lg:col-span-7 flex flex-col">
+							<div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+								<div>
+									<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-1">
+										# {String(i + 1).padStart(2, '0')} · {h.tier.toUpperCase()}
+									</p>
+									<h3 class="text-2xl sm:text-3xl font-bold text-pine-950 leading-tight">{h.name}</h3>
+								</div>
+								<div class="flex flex-wrap gap-2">
+									<span class={`badge border ${tb.cls}`}>{tb.t}</span>
+									<span class="badge bg-cold-50 text-cold-700 border border-cold-200">📍 {h.distance} · 🚶 {h.walk}</span>
+								</div>
+							</div>
+
+							<dl class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+								<div class="rounded-xl bg-cold-50 px-4 py-3">
+									<dt class="text-[10px] uppercase tracking-widest text-cold-500 mb-0.5">Presyo</dt>
+									<dd class="font-semibold text-pine-900 text-sm">{h.price}</dd>
+								</div>
+								<div class="rounded-xl bg-cold-50 px-4 py-3">
+									<dt class="text-[10px] uppercase tracking-widest text-cold-500 mb-0.5">Angkop Para sa</dt>
+									<dd class="font-semibold text-pine-900 text-sm">{h.fits.join(' · ')}</dd>
+								</div>
+							</dl>
+
+							<div class="mb-2">
+								<p class="text-xs font-bold uppercase tracking-[0.18em] text-rose-sand-700 mb-2">⭐ Mga Namumukod-Tanging Benepisyo</p>
+								<ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 list-disc ms-5 text-sm text-cold-800">
+									{h.highlights.map((x) => <li>{x}</li>)}
+								</ul>
+							</div>
+						</div>
+					</article>
+				);
+			})
+		}
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h2>Paunang Paalala Bago Magpareserba ng Hotel</h2>
+		<ul>
+			<li>
+				⚠️ <strong>Tuwing Pebrero (Panagbenga), Semana Santa, at Pasko</strong> — tumataas ang presyo ng 2x hanggang 3x.
+				Magpareserba ng <strong>3–6 na buwan nang maaga</strong> para makuha ang mababang presyo.
+			</li>
+			<li>
+				Ang mga presyo sa itaas ay <strong>pagtingin lamang sa kategorya</strong> — ang tunay na presyo ay nagbabago
+				araw-araw depende sa bakante. Suriin ang opisyal na website o app ng hotel para sa aktwal na halaga.
+			</li>
+			<li>
+				Para sa mga <strong>PWD o may kapansanan</strong>: Sabihin agad sa hotel kapag nagpapareserba.
+				Tanungin kung may PWD room, grab bar sa CR, at rampa para sa wheelchair.
+			</li>
+			<li>
+				Kung ikaw ay <strong>nagmamaneho</strong>: Tanungin kung may libreng paradahan ang hotel — dahil mahirap magparada sa sentro ng Baguio.
+			</li>
+			<li>
+				<strong>Wala kaming anumang kaakibat (affiliate) na link</strong> o komisyon mula sa mga hotel na nakalista rito.
+				Pumili batay sa iyong sariling pangangailangan.
+			</li>
+		</ul>
+	</div>
+</PageLayout>

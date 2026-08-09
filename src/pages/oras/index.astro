@@ -1,0 +1,208 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE, SEASONS } from '../../consts';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Pinakamagandang Oras na Bumisita sa Burnham Park',
+	description:
+		'Pinakamagandang buwan (Nobyembre–Pebrero), araw (Lunes–Biyernes), at oras (6–10 ng umaga), pati na ang Panagbenga Festival tuwing Pebrero.',
+	dateModified: new Date().toISOString().split('T')[0],
+	mainEntityOfPage: `${SITE.siteUrl}/oras/`,
+	author: { '@type': 'Organization', name: SITE.author },
+	image: SITE.siteUrl + '/og-default.svg',
+};
+
+const days = [
+	{ name: 'Lunes–Biyernes (araw ng trabaho)', tag: '⭐ PINAKAREKOMENDADO', color: 'from-pine-700 to-pine-900',
+		crowd: 'Kakaunti hanggang katamtaman',
+		light: 'Normal na liwanag',
+		notes: 'Perpekto ang araw na ito para sa mga larawan at pagbisita nang walang gaanong pila. Ang mga bangka, bisikleta, at roller skate ay mabilis na makukuha.' },
+	{ name: 'Sabado', tag: 'Maraming tao', color: 'from-lagoon-600 to-lagoon-800',
+		crowd: 'Dumadami simula tanghali',
+		light: 'Maaraw nang madalas',
+		notes: 'Maraming pamilya ang pumupunta tuwing Sabado ng hapon. Asahan ang mahabang pila sa bangka at mahirap na paradahan.' },
+	{ name: 'Linggo at Pista', tag: '⚠️ Siksikan', color: 'from-rose-sand-600 to-rose-sand-800',
+		crowd: 'Siksikan tuwing hapon',
+		light: 'Maaraw ngunit minsan maulap',
+		notes: 'Pinakamaganda ang umaga (bago mag-9AM) kung Linggo. Pagdating ng hapon, punong-puno na ang parke. Mas mabuting gamitin ang pampublikong sasakyan.' },
+];
+
+const hours = [
+	{ name: '5:00 – 7:00 ng Umaga', rate: 92, tag: '⭐ GOLDEN HOUR 1', desc: 'Bihira ang tao. Mahinang sikat ng araw at hamog sa lagoon. Pinakamagandang oras para sa pagtakbo, yoga, at litrato.' },
+	{ name: '7:00 – 10:00 ng Umaga', rate: 78, tag: '⭐ REKOMENDADO', desc: 'Payapa pa ring oras. Maaari nang sumakay ng bangka nang walang pila. Sariwa ang hangin at malamig pa ang panahon.' },
+	{ name: '10:00 AM – 1:00 PM', rate: 55, tag: '', desc: 'Nagsisimula nang dumami ang tao. Mas mainit na ang araw — kailangan ng sunscreen at sumbrero. Mainam ang oras na ito para sa Sports.' },
+	{ name: '1:00 – 4:00 ng Hapon', rate: 48, tag: '', desc: 'Pinakamainit na oras. Magpahinga muna sa lilim ng Picnic Grove o kumain sa Session Road. Iwasan ang matagal na paglakad sa araw.' },
+	{ name: '4:00 – 6:00 ng Hapon', rate: 20, tag: '⚠️ PINAKAMARAMING TAO', desc: 'Ngunit ang pinakamagandang liwanag ng araw para sa litrato (golden hour). Kung hindi ka sanay sa maraming tao, umiwas sa oras na ito.' },
+	{ name: '6:00 – 9:00 ng Gabi', rate: 45, tag: '', desc: 'Unti-unting lumalabas ang mga ilaw. Tahimik na ang paligid ng Lagoon. Maganda ang paglalakad, ngunit manatili sa maliwanag na daanan.' },
+	{ name: '9:00 PM – 5:00 AM', rate: 85, tag: '', desc: 'Napakakaunti na ng tao. Bukas pa rin ang parke ngunit mas mabuting huwag nang mag-isa. Ligtas kung may kasama.' },
+];
+---
+
+<PageLayout page="oras" structuredData={structuredData}>
+	<div class="prose-fil !max-w-none">
+		<span class="eyebrow">🌤️ Pinakamagandang Oras</span>
+		<h2 class="!mt-2">Kailan ang tamang panahon para bumisita sa Burnham Park?</h2>
+		<p>
+			Ang sagot ay nakadepende sa <strong>panahon ng taon</strong>, <strong>araw ng linggo</strong>, at <strong>oras ng araw</strong>.
+			Narito ang pinakakumpletong gabay para iwasan ang maraming tao at sulitin ang iyong pagbisita.
+		</p>
+
+		<div class="card p-6 mt-6 mb-10 bg-gradient-to-br from-pine-50 to-rose-sand-50 border-pine-100">
+			<p class="font-bold text-pine-950 mb-3 text-lg flex items-center gap-2">
+				⭐ <span>Buod ng Rekomendasyon</span>
+			</p>
+			<ul class="space-y-1.5 text-sm text-cold-800 list-disc ms-5 leading-relaxed">
+				<li><strong>Pinakamagandang Buwan:</strong> Nobyembre hanggang Pebrero — pinakamalamig at pinakamagandang mamulaklak ang mga rosas.</li>
+				<li><strong>Pinakamagandang Araw:</strong> Lunes hanggang Biyernes — iwasan ang Sabsado, Linggo, at mga Pista.</li>
+				<li><strong>Pinakamagandang Oras:</strong> 6:00 – 10:00 ng umaga. Pangalawa: ika-4 ng hapon (pero siksikan).</li>
+				<li><strong>Iwasan ang:</strong> Pebrero (Panagbenga), Semana Santa (Marso–Abril), at Pasko kung ayaw mo ng maraming tao.</li>
+			</ul>
+		</div>
+
+		<h2>Ayon sa Panahon ng Taon (Buwan)</h2>
+		<p>
+			Ang Baguio ay nasa 1500 metro sa itaas ng antas ng dagat — kaya ang klima rito ay mas malamig kaysa sa natitirang bahagi ng Pilipinas.
+			Ngunit mayroon pa ring tatlong pangunahing panahon:
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 my-10">
+		{
+			SEASONS.map((s) => (
+				<article class="card card-hover flex flex-col overflow-hidden">
+					<div class="bg-gradient-to-br from-pine-900 to-lagoon-800 px-6 py-5 text-white">
+						<p class="text-[10px] font-bold uppercase tracking-[0.2em] text-rose-sand-200 mb-1">
+							{s.id === 'taglamig-tuyot' ? '⭐ Pinaka-rekomendado' : s.id === 'taginit-tuyot' ? 'Sikat' : 'Pinakamurang panahon'}
+						</p>
+						<h3 class="text-xl sm:text-2xl font-bold leading-tight">{s.title}</h3>
+						<p class="text-sm text-white/80 mt-1">{s.months}</p>
+					</div>
+					<div class="p-5 sm:p-6 flex flex-1 flex-col">
+						<div class="grid grid-cols-2 gap-3 mb-4 text-sm">
+							<div class="rounded-xl bg-cold-50 px-3 py-2.5">
+								<p class="text-[10px] uppercase tracking-widest text-cold-500 mb-0.5">Temperatura</p>
+								<p class="font-semibold text-pine-900">{s.temp}</p>
+							</div>
+							<div class="rounded-xl bg-cold-50 px-3 py-2.5">
+								<p class="text-[10px] uppercase tracking-widest text-cold-500 mb-0.5">Ulan</p>
+								<p class="font-semibold text-pine-900">{s.rain}</p>
+							</div>
+						</div>
+						<p class="text-xs font-bold uppercase tracking-[0.18em] text-pine-700 mb-2">Kabagayan ng mga Tao</p>
+						<p class="text-sm text-cold-700 leading-relaxed mb-4">{s.crowd}</p>
+						<p class="text-xs font-bold uppercase tracking-[0.18em] text-rose-sand-700 mb-2">Kabagayan ng Panahon</p>
+						<p class="text-sm text-cold-700 leading-relaxed mb-4">{s.vibe}</p>
+						<div class="mt-auto space-y-4">
+							<div>
+								<p class="text-xs font-bold uppercase tracking-[0.18em] text-green-800 mb-1.5 flex items-center gap-1">✨ Mga Kalamangan</p>
+								<ul class="space-y-1 text-sm text-cold-800 list-disc ms-5 leading-relaxed">
+									{s.pros.map((p) => <li>{p}</li>)}
+								</ul>
+							</div>
+							<div>
+								<p class="text-xs font-bold uppercase tracking-[0.18em] text-red-800 mb-1.5 flex items-center gap-1">⚠️ Mga Hamon</p>
+								<ul class="space-y-1 text-sm text-cold-800 list-disc ms-5 leading-relaxed">
+									{s.cons.map((p) => <li>{p}</li>)}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</article>
+			))
+		}
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h2>Ayon sa Araw ng Linggo</h2>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12 mt-6">
+		{
+			days.map((d) => (
+				<article class={`relative overflow-hidden rounded-3xl p-6 sm:p-7 text-white bg-gradient-to-br ${d.color} shadow-card`}>
+					<span class="inline-block mb-4 text-[10px] font-bold uppercase tracking-[0.2em] bg-white/15 backdrop-blur-sm rounded-full px-3 py-1 border border-white/20">
+						{d.tag}
+					</span>
+					<h3 class="text-xl sm:text-2xl font-bold leading-tight mb-4">{d.name}</h3>
+					<dl class="space-y-3 text-sm">
+						<div>
+							<dt class="text-[11px] uppercase tracking-widest text-white/70 mb-0.5">Dami ng Tao</dt>
+							<dd class="font-medium leading-snug">{d.crowd}</dd>
+						</div>
+						<div>
+							<dt class="text-[11px] uppercase tracking-widest text-white/70 mb-0.5">Liwanag</dt>
+							<dd class="font-medium leading-snug">{d.light}</dd>
+						</div>
+						<div>
+							<dt class="text-[11px] uppercase tracking-widest text-white/70 mb-0.5">Paalala</dt>
+							<dd class="font-medium leading-snug">{d.notes}</dd>
+						</div>
+					</dl>
+				</article>
+			))
+		}
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h2>Ayon sa Oras ng Araw</h2>
+		<p>
+			Ang mga rating sa ibaba ay batay sa kombinasyon ng dami ng tao, ganda ng liwanag, at ginhawa ng panahon.
+			Mas mataas = mas payapa at mas maganda para sa mga bisita.
+		</p>
+	</div>
+
+	<div class="mt-8 mb-14">
+		<div class="space-y-4">
+			{
+				hours.map((h) => (
+					<article class="card p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+						<div class="w-full sm:w-56 shrink-0">
+							<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-1">Oras</p>
+							<h3 class="text-lg sm:text-xl font-bold text-pine-950 leading-tight">{h.name}</h3>
+							{h.tag && <p class="mt-2">{<span class="badge bg-rose-sand-100 text-rose-sand-700 border border-rose-sand-200">{h.tag}</span>}</p>}
+						</div>
+						<div class="flex-1 w-full">
+							<div class="flex items-center justify-between mb-2 text-xs text-cold-600 font-semibold">
+								<span>Kaginhawaan / Ganda ng Oras</span>
+								<span>{h.rate}/100</span>
+							</div>
+							<div class="w-full h-3 rounded-full bg-cold-100 overflow-hidden">
+								<div
+									class:list={[
+										'h-full rounded-full transition-all',
+										h.rate >= 70 ? 'bg-gradient-to-r from-pine-500 to-pine-700' : h.rate >= 40 ? 'bg-gradient-to-r from-lagoon-500 to-lagoon-700' : 'bg-gradient-to-r from-rose-sand-400 to-rose-sand-700',
+									]}
+									style={`width:${h.rate}%`}
+								></div>
+							</div>
+							<p class="mt-4 text-sm text-cold-700 leading-relaxed">{h.desc}</p>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<div class="card p-6 sm:p-8 mb-10 bg-gradient-to-br from-rose-sand-50 to-lagoon-50 border-rose-sand-100">
+			<p class="eyebrow text-rose-sand-700 !mb-3">🌸 Espesyal na Pista</p>
+			<h2 class="!mt-0 !mb-4">Panagbenga Festival · Tuwing Pebrero</h2>
+			<p>
+				Ang <strong>Panagbenga</strong> (mula sa salitang Kankanaey na "Ang panahon ng pamumukadkad") ang pinakamalaking pista ng Baguio.
+				Ginaganap ito tuwing buwan ng Pebrero, at ang malaking parada ng mga float na gawa sa sariwang bulaklak ay karaniwang itinatanghal sa
+				<em>Melvin Jones Grandstand</em> ng Burnham Park.
+			</p>
+			<ul>
+				<li>Asahan ang napakaraming tao mula sa buong bansa.</li>
+				<li>Ang mga presyo ng hotel ay tumataas nang 2–3 beses — magpareserba ng 3–6 na buwan bago ang pista.</li>
+				<li>Huwag magmaneho patungong parke — mas mainam ang jeep, taksi, Grab, o paglalakad.</li>
+				<li>Pinakamagandang araw para sa float parade: Sabado o Linggo ng ikalawang linggo ng Pebrero. (Mula taon hanggang taon ay nagbabago — suriin ang opisyal na iskedyul bago bumisita.)</li>
+			</ul>
+			<p>
+				Kung nais mong makita ang pista ngunit ayaw sa siksikan, maaari kang pumunta sa mga <em>garden competition</em> o street parade na hindi kasing siksik ng grand float.
+			</p>
+		</div>
+	</div>
+</PageLayout>

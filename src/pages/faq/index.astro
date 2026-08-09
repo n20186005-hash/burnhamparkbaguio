@@ -1,0 +1,93 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { SITE, FAQS } from '../../consts';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: FAQS.map((f) => ({
+		'@type': 'Question',
+		name: f.q,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: f.a,
+		},
+	})),
+	headline: 'FAQ tungkol sa Burnham Park · 15 Pinakamadalas Itanong',
+	description:
+		'Bayad sa pagpasok? Oras? Wheelchair? Aso? Paradahan? Drone? Paninigarilyo? — Lahat ng totoong sagot bago bumisita sa Burnham Park.',
+	dateModified: new Date().toISOString().split('T')[0],
+	mainEntityOfPage: `${SITE.siteUrl}/faq/`,
+	author: { '@type': 'Organization', name: SITE.author },
+};
+---
+
+<PageLayout page="faq" structuredData={structuredData as any}>
+	<div class="prose-fil !max-w-none">
+		<span class="eyebrow">❓ Mga Madalas Itanong</span>
+		<h2 class="!mt-2">15 Pinakamadalas Itanong Tungkol sa Burnham Park</h2>
+		<p>
+			Narito ang mga totoong sagot sa mga pinakamadalas itanong ng mga bisita bago pumunta sa Burnham Park.
+			Kung mayroon ka pang ibang katanungan na wala rito, maaari itong itanong sa tanggapan ng CEPMO ng Baguio o sa pinakamalapit na opisyal na guard sa loob ng parke.
+		</p>
+	</div>
+
+	<div class="mt-10 mb-6">
+		<FaqAccordion />
+	</div>
+
+	<div class="card p-6 sm:p-8 mt-14 bg-gradient-to-br from-pine-50 via-cold-50 to-rose-sand-50 border-pine-100">
+		<div class="flex flex-col sm:flex-row items-start gap-5">
+			<div class="shrink-0 h-12 w-12 sm:h-14 sm:w-14 inline-flex items-center justify-center rounded-2xl bg-white shadow-soft border border-pine-100 text-2xl">
+				📞
+			</div>
+			<div class="flex-1">
+				<h3 class="text-xl sm:text-2xl font-bold text-pine-950 mb-2 leading-tight">
+					Hindi pa rin nakakasagot ang FAQ na ito?
+				</h3>
+				<p class="text-cold-700 leading-relaxed mb-4">
+					Ang mga sagot sa itaas ay batay sa pinakabagong tala, patakaran ng Baguio AO 21 serye 2015, at karanasan ng mga lokal na bisita.
+					Ngunit maaaring magbago ang mga tuntunin, oras, at presyo nang walang paunang abiso.
+				</p>
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+					<div class="rounded-2xl bg-white px-4 py-3 border border-cold-100 shadow-soft/60">
+						<p class="text-[10px] font-bold uppercase tracking-widest text-cold-500 mb-1">Pinagkakatiwalaang Sanggunian #1</p>
+						<p class="font-semibold text-pine-900">Palatandaan sa Lugar (On-site)</p>
+						<p class="text-cold-700 text-xs leading-relaxed mt-1">
+							Ang mga palatandaan sa pasukan ng parke ang PINAKABAGONG impormasyon — laging tingnan ito bago ka pumasok.
+						</p>
+					</div>
+					<div class="rounded-2xl bg-white px-4 py-3 border border-cold-100 shadow-soft/60">
+						<p class="text-[10px] font-bold uppercase tracking-widest text-cold-500 mb-1">Pinagkakatiwalaang Sanggunian #2</p>
+						<p class="font-semibold text-pine-900">CEPMO · Baguio City</p>
+						<p class="text-cold-700 text-xs leading-relaxed mt-1">
+							City Environment and Parks Management Office ng Lungsod ng Baguio — sila ang direktang namamahala sa parke.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 no-print">
+		<a href="/plano/" class="card card-hover p-6 block bg-gradient-to-br from-pine-50 to-cold-50 border-pine-100">
+			<p class="eyebrow !mb-2">📝 Susunod na Hakbang</p>
+			<h3 class="text-xl sm:text-2xl font-bold text-pine-950 leading-tight mb-2">
+				Tingnan ang Buong Plano ng Pagbisita →
+			</h3>
+			<p class="text-sm text-cold-700 leading-relaxed">
+				Buo na ang iyong mga katanungan? Ngayon ay handa ka nang gumawa ng sarili mong iskedyul — 10 hakbang na ruta, presyo, at checklist bago pumunta.
+			</p>
+		</a>
+		<a href="/oras/" class="card card-hover p-6 block bg-gradient-to-br from-lagoon-50 to-cold-50 border-lagoon-100">
+			<p class="eyebrow !mb-2 text-lagoon-700">🌤️ Oras ng Pagbisita</p>
+			<h3 class="text-xl sm:text-2xl font-bold text-lagoon-800 leading-tight mb-2">
+				Pinakamagandang Oras at Panahon →
+			</h3>
+			<p class="text-sm text-cold-700 leading-relaxed">
+				Gusto mong iwasan ang maraming tao? O mahanap ang pinakamagandang liwanag para sa iyong larawan? Tingnan ang aming buong gabay sa oras at panahon.
+			</p>
+		</a>
+	</div>
+</PageLayout>

@@ -1,0 +1,75 @@
+---
+import { SITE } from '../consts';
+
+export interface Props {
+	title: string;
+	description?: string;
+	ogImage?: string;
+	ogImageAlt?: string;
+	ogType?: 'website' | 'article';
+	structuredData?: Record<string, unknown>;
+}
+
+const {
+	title,
+	description = SITE.description,
+	ogImage,
+	ogImageAlt,
+	ogType = 'website',
+	structuredData,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE.siteUrl).toString();
+const ogImageURL = ogImage
+	? ogImage.startsWith('http')
+		? ogImage
+		: new URL(ogImage, Astro.site ?? SITE.siteUrl).toString()
+	: new URL('/og-default.svg', Astro.site ?? SITE.siteUrl).toString();
+const pageOgImageAlt = ogImageAlt ?? 'Baybayin ng Burnham Park Baguio sa gitna ng mga punong pino';
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="author" content={SITE.author} />
+<meta name="lang" content={SITE.language} />
+
+<link rel="canonical" href={canonicalURL} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Open Graph -->
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:image:alt" content={pageOgImageAlt} />
+<meta property="og:locale" content={SITE.locale} />
+<meta property="og:locale:alternate" content="en_PH" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />
+<meta name="twitter:image:alt" content={pageOgImageAlt} />
+
+<!-- Robots: index, follow, large image preview -->
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+<meta name="googlebot" content="index,follow" />
+
+<!-- Security & Privacy -->
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(self 'https://www.google.com'), interest-cohort=()" />
+
+{structuredData && (
+	<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+)}

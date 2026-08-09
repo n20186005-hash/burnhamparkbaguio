@@ -1,0 +1,191 @@
+---
+import { NAV, SITE } from '../consts';
+
+const pathname = Astro.url.pathname;
+---
+
+<header
+	class="sticky top-0 z-50 w-full border-b border-cold-100/60 bg-cold-50/85 backdrop-blur-md supports-[backdrop-filter]:bg-cold-50/60"
+>
+	<nav class="container-page flex items-center justify-between py-3 sm:py-4" aria-label="Pangunahing nabigasyon">
+		<a
+			href="/"
+			class="group flex items-center gap-2 sm:gap-3"
+			aria-label={`${SITE.name} — Bumalik sa paunang pahina`}
+		>
+			<span
+				class="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-2xl bg-pine-900 text-white shadow-soft transition-transform duration-300 group-hover:-rotate-6 group-hover:bg-pine-800"
+				aria-hidden="true"
+			>
+				<svg viewBox="0 0 24 24" fill="none" class="h-5 w-5 sm:h-6 sm:w-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M12 3c-1.5 2.5-3 4-5 4a5 5 0 0 0-2 9.5A5 5 0 0 0 10 20h4a5 5 0 0 0 5-3.5 5 5 0 0 0-2-9.5c-2 0-3.5-1.5-5-4Z" />
+					<path d="M12 21v-8" />
+					<path d="M7 13h3" />
+					<path d="M14 13h3" />
+				</svg>
+			</span>
+			<span class="flex flex-col leading-none">
+				<span class="text-sm sm:text-base font-bold text-pine-950 tracking-tight">Burnham Park</span>
+				<span class="text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] text-pine-700">Baguio · Gabay sa Bisita</span>
+			</span>
+		</a>
+
+		<!-- Desktop Navigation -->
+		<ul class="hidden lg:flex items-center gap-1">
+			{
+				NAV.map((item) => {
+					const active =
+						item.href === '/'
+							? pathname === '/' || pathname === ''
+							: pathname.startsWith(item.href);
+					return (
+						<li>
+							<a
+								href={item.href}
+								class:list={[
+									'relative inline-flex items-center px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-200',
+									active
+										? 'text-pine-900 bg-pine-50'
+										: 'text-cold-700 hover:text-pine-800 hover:bg-pine-50/60',
+								]}
+								aria-current={active ? 'page' : undefined}
+							>
+								{item.label}
+								{
+									active && (
+										<span
+											aria-hidden="true"
+											class="absolute -bottom-px left-3 right-3 h-0.5 rounded-full bg-pine-600"
+										></span>
+									)
+								}
+							</a>
+						</li>
+					);
+				})
+			}
+		</ul>
+
+		<!-- Mobile hamburger -->
+		<button
+			type="button"
+			id="mobile-nav-toggle"
+			class="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-cold-200 bg-white text-pine-800 shadow-soft hover:bg-pine-50"
+			aria-controls="mobile-drawer"
+			aria-expanded="false"
+			aria-label="Buksan ang menu"
+		>
+			<svg id="icon-open" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M4 7h16M4 12h16M4 17h16" />
+			</svg>
+			<svg id="icon-close" viewBox="0 0 24 24" class="h-5 w-5 hidden" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M6 6l12 12M6 18L18 6" />
+			</svg>
+		</button>
+	</nav>
+
+	<!-- Mobile drawer -->
+	<div
+		id="mobile-drawer"
+		class="lg:hidden fixed inset-x-0 top-[72px] sm:top-[80px] bottom-0 z-40 hidden"
+		aria-hidden="true"
+	>
+		<!-- Backdrop -->
+		<div id="drawer-backdrop" class="absolute inset-0 bg-pine-950/40 backdrop-blur-sm"></div>
+
+		<!-- Panel -->
+		<div
+			id="drawer-panel"
+			class="relative h-full w-11/12 max-w-xs ml-auto bg-cold-50 border-l border-cold-200 shadow-card overflow-y-auto safe-bottom"
+			role="dialog"
+			aria-modal="true"
+			aria-label="Menu ng pahina"
+		>
+			<ul class="flex flex-col p-4 gap-1">
+				{
+					NAV.map((item) => {
+						const active =
+							item.href === '/'
+								? pathname === '/' || pathname === ''
+								: pathname.startsWith(item.href);
+						return (
+							<li>
+								<a
+									href={item.href}
+									class:list={[
+										'block rounded-2xl px-4 py-3.5 text-base font-semibold transition-colors',
+										active
+											? 'bg-pine-900 text-white shadow-soft'
+											: 'text-cold-800 hover:bg-white hover:text-pine-800',
+									]}
+								>
+									{item.label}
+								</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+
+			<div class="mx-4 mt-4 mb-10 rounded-3xl border border-pine-200 bg-gradient-to-br from-pine-50 to-rose-sand-50/60 p-5">
+				<p class="text-xs font-semibold uppercase tracking-[0.18em] text-pine-700 mb-2">
+					Talaan ng Lokasyon
+				</p>
+				<p class="text-sm text-cold-800 mb-4 leading-relaxed">
+					{SITE.address}
+					<br />
+					<span class="text-cold-600">Plus Code: {SITE.plusCode}</span>
+				</p>
+				<div class="flex flex-col gap-2">
+					<span class="chip self-start bg-white font-medium">WALANG BAYAD Pumasok</span>
+					<span class="chip self-start bg-white font-medium">Bukas 24 oras</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<script is:inline>
+	(function () {
+		const toggle = document.getElementById('mobile-nav-toggle');
+		const drawer = document.getElementById('mobile-drawer');
+		const backdrop = document.getElementById('drawer-backdrop');
+		const panel = document.getElementById('drawer-panel');
+		const iconOpen = document.getElementById('icon-open');
+		const iconClose = document.getElementById('icon-close');
+		if (!toggle || !drawer) return;
+
+		function open() {
+			drawer.classList.remove('hidden');
+			toggle.setAttribute('aria-expanded', 'true');
+			if (iconOpen && iconClose) {
+				iconOpen.classList.add('hidden');
+				iconClose.classList.remove('hidden');
+			}
+			document.body.style.overflow = 'hidden';
+		}
+		function close() {
+			drawer.classList.add('hidden');
+			toggle.setAttribute('aria-expanded', 'false');
+			if (iconOpen && iconClose) {
+				iconOpen.classList.remove('hidden');
+				iconClose.classList.add('hidden');
+			}
+			document.body.style.overflow = '';
+		}
+
+		toggle.addEventListener('click', function () {
+			const expanded = toggle.getAttribute('aria-expanded') === 'true';
+			expanded ? close() : open();
+		});
+		backdrop?.addEventListener('click', close);
+		document.addEventListener('keydown', function (e) {
+			if (e.key === 'Escape') close();
+		});
+
+		const links = panel?.querySelectorAll('a');
+		links?.forEach(function (a) {
+			a.addEventListener('click', close);
+		});
+	})();
+</script>

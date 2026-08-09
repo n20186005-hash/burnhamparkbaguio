@@ -1,0 +1,323 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import KeyInfoCard from '../components/KeyInfoCard.astro';
+import ClusterCard from '../components/ClusterCard.astro';
+import { SITE, CLUSTERS, NAV, PAGE_META, KEY_INFO } from '../consts';
+
+const meta = PAGE_META.home;
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'TouristAttraction',
+			'@id': `${SITE.siteUrl}/#park`,
+			name: 'Burnham Park (Burnham Park Reservation)',
+			alternateName: ['Burnham Park Baguio', 'Burnham Park Reservation'],
+			description: meta.description,
+			url: SITE.siteUrl,
+			image: [meta.hero],
+			address: {
+				'@type': 'PostalAddress',
+				streetAddress: 'Jose Abad Santos Drive',
+				addressLocality: 'Baguio',
+				addressRegion: 'Benguet',
+				postalCode: '2600',
+				addressCountry: {
+					'@type': 'Country',
+					name: 'PH',
+				},
+			},
+			geo: {
+				'@type': 'GeoCoordinates',
+				latitude: SITE.coordinates.lat,
+				longitude: SITE.coordinates.lng,
+			},
+			openingHoursSpecification: [
+				{
+					'@type': 'OpeningHoursSpecification',
+					dayOfWeek: [
+						'Monday',
+						'Tuesday',
+						'Wednesday',
+						'Thursday',
+						'Friday',
+						'Saturday',
+						'Sunday',
+					],
+					opens: '00:00',
+					closes: '23:59',
+				},
+			],
+			priceRange: 'Free',
+			wheelchairAccessible: true,
+			photoCount: 12,
+			touristType: ['Pamilya', 'Magkapareha', 'Bakasyonista', 'Mahilig sa kasaysayan'],
+			sameAs: [
+				'https://en.wikipedia.org/wiki/Burnham_Park_(Baguio)',
+			],
+		},
+		{
+			'@type': 'WebSite',
+			name: SITE.name,
+			url: SITE.siteUrl,
+			inLanguage: 'fil',
+			publisher: {
+				'@type': 'Organization',
+				name: SITE.author,
+			},
+			potentialAction: {
+				'@type': 'SearchAction',
+				target: `${SITE.siteUrl}/?s={search_term_string}`,
+				'query-input': 'required name=search_term_string',
+			},
+		},
+	],
+};
+---
+
+<BaseLayout
+	title={meta.title}
+	description={meta.description}
+	ogImage={meta.hero}
+	ogImageAlt={meta.heroAlt}
+	ogType="website"
+	structuredData={structuredData}
+	lang="fil"
+>
+	<!-- HERO -->
+	<section aria-label="Unang panauhin" class="relative">
+		<div class="relative h-[88vh] sm:h-[86vh] md:h-[88vh] min-h-[520px] sm:min-h-[560px] overflow-hidden">
+			<img
+				src={meta.hero}
+				alt={meta.heroAlt}
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+				class="absolute inset-0 h-full w-full object-cover"
+				style="border-radius:0"
+			/>
+			<div class="absolute inset-0 hero-overlay"></div>
+			<div class="absolute inset-0">
+				<div class="container-page h-full flex flex-col justify-end pb-20 sm:pb-28 md:pb-32">
+					<span class="eyebrow text-white/90" style="text-shadow:0 2px 12px rgba(0,0,0,0.4)">
+						{meta.eyebrow}
+					</span>
+					<h1 class="text-balance text-white font-bold tracking-tight max-w-4xl mb-5" style="text-shadow:0 6px 40px rgba(0,0,0,0.55)">
+						Burnham Park — Luntiang Puso ng Lungsod ng Baguio
+					</h1>
+					<p class="pretty text-white/90 max-w-2xl text-base sm:text-xl md:text-2xl leading-relaxed mb-8" style="text-shadow:0 2px 18px rgba(0,0,0,0.5)">
+						{meta.description}
+					</p>
+
+					<div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4 max-w-3xl">
+						<a href="/plano/" class="btn-primary btn-wide">
+							Plano ng Pagbisita
+							<span aria-hidden="true">→</span>
+						</a>
+						<a href="/pagbiyahe/" class="btn-secondary btn-wide !bg-white/10 !border-white/25 !text-white hover:!bg-white/20 backdrop-blur-sm">
+							🚌 Paano Pumunta
+						</a>
+					</div>
+
+					<!-- Quick badges -->
+					<div class="mt-10 flex flex-wrap gap-2 sm:gap-3">
+						{
+							KEY_INFO.map((k) => (
+								<span class="chip !bg-white/10 !text-white !border-white/20 backdrop-blur-sm">
+									<strong class="font-bold mr-1">{k.value}</strong>
+									<span class="text-white/80">· {k.label}</span>
+								</span>
+							))
+						}
+					</div>
+				</div>
+			</div>
+
+			<!-- Scroll hint -->
+			<div class="hidden sm:flex absolute bottom-4 left-1/2 -translate-x-1/2 items-center gap-2 text-white/80 text-xs font-semibold tracking-widest uppercase" aria-hidden="true">
+				<span>Mag-scroll pababa</span>
+				<span class="inline-block w-px h-8 bg-white/60 animate-pulse"></span>
+			</div>
+		</div>
+	</section>
+
+	<!-- Key Info Card (floating) -->
+	<KeyInfoCard />
+
+	<!-- Intro Section -->
+	<section class="section-pad" aria-label="Pagpapakilala sa Burnham Park">
+		<div class="container-page grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+			<div class="lg:col-span-7">
+				<span class="eyebrow">Tungkol sa Burnham Park</span>
+				<h2 class="text-balance mb-6">
+					Isang 32.84-ektaryang parke na inihanda ni Daniel Burnham, na nasa dating lupain ng mga Ibaloi.
+				</h2>
+				<div class="prose-fil !max-w-none">
+					<p>
+						Ang <strong>Burnham Park</strong> ay ang pinakasikat at pinakamahalagang pampublikong
+						parke ng <strong>Lungsod ng Baguio</strong>, ang tinaguriang Summer Capital ng Pilipinas.
+						Nasa gitna ito ng lungsod, katabi ng Session Road at Baguio Public Market — kaya madali itong puntahan mula saan mang dako ng sentro.
+					</p>
+					<p>
+						Dinisenyo ito ng tanyag na Amerikanong arkitekto at tagaplano ng lungsod na si
+						<strong>Daniel Hudson Burnham</strong> noong 1905, bilang sentrong luntiang bahagi ng kanyang
+						plano para sa Baguio. Itinayo ito sa dating parang ng <em>Kafagway</em>, ang orihinal na
+						pamayanan ng mga katutubong <strong>Ibaloi</strong> bago ang panahon ng mga Amerikano.
+					</p>
+					<p>
+						Sa ngayon, ang Burnham Park ay pinamamahalaan ng <strong>Lungsod ng Baguio</strong> at bukas
+						para sa lahat nang <strong>WALANG BAYAD</strong>. Para sa mga pamilya, magkapareha, o mga lokal na naghahanap ng sariwang hangin — ito ang pinaka-paboritong pampublikong lugar sa buong Cordillera.
+					</p>
+				</div>
+			</div>
+
+			<div class="lg:col-span-5 space-y-4">
+				<div class="card overflow-hidden p-0">
+					<div class="relative aspect-[4/3]">
+						<img
+							src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Burnham%20Park%20Baguio%20wide%20panoramic%20lagoon%20view%20pine%20trees%20both%20sides%20golden%20afternoon%20light%20people%20walking%20calm%20lake%20scenic&image_size=landscape_4_3"
+							alt="Malawak na tanawin ng Burnham Lagoon, mga pino sa gilid, at mga taong naglalakad sa gintong ilaw ng hapon, Burnham Park Baguio"
+							class="h-full w-full object-cover"
+							style="border-radius:0"
+							loading="lazy"
+						/>
+					</div>
+					<div class="p-5 sm:p-6">
+						<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-2">📊 Mabilis na Talaan</p>
+						<dl class="divide-y divide-cold-100">
+							<div class="flex items-center justify-between py-2.5">
+								<dt class="text-cold-600 text-sm">Sukat ng Parke</dt>
+								<dd class="font-semibold text-pine-900">32.84 ektarya (81.1 akre)</dd>
+							</div>
+							<div class="flex items-center justify-between py-2.5">
+								<dt class="text-cold-600 text-sm">Taon dinisenyo</dt>
+								<dd class="font-semibold text-pine-900">1905 (Burnham Plan)</dd>
+							</div>
+							<div class="flex items-center justify-between py-2.5">
+								<dt class="text-cold-600 text-sm">Taon pormal na itinalaga</dt>
+								<dd class="font-semibold text-pine-900">1925 (Proklamasyon Blg. 64)</dd>
+							</div>
+							<div class="flex items-center justify-between py-2.5">
+								<dt class="text-cold-600 text-sm">Taas ng lokasyon</dt>
+								<dd class="font-semibold text-pine-900">~1,500 m (ibabaw ng dagat)</dd>
+							</div>
+							<div class="flex items-center justify-between py-2.5">
+								<dt class="text-cold-600 text-sm">Bilang ng mga puno</dt>
+								<dd class="font-semibold text-pine-900">~2,600 na puno, 72 uri</dd>
+							</div>
+							<div class="flex items-center justify-between py-2.5">
+								<dt class="text-cold-600 text-sm">Kabuuan ng mga sona</dt>
+								<dd class="font-semibold text-pine-900">12 na pangunahing bahagi</dd>
+							</div>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 12 Clusters Section -->
+	<section aria-label="12 na sona ng Burnham Park" class="section-pad surface-pine">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">📐 12 Bahagi ng Parke</span>
+				<h2 class="text-balance mb-5">
+					Mula sa Lagoon hanggang Pine Grove — tuklasin ang bawat sulok ng Burnham Park.
+				</h2>
+				<p class="text-cold-700 text-lg leading-relaxed">
+					Ang Burnham Park ay hindi iisang malawak na damuhan lamang. Hinati ito sa 12 na magkakaibang
+					<em>cluster</em> — mula sa lawa, hardin ng rosas, palaruan para sa mga bata, hanggang sa
+					malawak na parang para sa Panagbenga. Narito ang bawat isa:
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+				{
+					CLUSTERS.map((cluster) => <ClusterCard cluster={cluster} />)
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- Page Jump CTA Section -->
+	<section class="section-pad" aria-label="Mabilis na pagtalon sa pahina">
+		<div class="container-page">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+				{
+					NAV.filter((n) => n.href !== '/').map((n, i) => {
+						const colors = [
+							'from-pine-800 to-pine-950',
+							'from-lagoon-700 to-lagoon-950',
+							'from-rose-sand-700 to-rose-sand-900',
+							'from-pine-700 to-pine-900',
+							'from-lagoon-600 to-pine-800',
+							'from-rose-sand-600 to-rose-sand-800',
+							'from-cold-800 to-pine-900',
+						];
+						const color = colors[i % colors.length];
+						return (
+							<a
+								href={n.href}
+								class={`relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white shadow-card bg-gradient-to-br ${color} transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl no-print`}
+							>
+								<span class="text-xs font-bold uppercase tracking-[0.2em] text-white/80 mb-3 block">
+									Hakbang {String(i + 1).padStart(2, '0')}
+								</span>
+								<h3 class="text-xl sm:text-2xl font-bold leading-tight mb-3">
+									{n.label}
+								</h3>
+								<p class="text-sm text-white/80 leading-relaxed mb-6 line-clamp-3">
+									Tingnan ang kumpletong impormasyon para sa bahaging ito ng pagbisita.
+								</p>
+								<span class="inline-flex items-center gap-2 text-sm font-semibold bg-white/15 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
+									Buksan ang pahina →
+								</span>
+								<span
+									class="absolute -right-6 -bottom-6 h-28 w-28 rounded-full bg-white/10 blur-xl"
+									aria-hidden="true"
+								></span>
+							</a>
+						);
+					})
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- Season banner -->
+	<section class="section-pad pt-0" aria-label="Panahon at pista">
+		<div class="container-page">
+			<div class="rounded-[2rem] overflow-hidden shadow-card border border-pine-100 grid grid-cols-1 lg:grid-cols-2">
+				<div class="relative aspect-[16/10] lg:aspect-auto lg:min-h-[420px]">
+					<img
+						src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Panagbenga%20Flower%20Festival%20Baguio%20Burnham%20Park%20grand%20float%20parade%20colorful%20flowers%20crowd%20pine%20trees%20sunny%20day%20celebration%20scenic&image_size=landscape_16_9"
+						alt="Panagbenga Flower Festival parade sa Burnham Park: makukulay na float ng bulaklak, maraming tao, at mga punong pino sa background"
+						class="h-full w-full object-cover"
+						style="border-radius:0"
+						loading="lazy"
+					/>
+				</div>
+				<div class="bg-gradient-to-br from-rose-sand-50 via-cold-50 to-pine-50/60 p-8 sm:p-10 md:p-14 flex flex-col justify-center">
+					<span class="eyebrow text-rose-sand-700">🌸 Panagbenga Festival</span>
+					<h2 class="text-balance mb-5 text-pine-950">
+						Pebrero — ang buwan ng <em>Panagbenga</em>, ang Baguio Flower Festival sa Melvin Jones.
+					</h2>
+					<p class="text-cold-800 text-lg leading-relaxed mb-6">
+						Kung nagpaplano kang pumunta tuwing Pebrero, asahan ang napakaraming tao at ang malaking
+						<strong>float parade</strong> ng mga bulaklak sa <em>Melvin Jones Grandstand</em>. Ito ang
+						pinakamalaking pista ng Baguio — kaya magpareserba ng hotel nang maaga at iwasang magmaneho patungong parke.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+						<a href="/oras/" class="btn-primary btn-wide no-print">
+							Tingnan ang Pinakamagandang Oras
+						</a>
+						<a href="/matutuluyan/" class="btn-secondary btn-wide no-print">
+							🏨 Hotel Malapit sa Parke
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

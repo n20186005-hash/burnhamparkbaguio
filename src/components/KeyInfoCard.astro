@@ -1,0 +1,35 @@
+---
+import { KEY_INFO } from '../consts';
+
+const icons: Record<string, string> = {
+	ticket: '🎟️',
+	clock: '🕒',
+	stopwatch: '⏱️',
+	heart: '💚',
+};
+---
+
+<section aria-label="Pangunahing impormasyon" class="container-page -mt-14 sm:-mt-16 md:-mt-20 relative z-20">
+	<div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+		{
+			KEY_INFO.map((info) => (
+				<div class="card p-5 sm:p-6 flex items-start gap-3 sm:gap-4 shadow-card">
+					<span class="inline-flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-2xl bg-pine-50 text-pine-800 text-xl sm:text-2xl border border-pine-100">
+						{icons[info.icon] ?? 'ℹ️'}
+					</span>
+					<div>
+						<p class="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-cold-500 mb-0.5">
+							{info.label}
+						</p>
+						<p class="text-base sm:text-xl font-bold text-pine-950 leading-tight mb-1">
+							{info.value}
+						</p>
+						<p class="text-xs sm:text-sm text-cold-600 leading-relaxed">
+							{info.sub}
+						</p>
+					</div>
+				</div>
+			))
+		}
+	</div>
+</section>

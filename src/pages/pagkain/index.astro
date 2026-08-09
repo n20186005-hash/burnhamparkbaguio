@@ -1,0 +1,199 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE, BITES, RESTAURANTS } from '../../consts';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: 'Pagkain Malapit sa Burnham Park · Meryenda at Restawran',
+	description:
+		'Kung saan makakakita ng tunay na strawberry taho, pinikpikan, at ang pinakamagandang restawran sa Session Road at paligid ng Burnham Park.',
+	dateModified: new Date().toISOString().split('T')[0],
+	mainEntityOfPage: `${SITE.siteUrl}/pagkain/`,
+	author: { '@type': 'Organization', name: SITE.author },
+	image: SITE.siteUrl + '/og-default.svg',
+	hasPart: RESTAURANTS.map((r) => ({
+		'@type': 'Restaurant',
+		name: r.name,
+		servesCuisine: r.price === 'premium' ? 'International, Filipino' : 'Filipino, Cordilleran',
+		priceRange: r.price === 'budget' ? '$' : r.price === 'mid' ? '$$' : '$$$',
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: 'Baguio',
+			addressRegion: 'Benguet',
+			addressCountry: 'PH',
+		},
+	})),
+};
+
+const priceBadge = (p: string) =>
+	p === 'budget'
+		? { t: '💚 Matipid', cls: 'bg-green-50 text-green-800 border-green-200' }
+		: p === 'mid'
+		? { t: '💛 Katamtaman', cls: 'bg-yellow-50 text-yellow-900 border-yellow-200' }
+		: { t: '💜 Mahal', cls: 'bg-purple-50 text-purple-900 border-purple-200' };
+
+const districts = [
+	{
+		name: 'Session Road (Hilaga hanggang Gitna)',
+		dist: '5–15 min lakad patungong parke',
+		price: 'Buo ang saklaw — mura hanggang mahal',
+		fit: 'Lahat ng bisita',
+		desc: 'Ito ang sentro ng pagkain at kainan sa Baguio. Mula sa mabilisang meryenda hanggang sa romantikong hapunan, narito ang lahat. Bukas kahit gabi.',
+	},
+	{
+		name: 'Baguio Public Market',
+		dist: '~800 m / 10 minutong lakad',
+		price: 'Napakamura',
+		fit: 'Pamilya, Backpacker, Bumibili ng pasalubong',
+		desc: 'Pinakamagandang bumili ng sariwang strawberry, ube halaya, sundot kulangot, at iba pang produkto ng Cordillera. Mura at sariwa ang mga prutas at gulay.',
+	},
+	{
+		name: 'Legarda Road at Kisad Road',
+		dist: '2–5 minutong lakad lamang',
+		price: 'Mababa hanggang katamtaman',
+		fit: 'Mabilisang meryenda at tanghalian',
+		desc: 'Dito naroon ang maraming lokal na karinderya at jeepney stop. Pinakamalapit na lugar kumain kung ayaw mong lumayo sa parke.',
+	},
+];
+---
+
+<PageLayout page="pagkain" structuredData={structuredData}>
+	<div class="prose-fil !max-w-none">
+		<span class="eyebrow">🍽️ Pagkain sa Lugar</span>
+		<h2 class="!mt-2">Anong mga pagkaing dapat subukan malapit sa Burnham Park?</h2>
+		<p>
+			Ang Baguio ay hindi lamang kilala sa malamig na panahon — kundi pati na rin sa mga kakaibang meryenda at putahe nito.
+			Narito ang mga <strong>dapat subukan</strong> bago ka umalis ng parke, kasama ang mga pinakamalapit na restawran.
+		</p>
+
+		<h2>Mga Tanyag na Lokal na Meryenda (Street Food)</h2>
+		<p>
+			Ang mga sumusunod ay mabibili ng mga naglalako sa loob o paligid lamang ng Burnham Park. Abot-kaya at tunay na lasang Baguio:
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 mt-6 mb-14">
+		{
+			BITES.map((b) => (
+				<article class="card card-hover flex flex-col sm:flex-row overflow-hidden">
+					<div class="relative sm:w-40 md:w-48 shrink-0 aspect-[4/3] sm:aspect-auto">
+						<img
+							src={`https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(b.name + ' Filipino snack Baguio authentic local street food closeup photography')}&image_size=square_hd`}
+							alt={`${b.name} — tapat na larawan ng lokal na meryenda ng Baguio`}
+							class="h-full w-full object-cover"
+							style="border-radius:0"
+							loading="lazy"
+						/>
+					</div>
+					<div class="flex-1 p-5 sm:p-6">
+						<div class="flex flex-wrap items-center gap-2 mb-2">
+							<h3 class="text-lg sm:text-xl font-bold text-pine-950 leading-snug">{b.name}</h3>
+							<span class="badge bg-pine-50 text-pine-800 border border-pine-200">{b.price}</span>
+						</div>
+						<p class="text-xs font-bold uppercase tracking-[0.18em] text-lagoon-700 mb-1.5">📍 Saan Mabibili</p>
+						<p class="text-sm text-cold-700 leading-relaxed mb-3">{b.where}</p>
+						<p class="text-sm text-cold-800 leading-relaxed">{b.note}</p>
+					</div>
+				</article>
+			))
+		}
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h2>Pinakamagandang Restawran (malapit lamang sa Burnham Park)</h2>
+		<p>
+			Narito ang walong restawran na inirerekomenda ng mga lokal — mula sa pinakamalapit na 500 metro hanggang 3 km (kung nais mong subukan ang tunay na pagkaing Cordillera).
+		</p>
+	</div>
+
+	<div class="space-y-5 sm:space-y-6 my-10">
+		{
+			RESTAURANTS.map((r, i) => {
+				const pb = priceBadge(r.price);
+				return (
+					<article class="card card-hover p-5 sm:p-7 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+						<div class="lg:col-span-5 relative aspect-[16/10] overflow-hidden rounded-2xl">
+							<img
+								src={`https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(r.name + ' Baguio restaurant interior signature dish cozy dining food photography')}&image_size=landscape_4_3`}
+								alt={`${r.name} — isa sa mga pinakamagandang kainan malapit sa Burnham Park, Baguio`}
+								class="h-full w-full object-cover"
+								style="border-radius:0"
+								loading="lazy"
+							/>
+						</div>
+						<div class="lg:col-span-7 flex flex-col">
+							<div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+								<div>
+									<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-1">
+										Kainan #{String(i + 1).padStart(2, '0')}
+									</p>
+									<h3 class="text-2xl sm:text-3xl font-bold text-pine-950 leading-tight">{r.name}</h3>
+								</div>
+								<div class="flex flex-wrap gap-2">
+									<span class={`badge border ${pb.cls}`}>{pb.t}</span>
+									<span class="badge bg-cold-50 text-cold-700 border border-cold-200">📍 {r.distance}</span>
+								</div>
+							</div>
+							<p class="text-cold-800 leading-relaxed mb-4">{r.why}</p>
+							<div>
+								<p class="text-xs font-bold uppercase tracking-[0.18em] text-rose-sand-700 mb-2">⭐ Mga Dapat Subukan</p>
+								<div class="chip-group">
+									{r.signature.map((s) => <span class="chip !font-medium">{s}</span>)}
+								</div>
+							</div>
+						</div>
+					</article>
+				);
+			})
+		}
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h2>Mga Lugar para Kumain (Food Districts) Malapit sa Parke</h2>
+		<p>
+			Kung hindi ka makapili ng iisang restawran, pumunta ka na lamang sa mga sumusunod na lugar — dahil dito nagtitipon ang mga kainan:
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6 mb-14">
+		{
+			districts.map((d) => (
+				<article class="card p-6 h-full flex flex-col">
+					<h3 class="text-lg sm:text-xl font-bold text-pine-950 mb-3">{d.name}</h3>
+					<dl class="text-sm space-y-2.5 mb-4">
+						<div>
+							<dt class="text-[11px] uppercase tracking-widest text-cold-500 mb-0.5">Layo sa Parke</dt>
+							<dd class="font-medium text-cold-800">{d.dist}</dd>
+						</div>
+						<div>
+							<dt class="text-[11px] uppercase tracking-widest text-cold-500 mb-0.5">Presyo</dt>
+							<dd class="font-medium text-cold-800">{d.price}</dd>
+						</div>
+						<div>
+							<dt class="text-[11px] uppercase tracking-widest text-cold-500 mb-0.5">Angkop Para sa</dt>
+							<dd class="font-medium text-cold-800">{d.fit}</dd>
+						</div>
+					</dl>
+					<p class="mt-auto text-sm text-cold-700 leading-relaxed">{d.desc}</p>
+				</article>
+			))
+		}
+	</div>
+
+	<div class="prose-fil !max-w-none">
+		<h2>Paalala sa Pagkain para sa mga Bisita</h2>
+		<ul>
+			<li><strong>Palaging tanungin muna ang presyo</strong> bago bumili sa mga naglalako, lalo na kung ikaw ay turista. Iwasan ang sobrang mahal na singil.</li>
+			<li><strong>Magdala ng perang mura (barya)</strong>. Karamihan sa mga tindero at karinderya ay hindi tumatanggap ng credit card o GCash.</li>
+			<li>Para sa mga may <strong>allergy</strong> — sabihin agad sa tagapagluto kung hindi ka nakakakain ng bawang, peanut, o iba pang allergen.</li>
+			<li>
+				Tungkol sa <strong>Pinikpikan</strong>: Ito ay tradisyunal na pagkaing manok ng Cordillera. Ang klasikong paraan ng paghahanda ay maaaring hindi katanggap-tanggap para sa ilang bisita (pagkatalo sa buhay na manok).
+				Maraming modernong restawran ang may binagong bersyon na — magtanong muna bago umorder.
+			</li>
+			<li>
+				<strong>Magtipid sa plastik.</strong> Maaaring magdala ng sariling lalagyan ng tubig o supot. Ang Baguio ay may mahigpit na batas laban sa plastik ngunit hindi laging naipatutupad.
+			</li>
+		</ul>
+	</div>
+</PageLayout>

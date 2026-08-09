@@ -1,0 +1,177 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { SITE, PAGE_META } from '../consts';
+
+export interface Props {
+	page: keyof typeof PAGE_META;
+	structuredData?: Record<string, unknown>;
+	ogType?: 'website' | 'article';
+	noIndex?: boolean;
+}
+
+const { page, structuredData, ogType = 'article', noIndex } = Astro.props;
+const meta = PAGE_META[page];
+const hero = meta.hero;
+const heroAlt = meta.heroAlt;
+const eyebrow = meta.eyebrow;
+---
+
+<BaseLayout
+	title={meta.title}
+	description={meta.description}
+	ogImage={hero}
+	ogImageAlt={heroAlt}
+	ogType={ogType}
+	structuredData={structuredData}
+	lang={SITE.language}
+	noIndex={noIndex}
+>
+	<!-- Page Hero -->
+	<section aria-label="Ulo ng pahina" class="relative">
+		<div class="relative h-[38vh] sm:h-[44vh] md:h-[52vh] min-h-[320px] sm:min-h-[360px] overflow-hidden">
+			<img
+				src={hero}
+				alt={heroAlt}
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+				class="absolute inset-0 h-full w-full object-cover"
+				style="border-radius:0"
+			/>
+			<div class="absolute inset-0 hero-overlay"></div>
+			<div class="absolute inset-0">
+				<div class="container-page h-full flex flex-col justify-end pb-10 sm:pb-14 md:pb-16">
+					<span class="eyebrow text-white/90 !text-white !uppercase" style="text-shadow:0 2px 12px rgba(0,0,0,0.4)">
+						{eyebrow}
+					</span>
+					<h1 class="text-balance text-white font-bold tracking-tight mb-3" style="text-shadow:0 4px 24px rgba(0,0,0,0.5)">
+						{meta.title.split(' · ')[0]}
+					</h1>
+					<p class="text-balance max-w-3xl text-white/90 sm:text-lg leading-relaxed" style="text-shadow:0 2px 12px rgba(0,0,0,0.45)">
+						{meta.description}
+					</p>
+
+					<!-- Address quick chips -->
+					<div class="mt-6 chip-group">
+						<span class="chip !border-white/20 !bg-white/10 !text-white backdrop-blur-sm">
+							📍 {SITE.address}
+						</span>
+						<span class="chip !border-white/20 !bg-white/10 !text-white backdrop-blur-sm">
+							🕒 24 oras · WALANG BAYAD
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Breadcrumbs -->
+		<div class="bg-white/70 border-b border-cold-100">
+			<nav aria-label="Mumo ng tinapay" class="container-page py-3 text-xs sm:text-sm">
+				<ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-cold-600">
+					<li><a href="/" class="hover:text-pine-800 hover:underline underline-offset-4">Home</a></li>
+					<li aria-hidden="true" class="text-cold-400">›</li>
+					<li class="font-medium text-pine-900" aria-current="page">{eyebrow}</li>
+				</ol>
+			</nav>
+		</div>
+	</section>
+
+	<!-- Body slot -->
+	<article class="section-pad">
+		<div class="container-page grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+			<!-- Right column on desktop: content -->
+			<div class="lg:col-span-8 order-2 lg:order-1">
+				<slot />
+			</div>
+
+			<!-- Left column on desktop: sticky mini nav + quick info -->
+			<aside class="lg:col-span-4 order-1 lg:order-2" aria-label="Mabilis na impormasyon at mga kaugnay na pahina">
+				<div class="lg:sticky lg:top-24 space-y-6">
+					<!-- Info card -->
+					<div class="card p-6">
+						<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-800 mb-3">
+							📋 Talaan ng Lokasyon
+						</p>
+						<ul class="space-y-3 text-sm text-cold-800">
+							<li class="flex gap-3">
+								<span class="text-pine-700 mt-0.5" aria-hidden="true">📍</span>
+								<span>{SITE.address}</span>
+							</li>
+							<li class="flex gap-3">
+								<span class="text-pine-700 mt-0.5" aria-hidden="true">🎟️</span>
+								<span><strong>WALANG BAYAD</strong> pagpasok · ang mga aktibidad ay may hiwalay na bayad</span>
+							</li>
+							<li class="flex gap-3">
+								<span class="text-pine-700 mt-0.5" aria-hidden="true">🕒</span>
+								<span>Parke: <strong>24 oras</strong> · Panloob na pasilidad: karaniwang 7AM–6PM</span>
+							</li>
+							<li class="flex gap-3">
+								<span class="text-pine-700 mt-0.5" aria-hidden="true">👨‍🦽</span>
+								<span>May <strong>wheelchair ramp</strong> sa mga pangunahing pasukan</span>
+							</li>
+							<li class="flex gap-3">
+								<span class="text-pine-700 mt-0.5" aria-hidden="true">⏱️</span>
+								<span>Inirerekomenda: <strong>3–4 na oras</strong> ang pagbisita</span>
+							</li>
+						</ul>
+					</div>
+
+					<!-- Quick links -->
+					<div class="card p-6">
+						<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-800 mb-4">
+							Mabilis na Link
+						</p>
+						<nav aria-label="Mabilis na link sa mga pahina">
+							<ul class="space-y-2 text-sm">
+								<li><a class="block rounded-xl px-3 py-2.5 text-cold-700 hover:bg-pine-50 hover:text-pine-800" href="/plano/">📝 Plano ng Pagbisita</a></li>
+								<li><a class="block rounded-xl px-3 py-2.5 text-cold-700 hover:bg-pine-50 hover:text-pine-800" href="/pagbiyahe/">🚌 Pagbiyahe at Paradahan</a></li>
+								<li><a class="block rounded-xl px-3 py-2.5 text-cold-700 hover:bg-pine-50 hover:text-pine-800" href="/oras/">🌤️ Pinakamagandang Oras</a></li>
+								<li><a class="block rounded-xl px-3 py-2.5 text-cold-700 hover:bg-pine-50 hover:text-pine-800" href="/pagkain/">🍽️ Pagkain sa Paligid</a></li>
+								<li><a class="block rounded-xl px-3 py-2.5 text-cold-700 hover:bg-pine-50 hover:text-pine-800" href="/matutuluyan/">🏨 Matutuluyan</a></li>
+								<li><a class="block rounded-xl px-3 py-2.5 text-cold-700 hover:bg-pine-50 hover:text-pine-800" href="/faq/">❓ FAQ</a></li>
+							</ul>
+						</nav>
+					</div>
+
+					<!-- "Need to verify" banner -->
+					<div class="rounded-2xl border border-yellow-300/80 bg-yellow-50/80 p-5 text-xs sm:text-sm leading-relaxed text-cold-800 shadow-soft/40">
+						<p class="font-bold text-yellow-900 mb-2 inline-flex items-center gap-2">
+							<span aria-hidden="true">⚠️</span>
+							Paalala Bago Umalis
+						</p>
+						Maaaring magbago ang mga presyo, oras ng pagbubukas, o panuntunan sa paradahan. Iwasang umasa lamang dito.
+						Tingnan ang pinakabagong update mula sa mga opisyal na palatandaan o app ng mapa bago ang iyong biyahe.
+					</div>
+				</div>
+			</aside>
+		</div>
+	</article>
+
+	<!-- Bottom CTA block -->
+	<section aria-label="Susunod na hakbang" class="pb-20 sm:pb-28 -mt-8 sm:-mt-12">
+		<div class="container-page">
+			<div class="surface-pine rounded-[2rem] p-7 sm:p-10 md:p-14 shadow-card border border-pine-100">
+				<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+					<div class="md:col-span-7">
+						<p class="eyebrow">Handa ka na bang pumunta?</p>
+						<h2 class="h2 mb-4 text-pine-950">
+							Ihanda ang iyong pagbisita sa Burnham Park sa tamang plano.
+						</h2>
+						<p class="text-cold-700 text-lg leading-relaxed">
+							Tingnan ang <strong>Plano ng Pagbisita</strong> para sa kumpletong ruta, o ang <strong>Pinakamagandang Oras</strong> para iwasan ang maraming tao.
+						</p>
+					</div>
+					<div class="md:col-span-5 flex flex-col sm:flex-row md:flex-col xl:flex-row gap-3 md:gap-4 md:justify-end">
+						<a href="/plano/" class="btn-primary btn-wide no-print">
+							Plano ng Pagbisita
+							<span aria-hidden="true">→</span>
+						</a>
+						<a href="/oras/" class="btn-secondary btn-wide no-print">
+							Pinakamagandang Oras
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

@@ -1,0 +1,61 @@
+---
+import { SITE } from '../consts';
+import GA4 from '../components/GA4.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+	title: string;
+	description?: string;
+	ogImage?: string;
+	ogImageAlt?: string;
+	ogType?: 'website' | 'article';
+	structuredData?: Record<string, unknown>;
+	lang?: string;
+	noIndex?: boolean;
+}
+
+const {
+	title,
+	description,
+	ogImage,
+	ogImageAlt,
+	ogType,
+	structuredData,
+	lang = SITE.language,
+	noIndex = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} dir="ltr" class="scroll-pt-20">
+	<head>
+		<BaseHead
+			title={title}
+			description={description}
+			ogImage={ogImage}
+			ogImageAlt={ogImageAlt}
+			ogType={ogType}
+			structuredData={structuredData}
+		/>
+		{noIndex && <meta name="robots" content="noindex,nofollow" />}
+		<GA4 />
+	</head>
+	<body class="min-h-screen flex flex-col bg-cold-50">
+		<a
+			href="#main-content"
+			class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-2xl focus:bg-pine-900 focus:px-5 focus:py-3 focus:text-white focus:shadow-card"
+		>
+			Laktawan patungo sa pangunahing nilalaman
+		</a>
+
+		<Navbar />
+
+		<main id="main-content" class="flex-1">
+			<slot />
+		</main>
+
+		<Footer />
+	</body>
+</html>
