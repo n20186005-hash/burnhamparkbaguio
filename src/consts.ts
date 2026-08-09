@@ -8,6 +8,8 @@ export const SITE = {
 	siteUrl: 'https://burnhamparkbaguio.com',
 	author: 'Burnham Park Baguio Editorial',
 	ga4Id: 'G-HXM22WWPKP',
+	ogImageDefault:
+		'https://images.unsplash.com/photo-1515894203077-9cd360321c6a?auto=format&fit=crop&w=1600&q=80',
 	address: 'Jose Abad Santos Dr, Baguio, 2600 Benguet, Pilipinas',
 	coordinates: {
 		lat: 16.4123795,
@@ -48,7 +50,11 @@ export type Cluster = {
 	description: string;
 	image: string;
 	imageAlt: string;
+	category?: string;
 };
+
+const U = (id: string, w = 1600) =>
+	`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
 
 export const CLUSTERS: Cluster[] = [
 	{
@@ -57,12 +63,12 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Puso ng Parke',
 		minutes: '45 min',
 		best: ['Pagsakay ng bangkang sisne', 'Pagkuha ng larawan', 'Magkapareha', 'Pamilya'],
+		category: 'family',
 		description:
 			'Ang artipisyal na lawa sa gitna ng Burnham Park. Maaaring umarkila ng bangkang sisne o sagwan para sa 2–4 na tao. Perpekto para sa pamilya at magkapareha.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Burnham%20Lagoon%20Baguio%20swan%20paddle%20boats%20on%20calm%20lake%20pine%20trees%20reflection%20soft%20morning%20mist%20highlands%20scenic%20photography&image_size=landscape_16_9',
+		image: U('photo-1515894203077-9cd360321c6a'),
 		imageAlt:
-			'Burnham Lagoon na may mga bangkang sisne, repleksyon ng mga punong pino, at mahinang hamog sa madaling araw, Baguio City',
+			'Burnham Lagoon swan paddle boats on calm water, pine trees reflection at sunrise — Burnham Park Baguio tourist guide',
 	},
 	{
 		id: 'rose-garden',
@@ -70,11 +76,11 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Bukid ng mga Rosas',
 		minutes: '20 min',
 		best: ['Namumukadkad Nobyembre–Marso', 'Pagkuha ng larawan', 'Mahinahong paglalakad'],
+		category: 'nature',
 		description:
 			'Mga hagdan-hagdang kama ng mga hybrid na rosas. Pinakamaganda ang kulay sa panahon ng taglamig ng Baguio. Madalas gamiting lugar para sa prenup shoot.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=terraced%20rose%20garden%20Burnham%20Park%20Baguio%20pink%20red%20yellow%20roses%20in%20bloom%20cool%20morning%20light%20pine%20trees%20highland%20botanical&image_size=landscape_4_3',
-		imageAlt: 'Rose Garden ng Burnham Park na may makukulay na rosas sa hagdan-hagdang kama at mga punong pino',
+		image: U('photo-1490750967868-88aa4486c946'),
+		imageAlt: 'Terraced rose garden with pink red yellow roses in cool morning light — Burnham Park Rose Garden Baguio',
 	},
 	{
 		id: 'orchidarium',
@@ -82,11 +88,11 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Tahanan ng mga Orkidya',
 		minutes: '15 min',
 		best: ['Mga katutubong orkidya ng Cordillera', 'Payapa at malamig', 'Mahilig sa halaman'],
+		category: 'nature',
 		description:
 			'Lilim na enclosure ng mga orkidyas mula sa bulubundukin ng Cordillera — mga dendrobium at vanda. Sariwa at mahalumigmig ang hangin sa loob.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=orchidarium%20shaded%20wooden%20frames%20dendrobium%20vanda%20orchids%20damp%20moss%20cool%20highland%20garden%20Burnham%20Park%20Baguio&image_size=landscape_4_3',
-		imageAlt: 'Orchidarium ng Burnham Park na may mga nakasabit na orkidya sa lilim na kahoy na rehas',
+		image: U('photo-1465146634408-991e0c42e742'),
+		imageAlt: 'Shaded orchidarium with dendrobium and vanda orchids in wooden frames — Burnham Park Orchidarium Baguio',
 	},
 	{
 		id: 'athletic-bowl',
@@ -94,11 +100,11 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Palakasan at Pag-eehersisyo',
 		minutes: '30 min',
 		best: ['Jogging tuwing umaga', 'Basketball', 'Football', 'Archery'],
+		category: 'sports',
 		description:
 			'Oval na takbuhan, bakuran ng basketball, at iba pang pasilidad pang-palakasan. Dito nag-eehersisyo ang mga lokal na mamamayan tuwing madaling araw.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Burnham%20Park%20Athletic%20Bowl%20oval%20running%20track%20joggers%20pine%20trees%20morning%20sunlight%20Baguio%20sports%20facility&image_size=landscape_16_9',
-		imageAlt: 'Athletic Bowl ng Burnham Park na may mga nagjo-jogging sa oval track sa madaling araw',
+		image: U('photo-1571019613454-1cb2f99b2d8b'),
+		imageAlt: 'Athletic oval running track with joggers under pine trees morning sunlight — Burnham Park Athletic Bowl Baguio sports',
 	},
 	{
 		id: 'melvin-jones',
@@ -106,12 +112,12 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Likas na Lunan',
 		minutes: '25 min',
 		best: ['Panagbenga Flower Festival', 'Palaro ng football', 'Pagpapalipad ng saranggola', 'Paglubog ng araw'],
+		category: 'family',
 		description:
 			'Malawak na luntiang parang sa silangang bahagi ng parke. Dito ginaganap ang grand float parade ng Panagbenga tuwing Pebrero. Magagandang silweta ng pino tuwing hapon.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Melvin%20Jones%20Grandstand%20Burnham%20Park%20Baguio%20wide%20green%20field%20pine%20tree%20silhouettes%20golden%20sunset%20light%20peaceful%20highland&image_size=landscape_16_9',
+		image: U('photo-1473448912268-2022ce9509d8'),
 		imageAlt:
-			'Melvin Jones Grandstand na may malawak na luntiang parang at silweta ng mga punong pino sa oras ng paglubog ng araw',
+			'Melvin Jones Grandstand wide green field pine tree silhouettes golden sunset — Burnham Park Baguio Panagbenga venue',
 	},
 	{
 		id: 'skating-rink',
@@ -119,11 +125,11 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Roller Skate Plaza',
 		minutes: '30 min',
 		best: ['Mga kabataan', 'Baguhan at bihasa', 'May upa ng skate'],
+		category: 'sports',
 		description:
 			'Sementadong palaruan ng roller skate. Maraming kabataang nag-eensayo ng trick, at mga magulang na nanonood sa gilid na bangko.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=outdoor%20concrete%20roller%20skating%20rink%20Burnham%20Park%20Baguio%20teenagers%20skating%20pine%20trees%20around%20casual%20friendly&image_size=landscape_4_3',
-		imageAlt: 'Skating Rink ng Burnham Park na may mga kabataang naka-roller skate sa sementadong plaza',
+		image: U('photo-1526047932273-341f2a7631f9'),
+		imageAlt: 'Outdoor concrete roller skating rink teenagers casual fun — Burnham Park Skating Rink Baguio recreation',
 	},
 	{
 		id: 'childrens-playground',
@@ -131,11 +137,11 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Lugar para sa Bata',
 		minutes: '25 min',
 		best: ['Pamilya na may maliliit na anak', 'Duuyan at slide', 'Pagsakay sa maliit na kabayo'],
+		category: 'family',
 		description:
 			'Mga duyan, slide, at palaruan para sa maliliit na bata. May pasakay ng maliit na kabayo na may maikling ikot para sa litrato.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=children%20playground%20Burnham%20Park%20Baguio%20colorful%20swings%20slides%20pine%20trees%20families%20with%20kids%20joyful%20morning&image_size=landscape_4_3',
-		imageAlt: "Children's Playground na may makukulay na slide at duyan, pamilyang naglalaro sa ilalim ng mga pino",
+		image: U('photo-1518602164578-cd0074062767'),
+		imageAlt: "Colorful children's playground swings slides families with kids joyful morning — Burnham Park Baguio playground",
 	},
 	{
 		id: 'igorot-garden',
@@ -143,11 +149,11 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Kultura ng mga Katutubo',
 		minutes: '15 min',
 		best: ['Estatwa ng mga mandirigmang Igorot', 'Bahay na bato', 'Paggalang sa kultura ng Cordillera'],
+		category: 'nature',
 		description:
 			'Maliliit na estatwa ng mga mandirigmang Igorot at tradisyunal na bahay na bato, bilang pagkilala sa katutubong kultura ng mga taga-Cordillera.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Igorot%20Garden%20Burnham%20Park%20stone%20warrior%20statues%20traditional%20Cordillera%20huts%20pine%20trees%20cultural%20heritage%20sculpture&image_size=landscape_4_3',
-		imageAlt: 'Igorot Garden na may mga estatwang bato ng mandirigma at tradisyunal na bahay ng mga katutubo',
+		image: U('photo-1528127269323-49458a486e23'),
+		imageAlt: 'Igorot Garden stone warrior statues traditional Cordillera huts heritage — Burnham Park Baguio cultural site',
 	},
 	{
 		id: 'japanese-peace',
@@ -155,11 +161,11 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Hardin ng Kapayapaan',
 		minutes: '15 min',
 		best: ['Tahimik na sulok', 'Japanese style garden', 'Koi pond'],
+		category: 'nature',
 		description:
 			'Tahimik na hardin sa istilong Hapon na may lawa ng koi. Alaala ng kapayapaan ng Pilipinas at Hapon.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Japanese%20Peace%20Park%20garden%20Burnham%20Park%20Baguio%20koi%20pond%20stone%20lanterns%20zen%20style%20pine%20trees%20quiet%20meditation&image_size=landscape_4_3',
-		imageAlt: 'Japanese Peace Tower garden na may koi pond, batong parol, at istilong zen na hardin',
+		image: U('photo-1503919545889-aef636e10afa'),
+		imageAlt: 'Japanese zen garden koi pond stone lanterns quiet meditation — Burnham Park Japanese Peace Tower Baguio',
 	},
 	{
 		id: 'picnic-grove',
@@ -167,11 +173,11 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Lugar para sa Piknik',
 		minutes: '60 min',
 		best: ['Magkakaibigan at pamilya', 'Ilalim ng matatayog na pino', 'Nagdadala ng sariling pagkain'],
+		category: 'family',
 		description:
 			'Malapad na lugar sa ilalim ng mga punong pino na perpekto para sa piknik ng buong pamilya o magkakaibigan. Maaaring maglatag ng banig at magpahinga nang mahaba.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=picnic%20grove%20pine%20trees%20Burnham%20Park%20Baguio%20families%20blankets%20on%20grass%20dappled%20shade%20tall%20Benguet%20pine%20sunlight&image_size=landscape_16_9',
-		imageAlt: 'Picnic Grove na may mga matatayog na punong pino at pamilyang nagpipiknik sa damuhan',
+		image: U('photo-1533240332313-0db49b459ad6'),
+		imageAlt: 'Picnic grove tall Benguet pine trees families blankets on grass dappled shade — Burnham Park Picnic Grove Baguio',
 	},
 	{
 		id: 'pine-trees-world',
@@ -179,11 +185,11 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Mga Pino sa Buong Mundo',
 		minutes: '15 min',
 		best: ['Mahilig sa puno', 'Maikling paglalakad', 'Edukasyon para sa bata'],
+		category: 'nature',
 		description:
 			'Nagtitipon ng mga iba\'t ibang uri ng punong pino mula sa iba\'t ibang bansa. Isang tahimik at makahulugang bahagi ng parke.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Pine%20Trees%20of%20the%20World%20Burnham%20Park%20Baguio%20assorted%20pine%20tree%20species%20informative%20garden%20path%20botanical%20cool%20climate&image_size=landscape_4_3',
-		imageAlt: 'Pine Trees of the World na may mga iba\'t ibang uri ng punong pino at daanan sa hardin',
+		image: U('photo-1441974231531-c6227db76b6e'),
+		imageAlt: 'Pine Trees of the World assorted botanical pine species garden path — Burnham Park Baguio educational walk',
 	},
 	{
 		id: 'burnham-bust',
@@ -191,13 +197,20 @@ export const CLUSTERS: Cluster[] = [
 		tagline: 'Alaala ng Arkitekto',
 		minutes: '5 min',
 		best: ['Kasaysayan ni Daniel Burnham', 'Litratong may kasaysayan'],
+		category: 'nature',
 		description:
 			'Bust o rebulto ng ulo ni Daniel Hudson Burnham, ang Amerikanong arkitekto na nagplano ng lungsod ng Baguio, kasama ang isang plake ng pagkilala.',
-		image:
-			'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Daniel%20Burnham%20bust%20monument%20bronze%20plaque%20Burnham%20Park%20Baguio%20pine%20trees%20historic%20marker%20dignified%20memorial&image_size=square',
-		imageAlt: 'Bronze bust ni Daniel Burnham na may plake sa gilid ng Burnham Park, Baguio',
+		image: U('photo-1563387852576-9645e4c1dbf4'),
+		imageAlt: 'Daniel Burnham bronze bust monument historic marker plaque — Burnham Park Baguio heritage Daniel Hudson Burnham',
 	},
 ];
+
+export const CLUSTER_CATEGORIES = [
+	{ id: 'all', label: 'Lahat' },
+	{ id: 'family', label: 'Pamilya at Bata' },
+	{ id: 'nature', label: 'Kalikasan at Hardin' },
+	{ id: 'sports', label: 'Palakasan at Aktibidad' },
+] as const;
 
 export type SeasonInfo = {
 	id: string;
@@ -253,6 +266,7 @@ export type Bite = {
 	price: string;
 	where: string;
 	note: string;
+	image: string;
 };
 
 export const BITES: Bite[] = [
@@ -263,6 +277,7 @@ export const BITES: Bite[] = [
 		where: 'Mga naglalako sa pasukan ng parke at gilid ng Lagoon',
 		note:
 			'Sariwang tofu na may strawberry syrup galing sa La Trinidad, Benguet. Higit sa lahat, ito ang lagda ng Baguio.',
+		image: U('photo-1539113996712-2f67e9b1d1e4'),
 	},
 	{
 		id: 'mais',
@@ -270,6 +285,7 @@ export const BITES: Bite[] = [
 		price: 'Napakamura',
 		where: 'Mga tindero sa paligid ng parke',
 		note: 'Buong mais na inihaw sa uling, pinapahiran ng mantikilya.',
+		image: U('photo-1551754756-6cab54358c72'),
 	},
 	{
 		id: 'ube-halaya',
@@ -277,6 +293,7 @@ export const BITES: Bite[] = [
 		price: 'Mababa \u2013 Katamtaman',
 		where: 'Public Market ng Baguio at mga panaderya',
 		note: 'Matamis at malinamnam na jam mula sa purple yam, kilalang produkto ng Baguio.',
+		image: U('photo-1534939561126-855b8675edd7'),
 	},
 	{
 		id: 'longganisa',
@@ -284,6 +301,7 @@ export const BITES: Bite[] = [
 		price: 'Mababa \u2013 Katamtaman',
 		where: 'Mga lokal na kainan at almusalan',
 		note: 'Lokal na sausage na may bawang at tamis na timpla.',
+		image: U('photo-1528821128474-27f963b062bf'),
 	},
 	{
 		id: 'pinikpikan',
@@ -292,6 +310,7 @@ export const BITES: Bite[] = [
 		where: 'Mga restawran ng pagkaing Cordillera (hal. Farmer\u2019s Daughter)',
 		note:
 			'Tradisyunal na putahe ng manok ng mga taga-Cordillera. May kakaibang lasa mula sa usok at pampalasa.',
+		image: U('photo-1496116218417-1a781b1c416c'),
 	},
 	{
 		id: 'ensaladang-pako',
@@ -299,6 +318,7 @@ export const BITES: Bite[] = [
 		price: 'Mababa \u2013 Katamtaman',
 		where: 'Mga lokal na kainan',
 		note: 'Ensalada ng mga ligaw na dahon ng pako, kamatis, at katas ng kalamansi.',
+		image: U('photo-1512621776951-a57141f2eefd'),
 	},
 	{
 		id: 'shake',
@@ -306,6 +326,7 @@ export const BITES: Bite[] = [
 		price: 'Mababa',
 		where: 'Mga tindahan ng inumin sa parke',
 		note: 'Lamig at sariwang gawa na shake mula sa mga lokal na prutas.',
+		image: U('photo-1553530666-ba11a7da3888'),
 	},
 	{
 		id: 'sundot-kulangot',
@@ -313,6 +334,7 @@ export const BITES: Bite[] = [
 		price: 'Napakamura',
 		where: 'Public Market at mga pasalubong shop',
 		note: 'Maliit na kakanin na nakabalot sa kawayan. Kawili-wiling pangalan, matamis na meryenda.',
+		image: U('photo-1558961363-fa8fdf82db35'),
 	},
 ];
 
@@ -323,6 +345,7 @@ export type Restaurant = {
 	price: 'budget' | 'mid' | 'premium';
 	signature: string[];
 	why: string;
+	image: string;
 };
 
 export const RESTAURANTS: Restaurant[] = [
@@ -333,6 +356,7 @@ export const RESTAURANTS: Restaurant[] = [
 		price: 'mid',
 		signature: ['Baguio Bagnet', 'Camote Bread'],
 		why: 'Isa sa pinakamatandang restawran sa Baguio. Rustik na kahoy na palamuti, may dating panitikan at sining.',
+		image: U('photo-1517248135467-4c7edcad34c4'),
 	},
 	{
 		id: 'good-taste',
@@ -341,6 +365,7 @@ export const RESTAURANTS: Restaurant[] = [
 		price: 'budget',
 		signature: ['Buttered Chicken', 'Chop Suey'],
 		why: 'Paborito ng mga lokal. Napakalaking serving at abot-kayang presyo. Bukas 24 oras.',
+		image: U('photo-1552566626-52f8b828add9'),
 	},
 	{
 		id: 'oh-my-gulay',
@@ -349,6 +374,7 @@ export const RESTAURANTS: Restaurant[] = [
 		price: 'mid',
 		signature: ['Anak ng Putanesca', 'Kabute Fritters'],
 		why: 'Lahat ay gulay at sining. Artist caf\u00e9 sa itaas ng La Azotea Building.',
+		image: U('photo-1555396273-367ea4eb4db5'),
 	},
 	{
 		id: 'hill-station',
@@ -357,6 +383,7 @@ export const RESTAURANTS: Restaurant[] = [
 		price: 'premium',
 		signature: ['Home-made Meatloaf', 'Moroccan Spiced Stew'],
 		why: 'Sa loob ng Casa Vallejo, ang pinakamatandang gusali ng Baguio. Award-winning na pagkain.',
+		image: U('photo-1414235077428-338989a2e8c0'),
 	},
 	{
 		id: 'farmers-daughter',
@@ -365,6 +392,7 @@ export const RESTAURANTS: Restaurant[] = [
 		price: 'mid',
 		signature: ['Pinikpikan', 'Pinuneg', 'Binungor'],
 		why: 'Pinakamainam na tunay na pagkaing Cordillera. Rustik na kapaligiran, damang-dama ang kultura.',
+		image: U('photo-1559339352-11d035aa65de'),
 	},
 	{
 		id: 'arcas-yard',
@@ -373,6 +401,7 @@ export const RESTAURANTS: Restaurant[] = [
 		price: 'mid',
 		signature: ['Camote Pie', 'Arca\u2019s Cloud Tea'],
 		why: 'Maliit na kubo sa bundok na may magandang tanawin. Perpekto para sa tahimik na meryenda.',
+		image: U('photo-1515543904788-1e19ebba0fc4'),
 	},
 	{
 		id: 'choco-batirol',
@@ -381,6 +410,7 @@ export const RESTAURANTS: Restaurant[] = [
 		price: 'mid',
 		signature: ['Tsokolate eh', 'Bibingka'],
 		why: 'Tradisyunal na mainit na tsokolate na gawa sa batirol, kasama ang mainit na bibingka.',
+		image: U('photo-1509042239860-f550ce710b93'),
 	},
 	{
 		id: '50s-diner',
@@ -389,6 +419,7 @@ export const RESTAURANTS: Restaurant[] = [
 		price: 'mid',
 		signature: ['Giant Banana Split', 'American classics'],
 		why: 'Retro diner sa istilong 1950s. Masarap ang milkshake at panghimagas ng mga kabataan.',
+		image: U('photo-1580959375944-abd7e991f971'),
 	},
 ];
 
@@ -401,6 +432,7 @@ export type Hotel = {
 	price: string;
 	fits: string[];
 	highlights: string[];
+	image: string;
 };
 
 export const HOTELS: Hotel[] = [
@@ -413,6 +445,7 @@ export const HOTELS: Hotel[] = [
 		price: 'Katamtaman (4-bituin)',
 		fits: ['Magkapareha', 'Pamilya'],
 		highlights: ['May balkonaheng tanaw ang parke', 'Sariling restawran', '24-oras na tanggapan'],
+		image: U('photo-1455587734955-081b22074882'),
 	},
 	{
 		id: 'tuscany-basic',
@@ -423,6 +456,7 @@ export const HOTELS: Hotel[] = [
 		price: 'Matipid',
 		fits: ['Bakasyonista', 'Mag-isang manlalakbay'],
 		highlights: ['Pinakamalapit na hotel sa parke', 'Payak at malinis na kuwarto'],
+		image: U('photo-1611892440504-42a792e24d32'),
 	},
 	{
 		id: 'travelite-express',
@@ -433,6 +467,7 @@ export const HOTELS: Hotel[] = [
 		price: 'Matipid',
 		fits: ['Pamilya', 'Barkada'],
 		highlights: ['May paradahan', '24-oras na serbisyo', 'Malapit sa jeepney stop'],
+		image: U('photo-1631049552144-60967b0f800f'),
 	},
 	{
 		id: 'henrico-kisad',
@@ -443,6 +478,7 @@ export const HOTELS: Hotel[] = [
 		price: 'Matipid',
 		fits: ['Lokal na bakasyon', 'Mga kumperensya'],
 		highlights: ['Malapit sa Kisad Road na mga kainan', 'May sariling restawran'],
+		image: U('photo-1578683010236-d716f9a3f461'),
 	},
 	{
 		id: 'burnham-suites',
@@ -453,6 +489,7 @@ export const HOTELS: Hotel[] = [
 		price: 'Katamtaman',
 		fits: ['Matagal na pananatili', 'Pamilya'],
 		highlights: ['Malalawak na suite', 'May kusina para sa mahabang pananatili'],
+		image: U('photo-1618773881591-bb5c1a8a8430'),
 	},
 	{
 		id: '456-hotel',
@@ -463,6 +500,7 @@ export const HOTELS: Hotel[] = [
 		price: 'Matipid',
 		fits: ['Malaking grupo', 'Backpacker'],
 		highlights: ['May tindahan at cafe sa loob', 'May libreng paradahan', '24 oras na bukas'],
+		image: U('photo-1566665797739-1674de7a421a'),
 	},
 	{
 		id: 'microtel-wyndham',
@@ -473,6 +511,7 @@ export const HOTELS: Hotel[] = [
 		price: 'Katamtaman',
 		fits: ['Pamilya', 'Corporate travel'],
 		highlights: ['International brand', 'Komportable at malinis', 'Family room'],
+		image: U('photo-1582719478250-c89cae4dc85b'),
 	},
 	{
 		id: 'azalea',
@@ -483,6 +522,7 @@ export const HOTELS: Hotel[] = [
 		price: 'Katamtaman \u2013 Mahal',
 		fits: ['Malaking pamilya', '8 katao hanggang'],
 		highlights: ['Multi-bedroom serviced apartments', 'Tahimik na lokasyon', 'May kusina at sala'],
+		image: U('photo-1582719508461-905c673771fd'),
 	},
 	{
 		id: 'casa-vallejo',
@@ -493,6 +533,7 @@ export const HOTELS: Hotel[] = [
 		price: 'Mahal',
 		fits: ['Kasaysayang buff', 'Magkapareha'],
 		highlights: ['Pinakamatandang hotel ng Baguio', 'Heritage building', 'Hill Station restaurant'],
+		image: U('photo-1564501049412-61c2a3083791'),
 	},
 ];
 
@@ -564,6 +605,11 @@ export const FAQS: Faq[] = [
 	},
 ];
 
+export const PAGE_IMAGES = {
+	indexPanoramic: U('photo-1515894203077-9cd360321c6a', 1200),
+	panagbengaParade: U('photo-1464822759023-fed622ff2c3b'),
+} as const;
+
 export const PAGE_META: Record<
 	string,
 	{ title: string; description: string; eyebrow: string; hero: string; heroAlt: string }
@@ -571,66 +617,66 @@ export const PAGE_META: Record<
 	home: {
 		title: 'Burnham Park Baguio — Opisyal na Gabay sa Bisita',
 		description:
-			'Ang 32.84-ektaryang luntiang parke sa gitna ng Baguio. Gabay sa bangka, bisikleta, hardin, paradahan, pagkain, at matutuluyan malapit sa Burnham Park.',
+			'Ang 32.84-ektaryang luntiang parke sa gitna ng Baguio. Gabay sa swan boat lagoon, bike rental, 12 park zones, parking, Panagbenga festival, best time to visit, pagkain, at hotel malapit.',
 		eyebrow: 'Burnham Park · Lungsod ng Baguio',
-		hero: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Burnham%20Park%20Baguio%20aerial%20wide%20panorama%20man%20made%20lagoon%20swan%20boats%20pine%20forest%20city%20skyline%20backdrop%20early%20morning%20mist%20golden%20hour%20scenic%20travel%20photography&image_size=landscape_16_9',
+		hero: U('photo-1515894203077-9cd360321c6a'),
 		heroAlt:
-			'Malapad na tanawin ng Burnham Park Baguio sa madaling araw: luntiang mga punong pino, lawa ng lagoon, at mga bangkang sisne sa gitna ng lungsod',
+			'Burnham Park Baguio aerial wide panorama: man-made lagoon, swan paddle boats, pine forest, city skyline backdrop early morning golden hour — official visitor guide',
 	},
 	plano: {
-		title: 'Plano ng Pagbisita sa Burnham Park · Ruta at Gawain',
+		title: 'Plano ng Pagbisita sa Burnham Park · Ruta, Bayad sa Bangka at Bisikleta',
 		description:
-			'Gaano katagal dapat manatili, pinakamagandang ruta sa paglalakad at pagbibisikleta, upa ng bangka at bisikleta, at mga paalala bago bumisita.',
+			'Itinerary Burnham Park: gaano katagal manatili, best walking route, bike lane, upa ng bangkang sisne at bisikleta presyo, at mga paalala bago bumisita.',
 		eyebrow: 'Plano ng Pagbisita',
-		hero: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=family%20riding%20bikes%20Burnham%20Park%20paved%20path%20pine%20trees%20both%20sides%20sunlight%20dappled%20morning%20joyful%20Baguio%20recreation&image_size=landscape_16_9',
-		heroAlt: 'Pamilyang nagbibisikleta sa sementadong daanan ng Burnham Park, sa pagitan ng mga punong pino sa madaling araw',
+		hero: U('photo-1519681393784-d120267933ba'),
+		heroAlt: 'Family riding bikes Burnham Park paved pine tree path sunlight dappled morning joyful Baguio recreation itinerary',
 	},
 	pagbiyahe: {
-		title: 'Pagbiyahe at Paradahan · Paano Pumunta sa Burnham Park',
+		title: 'Pagbiyahe at Paradahan · Paano Pumunta sa Burnham Park mula Manila',
 		description:
-			'Mula sa Manila: jeepney, taksi, Grab, bus, at eroplano patungong Baguio. Tunay na kalagayan ng paradahan sa paligid ng Burnham Park.',
+			'Paano pumunta sa Burnham Park: jeepney route, taxi/Grab fare, bus from Manila (Victory Liner, Genesis), flight to Loakan Airport, at tunay na kalagayan ng paradahan sa paligid.',
 		eyebrow: 'Pagbiyahe at Paradahan',
-		hero: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=colorful%20Filipino%20jeepney%20Baguio%20City%20street%20pine%20trees%20burnham%20park%20entrance%20local%20public%20transport%20photography&image_size=landscape_16_9',
-		heroAlt: 'Makukulay na jeepney sa kalsada ng Baguio City malapit sa pasukan ng Burnham Park, kasama ang mga punong pino',
+		hero: U('photo-1545569341-9eb8b30979d9'),
+		heroAlt: 'Colorful Filipino jeepney Baguio City street pine trees Burnham Park entrance local public transport',
 	},
 	kasaysayan: {
-		title: 'Kasaysayan ng Burnham Park · Daniel Burnham at ang 12 na Sona',
+		title: 'Kasaysayan ng Burnham Park · Daniel Burnham Plan, Ibaloi, at 12 na Sona',
 		description:
-			'Kasaysayan ng Burnham Park mula sa plano ni Daniel Burnham noong 1905, ang lupain ng mga Ibaloi, ang 12 na bahagi ng parke, at ang mga puno at halaman nito.',
+			'Kasaysayan Burnham Park Baguio: Daniel Burnham plan 1905, lupain ng mga Ibaloi ng Kafagway, Proclamation 64, ang 12 cluster zones, at ~2600 na puno at halaman.',
 		eyebrow: 'Kasaysayan at Pamana',
-		hero: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=vintage%20historic%20black%20and%20white%20photograph%20Burnham%20Park%20Baguio%20early%201900s%20colonial%20architecture%20pine%20trees%20american%20planner%20heritage&image_size=landscape_16_9',
-		heroAlt: 'Larawang pang-kasaysayan ng Burnham Park noong unang bahagi ng 1900s: mga punong pino, istilong Amerikano, at dating parke',
+		hero: U('photo-1518998053901-5348d3961a04'),
+		heroAlt: 'Vintage historic black and white Burnham Park Baguio early 1900s colonial American planner heritage pine trees',
 	},
 	oras: {
-		title: 'Pinakamagandang Oras na Bumisita sa Burnham Park',
+		title: 'Pinakamagandang Oras na Bumisita sa Burnham Park · Buwan, Araw, Pista',
 		description:
-			'Pinakamagandang buwan (Nobyembre\u2013Pebrero), araw (Lunes\u2013Biyernes), at oras (6\u201310 ng umaga), pati na ang Panagbenga Festival tuwing Pebrero.',
+			'Pinakamagandang buwan bumisita (Nobyembre–Pebrero cool dry), araw (Lunes–Biyernes less crowd), oras (6–10am sunrise), at Panagbenga Flower Festival tuwing Pebrero.',
 		eyebrow: 'Pinakamagandang Oras',
-		hero: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Burnham%20Park%20Baguio%20sunset%20golden%20hour%20Melvin%20Jones%20field%20silhouettes%20pine%20trees%20kites%20flying%20warm%20light%20peaceful&image_size=landscape_16_9',
-		heroAlt: 'Paglubog ng araw sa Melvin Jones Grandstand, Burnham Park: mga silweta ng pino at saranggola sa langit na kulay ginto',
+		hero: U('photo-1473448912268-2022ce9509d8'),
+		heroAlt: 'Burnham Park Baguio sunset golden hour Melvin Jones field pine tree silhouettes kites flying warm peaceful light',
 	},
 	pagkain: {
-		title: 'Pagkain Malapit sa Burnham Park · Meryenda at Restawran',
+		title: 'Pagkain Malapit sa Burnham Park · Strawberry Taho, Pinikpikan, Restawran',
 		description:
-			'Kung saan makakakita ng tunay na strawberry taho, pinikpikan, at ang pinakamagandang restawran sa Session Road at paligid ng Burnham Park.',
+			'Saan makakain sa Burnham Park: authentic strawberry taho, inihaw na mais, ube halaya, pinikpikan, at best restaurants sa Session Road, Kisad, at Camp John Hay.',
 		eyebrow: 'Pagkain at Meryenda',
-		hero: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=strawberry%20taho%20Filipino%20silken%20tofu%20snack%20fresh%20strawberry%20syrup%20Baguio%20City%20vendor%20outdoor%20closeup%20food%20photography%20authentic&image_size=landscape_16_9',
-		heroAlt: 'Strawberry taho ng Baguio: mainit na tofu na may makapal na strawberry syrup at sago, tapat na larawan ng meryenda',
+		hero: U('photo-1539113996712-2f67e9b1d1e4'),
+		heroAlt: 'Strawberry taho Filipino silken tofu snack fresh strawberry syrup Baguio City vendor authentic food closeup photography',
 	},
 	matutuluyan: {
-		title: 'Matutuluyan Malapit sa Burnham Park · Hotel at Pension',
+		title: 'Matutuluyan Malapit sa Burnham Park · Hotel, Pension, Presyo 2026',
 		description:
-			'Mga hotel na 2 minutong lakad lamang, matipid na opsyon, at mga magagandang heritage stay — na inayos ayon sa layo, presyo, at angkop sa pamilya.',
+			'Saan matuloy malapit sa Burnham Park: 2-min walk hotels (Tuscany, Travelite), budget (456, Microtel), scenic heritage (Casa Vallejo, Azalea) — presyo, distansya, at angkop sa pamilya.',
 		eyebrow: 'Matutuluyan',
-		hero: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Baguio%20city%20view%20hotel%20balcony%20overlooking%20Burnham%20Park%20pine%20trees%20foggy%20morning%20mountains%20background%20cozy%20wooden%20room&image_size=landscape_16_9',
-		heroAlt: 'Tingin mula sa balkonahe ng hotel sa Baguio na nakatanaw sa Burnham Park, mga pino, at hamog sa kabundukan',
+		hero: U('photo-1520250497591-112f2f40a3f4'),
+		heroAlt: 'Baguio hotel balcony view overlooking Burnham Park pine trees foggy morning mountains cozy wooden room',
 	},
 	faq: {
-		title: 'FAQ tungkol sa Burnham Park · 15 Pinakamadalas Itanong',
+		title: 'FAQ Burnham Park · 15 Pinakamadalas Itanong (Bayad, Oras, Paradahan)',
 		description:
-			'Bayad sa pagpasok? Oras? Wheelchair? Aso? Paradahan? Drone? Paninigarilyo? — Lahat ng totoong sagot bago bumisita sa Burnham Park.',
+			'FAQ Burnham Park Baguio: entrance fee? 24 hours open? wheelchair accessible? pet dog allowed? parking? drone? smoking? swan boat price? Panagbenga? — lahat ng totoong sagot.',
 		eyebrow: 'Mga Madalas Itanong',
-		hero: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Burnham%20Park%20wide%20peaceful%20scene%20pine%20avenue%20benches%20people%20sitting%20calm%20overcast%20day%20Baguio%20highland%20scenic%20urban%20park&image_size=landscape_16_9',
-		heroAlt: 'Tahimik na tanawin ng Burnham Park: mahabang hanay ng mga pino, mga bangko, at mga taong nagpapahinga sa damuhan',
+		hero: U('photo-1441974231531-c6227db76b6e'),
+		heroAlt: 'Burnham Park wide peaceful pine avenue benches people sitting calm overcast Baguio highland scenic urban park',
 	},
 };

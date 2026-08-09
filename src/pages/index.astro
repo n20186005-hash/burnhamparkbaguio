@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import KeyInfoCard from '../components/KeyInfoCard.astro';
 import ClusterCard from '../components/ClusterCard.astro';
-import { SITE, CLUSTERS, NAV, PAGE_META, KEY_INFO } from '../consts';
+import { SITE, CLUSTERS, NAV, PAGE_META, KEY_INFO, PAGE_IMAGES, CLUSTER_CATEGORIES } from '../consts';
 
 const meta = PAGE_META.home;
 
@@ -176,8 +176,8 @@ const structuredData = {
 				<div class="card overflow-hidden p-0">
 					<div class="relative aspect-[4/3]">
 						<img
-							src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Burnham%20Park%20Baguio%20wide%20panoramic%20lagoon%20view%20pine%20trees%20both%20sides%20golden%20afternoon%20light%20people%20walking%20calm%20lake%20scenic&image_size=landscape_4_3"
-							alt="Malawak na tanawin ng Burnham Lagoon, mga pino sa gilid, at mga taong naglalakad sa gintong ilaw ng hapon, Burnham Park Baguio"
+							src={PAGE_IMAGES.indexPanoramic}
+							alt="Burnham Lagoon panoramic wide view with pine trees and golden afternoon light — Burnham Park Baguio scenic overview"
 							class="h-full w-full object-cover"
 							style="border-radius:0"
 							loading="lazy"
@@ -232,10 +232,73 @@ const structuredData = {
 				</p>
 			</div>
 
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+			<!-- Category Filter -->
+			<div class="mb-8 sm:mb-10 flex flex-wrap items-center gap-2 sm:gap-3" role="tablist" aria-label="Filter ng 12 bahagi ng parke">
+				{
+					CLUSTER_CATEGORIES.map((cat) => (
+						<button
+							type="button"
+							role="tab"
+							aria-selected={cat.id === 'all'}
+							data-cluster-filter={cat.id}
+							class:list={[
+								'inline-flex items-center rounded-full border px-4 sm:px-5 py-2 text-sm sm:text-[15px] font-semibold transition-colors duration-200 no-print',
+								cat.id === 'all'
+									? 'bg-pine-900 text-white border-pine-900 shadow-soft'
+									: 'bg-white text-pine-800 border-pine-200 hover:bg-pine-50',
+							]}
+						>
+							{cat.label}
+						</button>
+					))
+				}
+			</div>
+
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8" data-cluster-grid>
 				{
 					CLUSTERS.map((cluster) => <ClusterCard cluster={cluster} />)
 				}
+			</div>
+		</div>
+	</section>
+
+	<!-- Interactive Map Section -->
+	<section class="section-pad pt-0" aria-label="Mapa at Lokasyon" id="mapa">
+		<div class="container-page">
+			<div class="max-w-3xl mb-8 sm:mb-10">
+				<span class="eyebrow">🗺️ Mapa ng Parke</span>
+				<h2 class="text-balance mb-5">
+					Hanapin ang Lagoon, Rose Garden, at paradahan gamit ang interactive na mapa.
+				</h2>
+				<p class="text-cold-700 text-lg leading-relaxed">
+					Naka-embed na Google Map ng Burnham Park. Maaari kang mag-zoom at mag-click sa marker para i-diretso ang Google Maps navigation patungo sa mga landmark.
+				</p>
+			</div>
+
+			<div class="card overflow-hidden p-0 shadow-card border border-pine-100">
+				<div class="relative aspect-[16/10] sm:aspect-[21/9] lg:aspect-[24/10] w-full">
+					<iframe
+						title="Burnham Park Baguio interactive Google Map with landmarks"
+						src="https://www.google.com/maps?q=Burnham%20Park%20Baguio&output=embed"
+						loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"
+						allowfullscreen
+						class="absolute inset-0 h-full w-full border-0"
+					></iframe>
+				</div>
+				<div class="p-5 sm:p-6 md:p-7 bg-gradient-to-br from-cold-50 via-white to-pine-50/60">
+					<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-3">
+						📍 Mga Pangunahing Landmark sa Mapa
+					</p>
+					<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-sm text-cold-800">
+						<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🦢</span><span><strong>Burnham Lagoon</strong> — swan boat at picnic area</span></li>
+						<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🌹</span><span><strong>Rose Garden</strong> — Nobyembre–Marso pinakamaganda</span></li>
+						<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🏟️</span><span><strong>Melvin Jones Grandstand</strong> — Panagbenga venue</span></li>
+						<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🏃</span><span><strong>Athletic Bowl</strong> — jogging at basketball</span></li>
+						<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🪴</span><span><strong>Orchidarium</strong> — orchids ng Cordillera</span></li>
+						<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🅿️</span><span><strong>Jose Abad Santos Dr</strong> — pinakamalapit na paradahan</span></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -290,15 +353,15 @@ const structuredData = {
 		<div class="container-page">
 			<div class="rounded-[2rem] overflow-hidden shadow-card border border-pine-100 grid grid-cols-1 lg:grid-cols-2">
 				<div class="relative aspect-[16/10] lg:aspect-auto lg:min-h-[420px]">
-					<img
-						src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Panagbenga%20Flower%20Festival%20Baguio%20Burnham%20Park%20grand%20float%20parade%20colorful%20flowers%20crowd%20pine%20trees%20sunny%20day%20celebration%20scenic&image_size=landscape_16_9"
-						alt="Panagbenga Flower Festival parade sa Burnham Park: makukulay na float ng bulaklak, maraming tao, at mga punong pino sa background"
+				<img
+						src={PAGE_IMAGES.panagbengaParade}
+						alt="Panagbenga Flower Festival grand float parade at Burnham Park Baguio — colorful flowers, crowd, and pine trees"
 						class="h-full w-full object-cover"
 						style="border-radius:0"
 						loading="lazy"
 					/>
 				</div>
-				<div class="bg-gradient-to-br from-rose-sand-50 via-cold-50 to-pine-50/60 p-8 sm:p-10 md:p-14 flex flex-col justify-center">
+				<div class="bg-gradient-to-br from-rose-sand-5 via-cold-50 to-pine-50/60 p-8 sm:p-10 md:p-14 flex flex-col justify-center">
 					<span class="eyebrow text-rose-sand-700">🌸 Panagbenga Festival</span>
 					<h2 class="text-balance mb-5 text-pine-950">
 						Pebrero — ang buwan ng <em>Panagbenga</em>, ang Baguio Flower Festival sa Melvin Jones.
@@ -321,3 +384,45 @@ const structuredData = {
 		</div>
 	</section>
 </BaseLayout>
+
+<script is:inline>
+	(function () {
+		const buttons = document.querySelectorAll('[data-cluster-filter]');
+		const cards = document.querySelectorAll('[data-cluster-card]');
+		if (!buttons.length || !cards.length) return;
+		const ACTIVE = [
+			'bg-pine-900',
+			'text-white',
+			'border-pine-900',
+			'shadow-soft',
+		];
+		const INACTIVE = [
+			'bg-white',
+			'text-pine-800',
+			'border-pine-200',
+			'hover:bg-pine-50',
+		];
+		function activate(btn) {
+			buttons.forEach(function (b) {
+				b.classList.remove.apply(b.classList, ACTIVE);
+				b.classList.add.apply(b.classList, INACTIVE);
+				b.setAttribute('aria-selected', 'false');
+			});
+			btn.classList.remove.apply(btn.classList, INACTIVE);
+			btn.classList.add.apply(btn.classList, ACTIVE);
+			btn.setAttribute('aria-selected', 'true');
+		}
+		buttons.forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				const filter = btn.getAttribute('data-cluster-filter') || 'all';
+				activate(btn);
+				cards.forEach(function (card) {
+					const category = card.getAttribute('data-cluster-category') || '';
+					const show = filter === 'all' || category === filter;
+					if (show) card.removeAttribute('hidden');
+					else card.setAttribute('hidden', '');
+				});
+			});
+		});
+	})();
+</script>

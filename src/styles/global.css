@@ -128,6 +128,8 @@
 	.text-balance { text-wrap: balance; }
 	.pretty { text-wrap: pretty; }
 	.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+	.safe-bottom-spacer { height: calc(4rem + env(safe-area-inset-bottom)); }
+	[data-cluster-card][hidden] { display: none !important; }
 }
 
 @media print {

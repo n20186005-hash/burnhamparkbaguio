@@ -79,8 +79,8 @@ const districts = [
 				<article class="card card-hover flex flex-col sm:flex-row overflow-hidden">
 					<div class="relative sm:w-40 md:w-48 shrink-0 aspect-[4/3] sm:aspect-auto">
 						<img
-							src={`https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(b.name + ' Filipino snack Baguio authentic local street food closeup photography')}&image_size=square_hd`}
-							alt={`${b.name} — tapat na larawan ng lokal na meryenda ng Baguio`}
+							src={b.image}
+							alt={`${b.name} — authentic Baguio local Filipino street food closeup photography`}
 							class="h-full w-full object-cover"
 							style="border-radius:0"
 							loading="lazy"
@@ -115,8 +115,8 @@ const districts = [
 					<article class="card card-hover p-5 sm:p-7 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 						<div class="lg:col-span-5 relative aspect-[16/10] overflow-hidden rounded-2xl">
 							<img
-								src={`https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(r.name + ' Baguio restaurant interior signature dish cozy dining food photography')}&image_size=landscape_4_3`}
-								alt={`${r.name} — isa sa mga pinakamagandang kainan malapit sa Burnham Park, Baguio`}
+								src={r.image}
+								alt={`${r.name} — Baguio restaurant interior and signature dish near Burnham Park`}
 								class="h-full w-full object-cover"
 								style="border-radius:0"
 								loading="lazy"
