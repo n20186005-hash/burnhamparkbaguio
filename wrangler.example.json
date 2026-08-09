@@ -1,0 +1,17 @@
+{
+  "_comment": "Ito ang HALIMBAWA ng Cloudflare Pages configuration — para sa reference lamang. Kapag nag-deploy na sa Cloudflare Pages dashboard, awtomatikong gagawa ang adapter ng dist/worker SSR o static directory build. HUWAG ilagay ang file na ito bilang 'wrangler.json' dahil sasabihin nito 'reserved name ASSETS' sa Pages mode ng Astro.",
+  "$schema": "https://json.schemastore.org/wrangler.json",
+  "name": "burnham-park-baguio",
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": "dist",
+  "env": {
+    "production": {
+      "vars": {
+        "PUBLIC_SITE_NAME": "Burnham Park Baguio",
+        "PUBLIC_SITE_URL": "https://burnhamparkbaguio.com",
+        "PUBLIC_GA4_ID": "G-HXM22WWPKP"
+      }
+    }
+  }
+}
