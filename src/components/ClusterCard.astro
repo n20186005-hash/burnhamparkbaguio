@@ -13,24 +13,12 @@ const { cluster } = Astro.props;
 	data-cluster-card
 	data-cluster-category={cluster.category ?? 'nature'}
 >
-	<div class="relative aspect-video w-full overflow-hidden">
-		<picture>
-			<source
-				type="image/webp"
-				srcset={`${cluster.image}&w=800&fm=webp 800w, ${cluster.image}&w=1200&fm=webp 1200w`}
-				sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-			/>
-			<img
-				src={cluster.image}
-				alt={cluster.imageAlt}
-				loading="lazy"
-				decoding="async"
-				class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-				style="border-radius:0"
-			/>
-		</picture>
-		<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-pine-950/85 via-pine-950/30 to-transparent p-4 pt-10 text-white">
-			<p class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-rose-sand-200/90 mb-1">
+	<div class="relative w-full overflow-hidden bg-gradient-to-br from-pine-800 via-pine-700 to-lagoon-700">
+		<div class="absolute inset-0 opacity-20" aria-hidden="true" style="background:
+			radial-gradient(600px 200px at 20% -10%, rgba(255,255,255,0.35), transparent 60%),
+			radial-gradient(500px 180px at 90% 110%, rgba(217,169,176,0.55), transparent 60%);"></div>
+		<div class="relative p-5 sm:p-6 text-white">
+			<p class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-rose-sand-100/90 mb-1.5">
 				{cluster.tagline} · {cluster.minutes}
 			</p>
 			<h3 class="text-lg sm:text-xl font-bold leading-tight">

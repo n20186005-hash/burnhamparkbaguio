@@ -223,19 +223,18 @@ const routeSteps = [
 		</div>
 		<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
 			{
-				CLUSTERS.map((c) => (
+				CLUSTERS.map((c, i) => (
 					<a
 						href="/kasaysayan/#cluster-${c.id}"
 						class="card-hover card flex items-center gap-3 p-3 sm:p-4"
 					>
-						<div class="relative h-12 w-12 sm:h-14 sm:w-14 shrink-0 rounded-xl overflow-hidden">
-							<img
-								src={c.image}
-								alt={c.title}
-								class="h-full w-full object-cover"
-								style="border-radius:0"
-								loading="lazy"
-							/>
+						<div class="relative h-12 w-12 sm:h-14 sm:w-14 shrink-0 rounded-xl bg-gradient-to-br from-pine-800 via-pine-700 to-lagoon-700 flex items-center justify-center shadow-soft overflow-hidden">
+							<div class="absolute inset-0 opacity-20" aria-hidden="true" style="background:
+								radial-gradient(200px 80px at 20% -10%, rgba(255,255,255,0.4), transparent 60%),
+								radial-gradient(160px 70px at 120% 120%, rgba(217,169,176,0.55), transparent 60%);"></div>
+							<span class="relative text-white font-black text-sm sm:text-lg" aria-hidden="true">
+								{String(i + 1).padStart(2, '0')}
+							</span>
 						</div>
 						<div class="min-w-0">
 							<p class="font-semibold text-pine-950 truncate text-sm sm:text-base">{c.title}</p>

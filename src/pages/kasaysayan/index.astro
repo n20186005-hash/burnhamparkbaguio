@@ -114,17 +114,31 @@ const timeline = [
 
 		<div class="space-y-10">
 			{
-				CLUSTERS.map((c) => (
+				CLUSTERS.map((c, i) => (
 					<article id={`cluster-${c.id}`} class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start scroll-mt-24">
 						<div class="lg:col-span-2 card overflow-hidden p-0 card-hover">
-							<div class="relative aspect-[4/3]">
-								<img
-									src={c.image}
-									alt={c.imageAlt}
-									class="h-full w-full object-cover"
-									style="border-radius:0"
-									loading="lazy"
-								/>
+							<div class="relative aspect-[4/3] w-full bg-gradient-to-br from-pine-800 via-pine-700 to-lagoon-700 overflow-hidden">
+								<div class="absolute inset-0 opacity-25" aria-hidden="true" style="background:
+									radial-gradient(600px 220px at 10% -20%, rgba(255,255,255,0.35), transparent 60%),
+									radial-gradient(500px 200px at 100% 120%, rgba(217,169,176,0.55), transparent 60%);"></div>
+								<div class="relative h-full p-5 sm:p-6 text-white flex flex-col justify-between">
+									<div>
+										<p class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-rose-sand-100/90 mb-1.5">
+											{c.tagline} · {c.minutes}
+										</p>
+										<h3 class="text-xl sm:text-2xl font-bold leading-tight">
+											{c.title}
+										</h3>
+									</div>
+									<div class="flex items-end justify-between">
+										<span class="inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-white/15 border border-white/20 backdrop-blur-sm text-xl sm:text-2xl font-black text-white shadow-soft">
+											{String(i + 1).padStart(2, '0')}
+										</span>
+										<span class="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
+											SONA
+										</span>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="lg:col-span-3">
