@@ -5,84 +5,93 @@ const pathname = Astro.url.pathname;
 ---
 
 <header
-	class="sticky top-0 z-50 w-full border-b border-cold-100/60 bg-cold-50/85 backdrop-blur-md supports-[backdrop-filter]:bg-cold-50/60"
+	class="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/85 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 shadow-sm"
 >
-	<nav class="container-page flex items-center justify-between py-3 sm:py-4" aria-label="Pangunahing nabigasyon">
-		<a
-			href="/"
-			class="group flex items-center gap-2 sm:gap-3"
-			aria-label={`${SITE.name} — Bumalik sa paunang pahina`}
-		>
-			<span
-				class="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-2xl bg-pine-900 text-white shadow-soft transition-transform duration-300 group-hover:-rotate-6 group-hover:bg-pine-800"
-				aria-hidden="true"
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<nav class="flex items-center justify-between py-3 sm:py-4" aria-label="Pangunahing nabigasyon">
+			<a
+				href="/"
+				class="group flex items-center gap-2 sm:gap-3 flex-shrink-0"
+				aria-label={`${SITE.name} — Bumalik sa paunang pahina`}
 			>
-				<svg viewBox="0 0 24 24" fill="none" class="h-5 w-5 sm:h-6 sm:w-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-					<path d="M12 3c-1.5 2.5-3 4-5 4a5 5 0 0 0-2 9.5A5 5 0 0 0 10 20h4a5 5 0 0 0 5-3.5 5 5 0 0 0-2-9.5c-2 0-3.5-1.5-5-4Z" />
-					<path d="M12 21v-8" />
-					<path d="M7 13h3" />
-					<path d="M14 13h3" />
+				<span
+					class="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-2xl bg-pine-900 text-white shadow-soft transition-transform duration-300 group-hover:-rotate-6 group-hover:bg-pine-800"
+					aria-hidden="true"
+				>
+					<svg viewBox="0 0 24 24" fill="none" class="h-5 w-5 sm:h-6 sm:w-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M12 3c-1.5 2.5-3 4-5 4a5 5 0 0 0-2 9.5A5 5 0 0 0 10 20h4a5 5 0 0 0 5-3.5A5 5 0 0 0 17 7c-2 0-3.5-1.5-5-4Z" />
+						<path d="M12 21v-8" />
+						<path d="M7 13h3" />
+						<path d="M14 13h3" />
+					</svg>
+				</span>
+				<span class="flex flex-col leading-none">
+					<span class="text-sm sm:text-base font-bold text-pine-950 tracking-tight">Burnham Park</span>
+					<span class="text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] text-pine-700">Baguio · Gabay sa Bisita</span>
+				</span>
+			</a>
+
+			<!-- Desktop Navigation -->
+			<ul class="hidden lg:flex items-center gap-1 flex-row flex-1 justify-center px-4">
+				{
+					NAV.map((item) => {
+						const active =
+							item.href === '/'
+								? pathname === '/' || pathname === ''
+								: pathname.startsWith(item.href);
+						return (
+							<li>
+								<a
+									href={item.href}
+									class:list={[
+										'relative inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200',
+										active
+											? 'text-pine-900 bg-pine-50'
+											: 'text-slate-700 hover:text-pine-800 hover:bg-pine-50/60',
+									]}
+									aria-current={active ? 'page' : undefined}
+								>
+									{item.label}
+									{
+										active && (
+											<span
+												aria-hidden="true"
+												class="absolute -bottom-px left-4 right-4 h-0.5 rounded-full bg-pine-600"
+											></span>
+										)
+									}
+								</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+
+			<!-- Desktop right-CTA -->
+			<div class="hidden lg:flex items-center gap-3 flex-shrink-0">
+				<a href="/plano/" class="btn-primary !py-2 !px-4 text-sm">
+					📝 Plano
+				</a>
+			</div>
+
+			<!-- Mobile hamburger -->
+			<button
+				type="button"
+				id="mobile-nav-toggle"
+				class="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-pine-800 shadow-soft hover:bg-pine-50 flex-shrink-0"
+				aria-controls="mobile-drawer"
+				aria-expanded="false"
+				aria-label="Buksan ang menu"
+			>
+				<svg id="icon-open" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M4 7h16M4 12h16M4 17h16" />
 				</svg>
-			</span>
-			<span class="flex flex-col leading-none">
-				<span class="text-sm sm:text-base font-bold text-pine-950 tracking-tight">Burnham Park</span>
-				<span class="text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] text-pine-700">Baguio · Gabay sa Bisita</span>
-			</span>
-		</a>
-
-		<!-- Desktop Navigation -->
-		<ul class="hidden lg:flex items-center gap-1">
-			{
-				NAV.map((item) => {
-					const active =
-						item.href === '/'
-							? pathname === '/' || pathname === ''
-							: pathname.startsWith(item.href);
-					return (
-						<li>
-							<a
-								href={item.href}
-								class:list={[
-									'relative inline-flex items-center px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-200',
-									active
-										? 'text-pine-900 bg-pine-50'
-										: 'text-cold-700 hover:text-pine-800 hover:bg-pine-50/60',
-								]}
-								aria-current={active ? 'page' : undefined}
-							>
-								{item.label}
-								{
-									active && (
-										<span
-											aria-hidden="true"
-											class="absolute -bottom-px left-3 right-3 h-0.5 rounded-full bg-pine-600"
-										></span>
-									)
-								}
-							</a>
-						</li>
-					);
-				})
-			}
-		</ul>
-
-		<!-- Mobile hamburger -->
-		<button
-			type="button"
-			id="mobile-nav-toggle"
-			class="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-cold-200 bg-white text-pine-800 shadow-soft hover:bg-pine-50"
-			aria-controls="mobile-drawer"
-			aria-expanded="false"
-			aria-label="Buksan ang menu"
-		>
-			<svg id="icon-open" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-				<path d="M4 7h16M4 12h16M4 17h16" />
-			</svg>
-			<svg id="icon-close" viewBox="0 0 24 24" class="h-5 w-5 hidden" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-				<path d="M6 6l12 12M6 18L18 6" />
-			</svg>
-		</button>
-	</nav>
+				<svg id="icon-close" viewBox="0 0 24 24" class="h-5 w-5 hidden" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M6 6l12 12M6 18L18 6" />
+				</svg>
+			</button>
+		</nav>
+	</div>
 
 	<!-- Mobile drawer -->
 	<div
@@ -96,7 +105,7 @@ const pathname = Astro.url.pathname;
 		<!-- Panel -->
 		<div
 			id="drawer-panel"
-			class="relative h-full w-11/12 max-w-xs ml-auto bg-cold-50 border-l border-cold-200 shadow-card overflow-y-auto safe-bottom"
+			class="relative h-full w-11/12 max-w-xs ml-auto bg-slate-50 border-l border-slate-200 shadow-card overflow-y-auto safe-bottom"
 			role="dialog"
 			aria-modal="true"
 			aria-label="Menu ng pahina"
@@ -116,7 +125,7 @@ const pathname = Astro.url.pathname;
 										'block rounded-2xl px-4 py-3.5 text-base font-semibold transition-colors',
 										active
 											? 'bg-pine-900 text-white shadow-soft'
-											: 'text-cold-800 hover:bg-white hover:text-pine-800',
+											: 'text-slate-800 hover:bg-white hover:text-pine-800',
 									]}
 								>
 									{item.label}
@@ -131,10 +140,10 @@ const pathname = Astro.url.pathname;
 				<p class="text-xs font-semibold uppercase tracking-[0.18em] text-pine-700 mb-2">
 					Talaan ng Lokasyon
 				</p>
-				<p class="text-sm text-cold-800 mb-4 leading-relaxed">
+				<p class="text-sm text-slate-800 mb-4 leading-relaxed">
 					{SITE.address}
 					<br />
-					<span class="text-cold-600">Plus Code: {SITE.plusCode}</span>
+					<span class="text-slate-600">Plus Code: {SITE.plusCode}</span>
 				</p>
 				<div class="flex flex-col gap-2">
 					<span class="chip self-start bg-white font-medium">WALANG BAYAD Pumasok</span>

@@ -9,23 +9,23 @@ const { cluster } = Astro.props;
 ---
 
 <article
-	class="card card-hover flex h-full flex-col"
+	class="group rounded-xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ease-out flex h-full flex-col overflow-hidden"
 	data-cluster-card
 	data-cluster-category={cluster.category ?? 'nature'}
 >
-	<div class="relative aspect-[16/10] overflow-hidden">
+	<div class="relative aspect-video w-full overflow-hidden">
 		<picture>
 			<source
 				type="image/webp"
 				srcset={`${cluster.image}&w=800&fm=webp 800w, ${cluster.image}&w=1200&fm=webp 1200w`}
-				sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+				sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
 			/>
 			<img
 				src={cluster.image}
 				alt={cluster.imageAlt}
 				loading="lazy"
 				decoding="async"
-				class="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105"
+				class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
 				style="border-radius:0"
 			/>
 		</picture>
@@ -39,8 +39,8 @@ const { cluster } = Astro.props;
 		</div>
 	</div>
 
-	<div class="flex flex-1 flex-col p-5 sm:p-6">
-		<p class="text-sm text-cold-700 leading-relaxed mb-4">
+	<div class="flex flex-1 flex-col p-4">
+		<p class="text-sm text-slate-700 leading-relaxed mb-4">
 			{cluster.description}
 		</p>
 

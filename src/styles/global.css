@@ -13,12 +13,13 @@
 	}
 
 	body {
-		@apply font-sans bg-cold-50 text-cold-900 antialiased;
+		@apply font-sans bg-slate-50 text-slate-900 antialiased;
+		font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, system-ui, -apple-system, sans-serif;
 		line-height: 1.75;
 	}
 
 	:focus-visible {
-		@apply outline-none ring-2 ring-pine-600 ring-offset-2 ring-offset-cold-50 rounded;
+		@apply outline-none ring-2 ring-pine-600 ring-offset-2 ring-offset-slate-50 rounded;
 	}
 
 	::selection {
@@ -41,11 +42,11 @@
 
 @layer components {
 	.container-page {
-		@apply container max-w-6xl mx-auto;
+		@apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 	}
 
 	.prose-fil {
-		@apply max-w-3xl mx-auto text-cold-800 leading-prose;
+		@apply max-w-3xl mx-auto text-slate-800 leading-prose;
 	}
 	.prose-fil > p { @apply mb-5; }
 	.prose-fil h2 { @apply mt-12 mb-4 text-pine-900; }
@@ -55,18 +56,18 @@
 	.prose-fil a { @apply text-pine-700 font-medium underline underline-offset-4 decoration-pine-300 hover:text-pine-900 hover:decoration-pine-600; }
 	.prose-fil strong { @apply text-pine-900 font-semibold; }
 	.prose-fil table { @apply w-full border-collapse my-8 text-sm; }
-	.prose-fil th, .prose-fil td { @apply border border-cold-200 px-4 py-3 text-left; }
+	.prose-fil th, .prose-fil td { @apply border border-slate-200 px-4 py-3 text-left; }
 	.prose-fil th { @apply bg-pine-50 text-pine-900 font-semibold; }
-	.prose-fil tr:nth-child(even) td { @apply bg-cold-50; }
-	.prose-fil blockquote { @apply border-l-4 border-pine-500 pl-6 my-6 italic text-cold-700; }
-	.prose-fil hr { @apply my-10 border-cold-200; }
+	.prose-fil tr:nth-child(even) td { @apply bg-slate-50; }
+	.prose-fil blockquote { @apply border-l-4 border-pine-500 pl-6 my-6 italic text-slate-700; }
+	.prose-fil hr { @apply my-10 border-slate-200; }
 
 	.badge {
 		@apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium;
 	}
 
 	.card {
-		@apply bg-white rounded-3xl shadow-soft border border-cold-100 overflow-hidden;
+		@apply bg-white rounded-3xl shadow-soft border border-slate-100 overflow-hidden;
 	}
 
 	.card-hover {
@@ -90,7 +91,7 @@
 		@apply flex flex-wrap gap-2;
 	}
 	.chip {
-		@apply inline-flex items-center rounded-full border border-cold-200 bg-white px-3 py-1.5 text-xs sm:text-sm text-cold-700;
+		@apply inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs sm:text-sm text-slate-700;
 	}
 
 	.section-pad {
@@ -102,7 +103,7 @@
 	}
 
 	.hero-overlay {
-		background: linear-gradient(180deg, rgba(14,32,24,0.0) 0%, rgba(14,32,24,0.25) 55%, rgba(14,32,24,0.85) 100%);
+		background: linear-gradient(180deg, rgba(14,32,24,0.0) 0%, rgba(14,32,24,0.25) 55%, rgba(14,32,24,0.88) 100%);
 	}
 
 	summary::-webkit-details-marker {
@@ -110,7 +111,7 @@
 	}
 
 	.accordion-item {
-		@apply border-b border-cold-200 last:border-b-0;
+		@apply border-b border-slate-200 last:border-b-0;
 	}
 	.accordion-trigger {
 		@apply flex w-full items-center justify-between gap-4 py-5 px-1 text-left font-semibold text-pine-900 cursor-pointer hover:text-pine-700;
@@ -118,9 +119,9 @@
 
 	.surface-pine {
 		background:
-			radial-gradient(1200px 600px at 10% -10%, rgba(74,124,100,0.15), transparent 60%),
-			radial-gradient(800px 500px at 100% 0%, rgba(217,169,176,0.18), transparent 60%),
-			linear-gradient(180deg, #f5f6f5 0%, #eef2ef 100%);
+			radial-gradient(1200px 600px at 10% -10%, rgba(74,124,100,0.12), transparent 60%),
+			radial-gradient(800px 500px at 100% 0%, rgba(217,169,176,0.14), transparent 60%),
+			linear-gradient(180deg, #f8faf8 0%, #eef2ef 100%);
 	}
 }
 

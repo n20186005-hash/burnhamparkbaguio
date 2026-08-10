@@ -86,8 +86,8 @@ const structuredData = {
 	lang="fil"
 >
 	<!-- HERO -->
-	<section aria-label="Unang panauhin" class="relative">
-		<div class="relative h-[88vh] sm:h-[86vh] md:h-[88vh] min-h-[520px] sm:min-h-[560px] overflow-hidden">
+	<section aria-label="Unang panauhin" class="relative bg-pine-950">
+		<div class="relative w-full h-[480px] sm:h-[520px] md:h-[560px] overflow-hidden">
 			<img
 				src={meta.hero}
 				alt={meta.heroAlt}
@@ -99,14 +99,14 @@ const structuredData = {
 			/>
 			<div class="absolute inset-0 hero-overlay"></div>
 			<div class="absolute inset-0">
-				<div class="container-page h-full flex flex-col justify-end pb-20 sm:pb-28 md:pb-32">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center sm:justify-end pb-10 sm:pb-16 md:pb-20">
 					<span class="eyebrow text-white/90" style="text-shadow:0 2px 12px rgba(0,0,0,0.4)">
 						{meta.eyebrow}
 					</span>
-					<h1 class="text-balance text-white font-bold tracking-tight max-w-4xl mb-5" style="text-shadow:0 6px 40px rgba(0,0,0,0.55)">
+					<h1 class="text-balance text-white font-bold tracking-tight max-w-4xl mb-4 sm:mb-5" style="text-shadow:0 6px 40px rgba(0,0,0,0.55)">
 						Burnham Park — Luntiang Puso ng Lungsod ng Baguio
 					</h1>
-					<p class="pretty text-white/90 max-w-2xl text-base sm:text-xl md:text-2xl leading-relaxed mb-8" style="text-shadow:0 2px 18px rgba(0,0,0,0.5)">
+					<p class="pretty text-white/90 max-w-2xl text-base sm:text-xl md:text-2xl leading-relaxed mb-6 sm:mb-8" style="text-shadow:0 2px 18px rgba(0,0,0,0.5)">
 						{meta.description}
 					</p>
 
@@ -121,7 +121,7 @@ const structuredData = {
 					</div>
 
 					<!-- Quick badges -->
-					<div class="mt-10 flex flex-wrap gap-2 sm:gap-3">
+					<div class="mt-8 sm:mt-10 flex flex-wrap gap-2 sm:gap-3">
 						{
 							KEY_INFO.map((k) => (
 								<span class="chip !bg-white/10 !text-white !border-white/20 backdrop-blur-sm">
@@ -132,12 +132,6 @@ const structuredData = {
 						}
 					</div>
 				</div>
-			</div>
-
-			<!-- Scroll hint -->
-			<div class="hidden sm:flex absolute bottom-4 left-1/2 -translate-x-1/2 items-center gap-2 text-white/80 text-xs font-semibold tracking-widest uppercase" aria-hidden="true">
-				<span>Mag-scroll pababa</span>
-				<span class="inline-block w-px h-8 bg-white/60 animate-pulse"></span>
 			</div>
 		</div>
 	</section>
@@ -254,7 +248,7 @@ const structuredData = {
 				}
 			</div>
 
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8" data-cluster-grid>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-cluster-grid>
 				{
 					CLUSTERS.map((cluster) => <ClusterCard cluster={cluster} />)
 				}

@@ -1,4 +1,5 @@
 ---
+import '../styles/global.css';
 import { SITE } from '../consts';
 import GA4 from '../components/GA4.astro';
 import BaseHead from '../components/BaseHead.astro';
@@ -49,7 +50,7 @@ const mobileNav = [
 		{noIndex && <meta name="robots" content="noindex,nofollow" />}
 		<GA4 />
 	</head>
-	<body class="min-h-screen flex flex-col bg-cold-50">
+	<body class="min-h-screen flex flex-col bg-slate-50 font-sans text-slate-900 antialiased">
 		<a
 			href="#main-content"
 			class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-2xl focus:bg-pine-900 focus:px-5 focus:py-3 focus:text-white focus:shadow-card"
