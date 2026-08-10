@@ -1,12 +1,13 @@
-# Mga permanenteng redirect (301) para sa karaniwang pagkakamali ng URL
-/home       /              301
-/about      /kasaysayan/   301
-/travel     /pagbiyahe/    301
-/plan       /plano/        301
-/itinerary  /plano/        301
-/history    /kasaysayan/   301
-/visit      /oras/         301
-/food       /pagkain/      301
-/hotel      /matutuluyan/  301
-/stay       /matutuluyan/  301
-# Walang 404 fallback — hayaan ang Astro na humawak nito
+# Burnham Park Baguio — Cloudflare Pages Redirects
+# Redirect legacy multi-page URLs to single-page anchors
+
+/plano/           /#tungkol         301
+/pagbiyahe/        /#transportasyon   301
+/kasaysayan/       /#kasaysayan       301
+/oras/             /#transportasyon   301
+/pagkain/          /#pagkain          301
+/matutuluyan/      /#matutuluyan      301
+/faq/              /#faq              301
+
+# SEO / canonical
+https://burnhamparkbaguio.com/*  https://burnhamparkbaguio.com/:splat  301

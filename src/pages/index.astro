@@ -2,7 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import KeyInfoCard from '../components/KeyInfoCard.astro';
 import ClusterCard from '../components/ClusterCard.astro';
-import { SITE, CLUSTERS, NAV, PAGE_META, KEY_INFO, PAGE_IMAGES, CLUSTER_CATEGORIES } from '../consts';
+import {
+	SITE, NAV, CLUSTERS, CLUSTER_CATEGORIES, KEY_INFO, PAGE_META, PAGE_IMAGES,
+	HISTORY_TIMELINE, LEGENDS, ACTIVITIES, FOOD_TYPES, ACCOMMODATION_TYPES,
+	NEARBY_ATTRACTIONS, PRACTICAL_INFO, TRANSPORT_OPTIONS, TIPS, FAQS,
+	SEASONS, GALLERY_IMAGES, DISCLAIMER,
+} from '../consts';
 
 const meta = PAGE_META.home;
 
@@ -23,49 +28,29 @@ const structuredData = {
 				addressLocality: 'Baguio',
 				addressRegion: 'Benguet',
 				postalCode: '2600',
-				addressCountry: {
-					'@type': 'Country',
-					name: 'PH',
-				},
+				addressCountry: { '@type': 'Country', name: 'PH' },
 			},
 			geo: {
 				'@type': 'GeoCoordinates',
 				latitude: SITE.coordinates.lat,
 				longitude: SITE.coordinates.lng,
 			},
-			openingHoursSpecification: [
-				{
-					'@type': 'OpeningHoursSpecification',
-					dayOfWeek: [
-						'Monday',
-						'Tuesday',
-						'Wednesday',
-						'Thursday',
-						'Friday',
-						'Saturday',
-						'Sunday',
-					],
-					opens: '00:00',
-					closes: '23:59',
-				},
-			],
+			openingHoursSpecification: [{
+				'@type': 'OpeningHoursSpecification',
+				dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+				opens: '00:00', closes: '23:59',
+			}],
 			priceRange: 'Free',
 			wheelchairAccessible: true,
-			photoCount: 12,
 			touristType: ['Pamilya', 'Magkapareha', 'Bakasyonista', 'Mahilig sa kasaysayan'],
-			sameAs: [
-				'https://en.wikipedia.org/wiki/Burnham_Park_(Baguio)',
-			],
+			sameAs: ['https://en.wikipedia.org/wiki/Burnham_Park_(Baguio)'],
 		},
 		{
 			'@type': 'WebSite',
 			name: SITE.name,
 			url: SITE.siteUrl,
 			inLanguage: 'fil',
-			publisher: {
-				'@type': 'Organization',
-				name: SITE.author,
-			},
+			publisher: { '@type': 'Organization', name: SITE.author },
 			potentialAction: {
 				'@type': 'SearchAction',
 				target: `${SITE.siteUrl}/?s={search_term_string}`,
@@ -85,7 +70,9 @@ const structuredData = {
 	structuredData={structuredData}
 	lang="fil"
 >
-	<!-- HERO -->
+	<!-- =================================================================== -->
+	<!-- 1. HERO                                                             -->
+	<!-- =================================================================== -->
 	<section aria-label="Unang panauhin" class="relative bg-pine-950">
 		<div class="relative w-full h-[480px] sm:h-[520px] md:h-[560px] overflow-hidden">
 			<img
@@ -109,38 +96,35 @@ const structuredData = {
 					<p class="pretty text-white/90 max-w-2xl text-base sm:text-xl md:text-2xl leading-relaxed mb-6 sm:mb-8" style="text-shadow:0 2px 18px rgba(0,0,0,0.5)">
 						{meta.description}
 					</p>
-
 					<div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4 max-w-3xl">
-						<a href="/plano/" class="btn-primary btn-wide">
-							Plano ng Pagbisita
+						<a href="#tungkol" class="btn-primary btn-wide">
+							Tuklasin ang Parke
 							<span aria-hidden="true">→</span>
 						</a>
-						<a href="/pagbiyahe/" class="btn-secondary btn-wide !bg-white/10 !border-white/25 !text-white hover:!bg-white/20 backdrop-blur-sm">
-							🚌 Paano Pumunta
+						<a href="#mapa" class="btn-secondary btn-wide !bg-white/10 !border-white/25 !text-white hover:!bg-white/20 backdrop-blur-sm">
+							🗺️ Tingnan ang Mapa
 						</a>
 					</div>
-
-					<!-- Quick badges -->
 					<div class="mt-8 sm:mt-10 flex flex-wrap gap-2 sm:gap-3">
-						{
-							KEY_INFO.map((k) => (
-								<span class="chip !bg-white/10 !text-white !border-white/20 backdrop-blur-sm">
-									<strong class="font-bold mr-1">{k.value}</strong>
-									<span class="text-white/80">· {k.label}</span>
-								</span>
-							))
-						}
+						{KEY_INFO.map((k) => (
+							<span class="chip !bg-white/10 !text-white !border-white/20 backdrop-blur-sm">
+								<strong class="font-bold mr-1">{k.value}</strong>
+								<span class="text-white/80">· {k.label}</span>
+							</span>
+						))}
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- Key Info Card (floating) -->
+	<!-- 2. QUICK INFO CARDS (floating) -->
 	<KeyInfoCard />
 
-	<!-- Intro Section -->
-	<section class="section-pad" aria-label="Pagpapakilala sa Burnham Park">
+	<!-- =================================================================== -->
+	<!-- 3. TUNGKOL (About)                                                  -->
+	<!-- =================================================================== -->
+	<section class="section-pad" aria-label="Tungkol sa Burnham Park" id="tungkol">
 		<div class="container-page grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
 			<div class="lg:col-span-7">
 				<span class="eyebrow">Tungkol sa Burnham Park</span>
@@ -161,17 +145,18 @@ const structuredData = {
 					</p>
 					<p>
 						Sa ngayon, ang Burnham Park ay pinamamahalaan ng <strong>Lungsod ng Baguio</strong> at bukas
-						para sa lahat nang <strong>WALANG BAYAD</strong>. Para sa mga pamilya, magkapareha, o mga lokal na naghahanap ng sariwang hangin — ito ang pinaka-paboritong pampublikong lugar sa buong Cordillera.
+						para sa lahat nang <strong>WALANG BAYAD</strong>. Para sa mga pamilya, magkapareha, o mga
+						lokal na naghahanap ng sariwang hangin — ito ang pinaka-paboritong pampublikong lugar sa
+						buong Cordillera.
 					</p>
 				</div>
 			</div>
-
 			<div class="lg:col-span-5 space-y-4">
 				<div class="card overflow-hidden p-0">
 					<div class="relative aspect-[4/3]">
 						<img
-							src={PAGE_IMAGES.indexPanoramic}
-							alt="Burnham Lagoon panoramic wide view with pine trees and golden afternoon light — Burnham Park Baguio scenic overview"
+							src={PAGE_IMAGES.aboutPark}
+							alt={PAGE_IMAGES.aboutParkAlt}
 							class="h-full w-full object-cover"
 							style="border-radius:0"
 							loading="lazy"
@@ -179,29 +164,29 @@ const structuredData = {
 					</div>
 					<div class="p-5 sm:p-6">
 						<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-2">📊 Mabilis na Talaan</p>
-						<dl class="divide-y divide-cold-100">
+						<dl class="divide-y divide-slate-100">
 							<div class="flex items-center justify-between py-2.5">
-								<dt class="text-cold-600 text-sm">Sukat ng Parke</dt>
+								<dt class="text-slate-600 text-sm">Sukat ng Parke</dt>
 								<dd class="font-semibold text-pine-900">32.84 ektarya (81.1 akre)</dd>
 							</div>
 							<div class="flex items-center justify-between py-2.5">
-								<dt class="text-cold-600 text-sm">Taon dinisenyo</dt>
+								<dt class="text-slate-600 text-sm">Taon dinisenyo</dt>
 								<dd class="font-semibold text-pine-900">1905 (Burnham Plan)</dd>
 							</div>
 							<div class="flex items-center justify-between py-2.5">
-								<dt class="text-cold-600 text-sm">Taon pormal na itinalaga</dt>
-								<dd class="font-semibold text-pine-900">1925 (Proklamasyon Blg. 64)</dd>
+								<dt class="text-slate-600 text-sm">Taon itinalaga</dt>
+								<dd class="font-semibold text-pine-900">1925 (Proc. Blg. 64)</dd>
 							</div>
 							<div class="flex items-center justify-between py-2.5">
-								<dt class="text-cold-600 text-sm">Taas ng lokasyon</dt>
+								<dt class="text-slate-600 text-sm">Taas ng lokasyon</dt>
 								<dd class="font-semibold text-pine-900">~1,500 m (ibabaw ng dagat)</dd>
 							</div>
 							<div class="flex items-center justify-between py-2.5">
-								<dt class="text-cold-600 text-sm">Bilang ng mga puno</dt>
+								<dt class="text-slate-600 text-sm">Bilang ng mga puno</dt>
 								<dd class="font-semibold text-pine-900">~2,600 na puno, 72 uri</dd>
 							</div>
 							<div class="flex items-center justify-between py-2.5">
-								<dt class="text-cold-600 text-sm">Kabuuan ng mga sona</dt>
+								<dt class="text-slate-600 text-sm">Kabuuan ng mga sona</dt>
 								<dd class="font-semibold text-pine-900">12 na pangunahing bahagi</dd>
 							</div>
 						</dl>
@@ -211,69 +196,399 @@ const structuredData = {
 		</div>
 	</section>
 
-	<!-- 12 Clusters Section -->
-	<section aria-label="12 na sona ng Burnham Park" class="section-pad surface-pine">
+	<!-- =================================================================== -->
+	<!-- 4. KASAYSAYAN (History Timeline)                                     -->
+	<!-- =================================================================== -->
+	<section class="section-pad surface-pine" aria-label="Kasaysayan ng Burnham Park" id="kasaysayan">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">📜 Kasaysayan at Pamana</span>
+				<h2 class="text-balance mb-5">
+					Mula Kafagway hanggang Burnham Park — mahigit 120 taon ng kasaysayan.
+				</h2>
+				<p class="text-slate-700 text-lg leading-relaxed">
+					Si <strong>Daniel Hudson Burnham</strong> (1846–1912) ay isa sa pinakamakapangyarihang
+					tagaplano ng lungsod sa Amerika. Noong 1904, inimbitahan siya sa Pilipinas upang gumawa
+					ng plano para sa Maynila at Baguio — at ang Burnham Park ang naging "green heart" ng
+					kanyang plano. Narito ang mahalagang mga pangyayari sa kasaysayan ng parke:
+				</p>
+			</div>
+
+			<ol class="relative border-s-2 border-pine-300 ms-3 sm:ms-5">
+				{HISTORY_TIMELINE.map((t, i) => (
+					<li class="mb-10 ms-6 sm:ms-10 last:mb-0">
+						<span class="absolute -start-[22px] sm:-start-[30px] mt-1.5 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-pine-800 text-white text-xs sm:text-sm font-bold shadow-soft ring-4 ring-cold-50">
+							{i + 1}
+						</span>
+						<time class="mb-1 block text-xs sm:text-sm font-bold uppercase tracking-[0.18em] text-rose-sand-700">
+							{t.year}
+						</time>
+						<h3 class="text-xl sm:text-2xl font-bold text-pine-950 mb-2 leading-tight">{t.title}</h3>
+						<p set:html={t.desc} class="text-slate-700 leading-relaxed"></p>
+					</li>
+				))}
+			</ol>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 5. LEGENDS & HERITAGE                                                -->
+	<!-- =================================================================== -->
+	<section class="section-pad" aria-label="Mga Alamat at Pamana" id="alamat">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">📖 Pamana at Kahalagahan</span>
+				<h2 class="text-balance mb-5">
+					Ang kuwento ng mga Ibaloi, ang Kafagway, at ang City Beautiful Movement.
+				</h2>
+				<p class="text-slate-700 text-lg leading-relaxed">
+					Ang Burnham Park ay higit pa sa isang parke — ito ay buhay na bahagi ng kasaysayan
+					ng Cordillera.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+				{LEGENDS.map((l) => (
+					<div class="card p-6 sm:p-8 flex flex-col items-start">
+						<span class="text-4xl mb-4" aria-hidden="true">{l.icon}</span>
+						<h3 class="text-lg sm:text-xl font-bold text-pine-950 mb-3">{l.title}</h3>
+						<p set:html={l.desc} class="text-sm text-slate-700 leading-relaxed"></p>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 6. MGA ATRAKSYON (12 Clusters)                                      -->
+	<!-- =================================================================== -->
+	<section class="section-pad surface-pine" aria-label="12 na sona ng Burnham Park" id="atraksyon">
 		<div class="container-page">
 			<div class="max-w-3xl mb-10 sm:mb-14">
 				<span class="eyebrow">📐 12 Bahagi ng Parke</span>
 				<h2 class="text-balance mb-5">
 					Mula sa Lagoon hanggang Pine Grove — tuklasin ang bawat sulok ng Burnham Park.
 				</h2>
-				<p class="text-cold-700 text-lg leading-relaxed">
-					Ang Burnham Park ay hindi iisang malawak na damuhan lamang. Hinati ito sa 12 na magkakaibang
-					<em>cluster</em> — mula sa lawa, hardin ng rosas, palaruan para sa mga bata, hanggang sa
-					malawak na parang para sa Panagbenga. Narito ang bawat isa:
+				<p class="text-slate-700 text-lg leading-relaxed">
+					Ang Burnham Park ay hindi iisang malawak na damuhan lamang. Hinati ito sa 12 na
+					magkakaibang <em>cluster</em> — mula sa lawa, hardin ng rosas, palaruan para sa mga bata,
+					hanggang sa malawak na parang para sa Panagbenga. Narito ang bawat isa:
 				</p>
 			</div>
 
 			<!-- Category Filter -->
 			<div class="mb-8 sm:mb-10 flex flex-wrap items-center gap-2 sm:gap-3" role="tablist" aria-label="Filter ng 12 bahagi ng parke">
-				{
-					CLUSTER_CATEGORIES.map((cat) => (
-						<button
-							type="button"
-							role="tab"
-							aria-selected={cat.id === 'all'}
-							data-cluster-filter={cat.id}
-							class:list={[
-								'inline-flex items-center rounded-full border px-4 sm:px-5 py-2 text-sm sm:text-[15px] font-semibold transition-colors duration-200 no-print',
-								cat.id === 'all'
-									? 'bg-pine-900 text-white border-pine-900 shadow-soft'
-									: 'bg-white text-pine-800 border-pine-200 hover:bg-pine-50',
-							]}
-						>
-							{cat.label}
-						</button>
-					))
-				}
+				{CLUSTER_CATEGORIES.map((cat) => (
+					<button
+						type="button" role="tab"
+						aria-selected={cat.id === 'all'}
+						data-cluster-filter={cat.id}
+						class:list={[
+							'inline-flex items-center rounded-full border px-4 sm:px-5 py-2 text-sm sm:text-[15px] font-semibold transition-colors duration-200 no-print',
+							cat.id === 'all'
+								? 'bg-pine-900 text-white border-pine-900 shadow-soft'
+								: 'bg-white text-pine-800 border-pine-200 hover:bg-pine-50',
+						]}
+					>
+						{cat.label}
+					</button>
+				))}
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-cluster-grid>
-				{
-					CLUSTERS.map((cluster) => <ClusterCard cluster={cluster} />)
-				}
+				{CLUSTERS.map((cluster) => <ClusterCard cluster={cluster} />)}
 			</div>
 		</div>
 	</section>
 
-	<!-- Interactive Map Section -->
-	<section class="section-pad pt-0" aria-label="Mapa at Lokasyon" id="mapa">
+	<!-- =================================================================== -->
+	<!-- 7. MGA GAWAIN (Activities) — mga uri lamang, walang komersyal       -->
+	<!-- =================================================================== -->
+	<section class="section-pad" aria-label="Mga aktibidad sa Burnham Park" id="gawain">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">⚽ Mga Aktibidad</span>
+				<h2 class="text-balance mb-5">
+					Ano ang maaaring gawin sa loob ng Burnham Park?
+				</h2>
+				<p class="text-slate-700 text-lg leading-relaxed">
+					Maraming aktibidad na puwedeng subukan — mula sa pamamangka sa lagoon, pagbibisikleta,
+					hanggang sa tahimik na pagkuha ng litrato. Pumili ayon sa iyong hilig.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+				{ACTIVITIES.map((a) => (
+					<div class="card p-6 sm:p-7 flex flex-col h-full">
+						<div class="flex items-start gap-4 mb-4">
+							<span class="text-3xl shrink-0" aria-hidden="true">{a.icon}</span>
+							<div>
+								<h3 class="text-lg font-bold text-pine-950 mb-1">{a.title}</h3>
+								<p class="text-xs font-semibold uppercase tracking-[0.15em] text-pine-700">{a.type}</p>
+							</div>
+						</div>
+						<ul class="mt-auto text-sm text-slate-700 space-y-2 list-disc list-outside ms-5">
+							{a.details.map((d) => <li>{d}</li>)}
+						</ul>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 8. PRAKTIKAL NA IMPORMASYON (Facilities & Services)                  -->
+	<!-- =================================================================== -->
+	<section class="section-pad surface-pine" aria-label="Praktikal na impormasyon" id="praktikal">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">ℹ️ Praktikal na Impormasyon</span>
+				<h2 class="text-balance mb-5">
+					Mga pasilidad, serbisyo, at mahalagang impormasyon para sa iyong pagbisita.
+				</h2>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+				{PRACTICAL_INFO.map((p) => (
+					<div class="card p-5 sm:p-6 flex items-start gap-4">
+						<span class="text-3xl shrink-0" aria-hidden="true">{p.icon}</span>
+						<div>
+							<h3 class="font-bold text-pine-950 mb-1.5">{p.title}</h3>
+							<p class="text-sm text-slate-600 leading-relaxed">{p.desc}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 9. PAGKAIN (Food Types) — uri lamang, walang tiyak na kainan        -->
+	<!-- =================================================================== -->
+	<section class="section-pad" aria-label="Mga uri ng pagkain malapit sa parke" id="pagkain">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">🍽️ Pagkain at Meryenda</span>
+				<h2 class="text-balance mb-5">
+					Anong klaseng pagkain ang makikita sa paligid ng Burnham Park?
+				</h2>
+				<p class="text-slate-700 text-lg leading-relaxed">
+					Ang Baguio ay kilala sa masasarap at abot-kayang pagkain — mula sa street food
+					hanggang sa tunay na lutuing Cordilleran. Narito ang mga uri ng pagkain na matitikman
+					mo sa paligid ng parke, nang hindi nagrerekomenda ng partikular na kainan.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+				{FOOD_TYPES.map((f) => (
+					<div class="card p-5 sm:p-6 flex items-start gap-4">
+						<span class="text-3xl shrink-0" aria-hidden="true">{f.icon}</span>
+						<div>
+							<h3 class="font-bold text-pine-950 mb-1.5">{f.title}</h3>
+							<p class="text-sm text-slate-600 leading-relaxed">{f.desc}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 10. MATUTULUYAN (Accommodation Types) — uri lamang                   -->
+	<!-- =================================================================== -->
+	<section class="section-pad surface-pine" aria-label="Mga uri ng matutuluyan malapit sa parke" id="matutuluyan">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">🏨 Matutuluyan</span>
+				<h2 class="text-balance mb-5">
+					Saan maaaring manatili malapit sa Burnham Park?
+				</h2>
+				<p class="text-slate-700 text-lg leading-relaxed">
+					Maraming uri ng matutuluyan sa Baguio — mula sa walking distance na hotel hanggang sa
+					budget-friendly na pension house. Narito ang mga kategorya upang makatulong sa iyong
+					pagpili, nang hindi nagrerekomenda ng partikular na establisyemento.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+				{ACCOMMODATION_TYPES.map((h) => (
+					<div class="card p-6 sm:p-8">
+						<div class="flex items-start gap-4 mb-4">
+							<span class="text-3xl shrink-0" aria-hidden="true">{h.icon}</span>
+							<div>
+								<h3 class="text-xl font-bold text-pine-950 mb-1">{h.title}</h3>
+								<p class="text-xs font-semibold uppercase tracking-[0.15em] text-pine-700">{h.areas}</p>
+							</div>
+						</div>
+						<p class="text-sm text-slate-700 leading-relaxed mb-5">{h.desc}</p>
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+							<div>
+								<p class="text-xs font-bold uppercase tracking-[0.15em] text-green-700 mb-2">✅ Mga Bentahe</p>
+								<ul class="text-xs text-slate-600 space-y-1 list-disc list-outside ms-4">
+									{h.pros.map((p) => <li>{p}</li>)}
+								</ul>
+							</div>
+							<div>
+								<p class="text-xs font-bold uppercase tracking-[0.15em] text-rose-sand-700 mb-2">⚠️ Dapat Isaalang-alang</p>
+								<ul class="text-xs text-slate-600 space-y-1 list-disc list-outside ms-4">
+									{h.cons.map((c) => <li>{c}</li>)}
+								</ul>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 11. TRANSPORTASYON                                                   -->
+	<!-- =================================================================== -->
+	<section class="section-pad" aria-label="Paano pumunta sa Burnham Park" id="transportasyon">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">🚌 Transportasyon</span>
+				<h2 class="text-balance mb-5">
+					Paano pumunta sa Burnham Park mula sa kahit saang bahagi ng Baguio?
+				</h2>
+				<p class="text-slate-700 text-lg leading-relaxed">
+					Nasa gitna ng lungsod ang Burnham Park kaya maraming paraan upang marating ito.
+					Narito ang mga pangunahing opsyon:
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+				{TRANSPORT_OPTIONS.map((t) => (
+					<div class="card p-5 sm:p-6 flex flex-col items-start">
+						<span class="text-3xl mb-3" aria-hidden="true">{t.icon}</span>
+						<h3 class="font-bold text-pine-950 mb-2">{t.title}</h3>
+						<p class="text-sm text-slate-600 leading-relaxed">{t.desc}</p>
+					</div>
+				))}
+			</div>
+
+			<!-- Season Banner -->
+			<div class="mt-12 rounded-[2rem] overflow-hidden shadow-card border border-pine-100 grid grid-cols-1 lg:grid-cols-2">
+				<div class="relative aspect-[16/10] lg:aspect-auto lg:min-h-[380px]">
+					<img
+						src={PAGE_IMAGES.panagbenga}
+						alt={PAGE_IMAGES.panagbengaAlt}
+						class="h-full w-full object-cover"
+						style="border-radius:0"
+						loading="lazy"
+					/>
+				</div>
+				<div class="bg-gradient-to-br from-rose-sand-5 via-cold-50 to-pine-50/60 p-8 sm:p-10 md:p-14 flex flex-col justify-center">
+					<span class="eyebrow text-rose-sand-700">🌸 Panagbenga Festival</span>
+					<h2 class="text-balance mb-5 text-pine-950">
+						Pebrero — ang buwan ng <em>Panagbenga</em>, ang Baguio Flower Festival.
+					</h2>
+					<p class="text-slate-800 text-lg leading-relaxed mb-6">
+						Kung nagpaplano kang pumunta tuwing Pebrero, asahan ang napakaraming tao at ang malaking
+						<strong>float parade</strong> ng mga bulaklak sa <em>Melvin Jones Grandstand</em>. Ito ang
+						pinakamalaking pista ng Baguio — magplano ng matutuluyan nang maaga.
+					</p>
+				</div>
+			</div>
+
+			<!-- Seasons -->
+			<div class="mt-12">
+				<span class="eyebrow">📅 Panahon at Klima</span>
+				<h2 class="text-2xl sm:text-3xl font-bold text-pine-950 mb-6">Pinakamagandang panahon para bumisita</h2>
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+					{SEASONS.map((s) => (
+						<div class="card p-5 sm:p-6 flex flex-col items-start">
+							<span class="text-3xl mb-3" aria-hidden="true">{s.icon}</span>
+							<h3 class="font-bold text-pine-950 mb-2">{s.title}</h3>
+							<p class="text-sm text-slate-600 leading-relaxed">{s.desc}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 12. MGA KALAPIT NA ATRAKSYON                                         -->
+	<!-- =================================================================== -->
+	<section class="section-pad surface-pine" aria-label="Mga kalapit na atraksyon" id="kalapit">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">📍 Mga Kalapit na Atraksyon</span>
+				<h2 class="text-balance mb-5">
+					Iba pang lugar na dapat bisitahin sa Baguio — lahat malapit sa Burnham Park.
+				</h2>
+				<p class="text-slate-700 text-lg leading-relaxed">
+					Ang Burnham Park ay nasa puso ng Baguio kaya maraming iba pang atraksyon na
+					kayang lakarin o isang maikling biyahe lamang ang layo.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+				{NEARBY_ATTRACTIONS.map((n) => (
+					<div class="card p-5 sm:p-6 flex flex-col">
+						<span class="text-xs font-bold uppercase tracking-[0.18em] text-pine-700 mb-2">{n.type}</span>
+						<h3 class="text-lg font-bold text-pine-950 mb-2">{n.title}</h3>
+						<p class="text-sm text-slate-600 leading-relaxed mb-4 flex-1">{n.desc}</p>
+						<span class="inline-flex items-center gap-1 text-xs font-semibold text-pine-700 bg-pine-50 rounded-full px-3 py-1.5 border border-pine-100">
+							📍 {n.dist}
+						</span>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 13. GALERIYA (Gallery)                                               -->
+	<!-- =================================================================== -->
+	<section class="section-pad" aria-label="Galeriya ng mga larawan" id="galeriya">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">📸 Galeriya</span>
+				<h2 class="text-balance mb-5">
+					Tingnan ang ganda ng Burnham Park sa mga larawan.
+				</h2>
+			</div>
+
+			<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+				{GALLERY_IMAGES.map((img) => (
+					<div class="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-pine-100 shadow-sm">
+						<img
+							src={img.src}
+							alt={img.alt}
+							loading="lazy"
+							class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+							style="border-radius: 0"
+						/>
+						<div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/5 pointer-events-none" aria-hidden="true"></div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 14. MAPA                                                             -->
+	<!-- =================================================================== -->
+	<section class="section-pad surface-pine" aria-label="Mapa at Lokasyon" id="mapa">
 		<div class="container-page">
 			<div class="max-w-3xl mb-8 sm:mb-10">
 				<span class="eyebrow">🗺️ Mapa ng Parke</span>
 				<h2 class="text-balance mb-5">
 					Hanapin ang Lagoon, Rose Garden, at paradahan gamit ang interactive na mapa.
 				</h2>
-				<p class="text-cold-700 text-lg leading-relaxed">
-					Naka-embed na Google Map ng Burnham Park. Maaari kang mag-zoom at mag-click sa marker para i-diretso ang Google Maps navigation patungo sa mga landmark.
+				<p class="text-slate-700 text-lg leading-relaxed">
+					Naka-embed na Google Map ng Burnham Park. Mag-zoom at mag-click sa marker
+					para i-diretso ang Google Maps navigation.
 				</p>
 			</div>
 
 			<div class="card overflow-hidden p-0 shadow-card border border-pine-100">
 				<div class="relative aspect-[16/10] sm:aspect-[21/9] lg:aspect-[24/10] w-full">
 					<iframe
-						title="Burnham Park Baguio interactive Google Map with landmarks"
-						src="https://www.google.com/maps?q=Burnham%20Park%20Baguio&output=embed"
+						title="Burnham Park Baguio interactive Google Map"
+						src={SITE.mapsEmbed}
 						loading="lazy"
 						referrerpolicy="no-referrer-when-downgrade"
 						allowfullscreen
@@ -284,7 +599,7 @@ const structuredData = {
 					<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-3">
 						📍 Mga Pangunahing Landmark sa Mapa
 					</p>
-					<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-sm text-cold-800">
+					<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-sm text-slate-800">
 						<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🦢</span><span><strong>Burnham Lagoon</strong> — swan boat at picnic area</span></li>
 						<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🌹</span><span><strong>Rose Garden</strong> — Nobyembre–Marso pinakamaganda</span></li>
 						<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🏟️</span><span><strong>Melvin Jones Grandstand</strong> — Panagbenga venue</span></li>
@@ -297,105 +612,84 @@ const structuredData = {
 		</div>
 	</section>
 
-	<!-- Page Jump CTA Section -->
-	<section class="section-pad" aria-label="Mabilis na pagtalon sa pahina">
+	<!-- =================================================================== -->
+	<!-- 15. MGA TIP                                                          -->
+	<!-- =================================================================== -->
+	<section class="section-pad" aria-label="Mga tip para sa bisita" id="tip">
 		<div class="container-page">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-				{
-					NAV.filter((n) => n.href !== '/').map((n, i) => {
-						const colors = [
-							'from-pine-800 to-pine-950',
-							'from-lagoon-700 to-lagoon-950',
-							'from-rose-sand-700 to-rose-sand-900',
-							'from-pine-700 to-pine-900',
-							'from-lagoon-600 to-pine-800',
-							'from-rose-sand-600 to-rose-sand-800',
-							'from-cold-800 to-pine-900',
-						];
-						const color = colors[i % colors.length];
-						return (
-							<a
-								href={n.href}
-								class={`relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white shadow-card bg-gradient-to-br ${color} transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl no-print`}
-							>
-								<span class="text-xs font-bold uppercase tracking-[0.2em] text-white/80 mb-3 block">
-									Hakbang {String(i + 1).padStart(2, '0')}
-								</span>
-								<h3 class="text-xl sm:text-2xl font-bold leading-tight mb-3">
-									{n.label}
-								</h3>
-								<p class="text-sm text-white/80 leading-relaxed mb-6 line-clamp-3">
-									Tingnan ang kumpletong impormasyon para sa bahaging ito ng pagbisita.
-								</p>
-								<span class="inline-flex items-center gap-2 text-sm font-semibold bg-white/15 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-									Buksan ang pahina →
-								</span>
-								<span
-									class="absolute -right-6 -bottom-6 h-28 w-28 rounded-full bg-white/10 blur-xl"
-									aria-hidden="true"
-								></span>
-							</a>
-						);
-					})
-				}
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">💡 Mga Tip sa Pagbisita</span>
+				<h2 class="text-balance mb-5">
+					Mga praktikal na payo para sa mas magandang karanasan sa Burnham Park.
+				</h2>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+				{TIPS.map((t) => (
+					<div class="card p-5 sm:p-6 flex items-start gap-4">
+						<span class="text-3xl shrink-0" aria-hidden="true">{t.icon}</span>
+						<div>
+							<h3 class="font-bold text-pine-950 mb-1.5">{t.title}</h3>
+							<p class="text-sm text-slate-600 leading-relaxed">{t.desc}</p>
+						</div>
+					</div>
+				))}
 			</div>
 		</div>
 	</section>
 
-	<!-- Season banner -->
-	<section class="section-pad pt-0" aria-label="Panahon at pista">
-		<div class="container-page">
-			<div class="rounded-[2rem] overflow-hidden shadow-card border border-pine-100 grid grid-cols-1 lg:grid-cols-2">
-				<div class="relative aspect-[16/10] lg:aspect-auto lg:min-h-[420px]">
-				<img
-						src={PAGE_IMAGES.panagbengaParade}
-						alt="Panagbenga Flower Festival grand float parade at Burnham Park Baguio — colorful flowers, crowd, and pine trees"
-						class="h-full w-full object-cover"
-						style="border-radius:0"
-						loading="lazy"
-					/>
-				</div>
-				<div class="bg-gradient-to-br from-rose-sand-5 via-cold-50 to-pine-50/60 p-8 sm:p-10 md:p-14 flex flex-col justify-center">
-					<span class="eyebrow text-rose-sand-700">🌸 Panagbenga Festival</span>
-					<h2 class="text-balance mb-5 text-pine-950">
-						Pebrero — ang buwan ng <em>Panagbenga</em>, ang Baguio Flower Festival sa Melvin Jones.
-					</h2>
-					<p class="text-cold-800 text-lg leading-relaxed mb-6">
-						Kung nagpaplano kang pumunta tuwing Pebrero, asahan ang napakaraming tao at ang malaking
-						<strong>float parade</strong> ng mga bulaklak sa <em>Melvin Jones Grandstand</em>. Ito ang
-						pinakamalaking pista ng Baguio — kaya magpareserba ng hotel nang maaga at iwasang magmaneho patungong parke.
-					</p>
-					<div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-						<a href="/oras/" class="btn-primary btn-wide no-print">
-							Tingnan ang Pinakamagandang Oras
-						</a>
-						<a href="/matutuluyan/" class="btn-secondary btn-wide no-print">
-							🏨 Hotel Malapit sa Parke
-						</a>
-					</div>
-				</div>
+	<!-- =================================================================== -->
+	<!-- 16. FAQ                                                              -->
+	<!-- =================================================================== -->
+	<section class="section-pad surface-pine" aria-label="Mga madalas itanong" id="faq">
+		<div class="container-page max-w-4xl">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">❓ Mga Madalas Itanong</span>
+				<h2 class="text-balance mb-5">
+					May tanong ka ba tungkol sa Burnham Park?
+				</h2>
+			</div>
+
+			<div class="space-y-0 divide-y divide-pine-200 bg-white rounded-3xl shadow-soft border border-pine-100 overflow-hidden">
+				{FAQS.map((faq, i) => (
+					<details class="accordion-item group">
+						<summary class="accordion-trigger">
+							<span class="mr-2 text-pine-700 font-bold">{String(i + 1).padStart(2, '0')}.</span>
+							<span class="flex-1">{faq.q}</span>
+							<span class="text-pine-500 text-lg transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+						</summary>
+						<div class="px-5 pb-5">
+							<p class="text-slate-700 leading-relaxed">{faq.a}</p>
+						</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 17. DISCLAIMER                                                       -->
+	<!-- =================================================================== -->
+	<section class="section-pad" aria-label="Patalastas" id="patalastas">
+		<div class="container-page max-w-4xl">
+			<div class="bg-amber-50 border border-amber-200 rounded-3xl p-6 sm:p-8 md:p-10 text-center">
+				<span class="eyebrow text-amber-700">📋 Patalastas</span>
+				<p class="text-sm sm:text-base text-amber-900 leading-relaxed max-w-2xl mx-auto">
+					{DISCLAIMER.text}
+				</p>
 			</div>
 		</div>
 	</section>
 </BaseLayout>
 
 <script is:inline>
+	// ---- Cluster filter ------------------------------------------------
 	(function () {
 		const buttons = document.querySelectorAll('[data-cluster-filter]');
 		const cards = document.querySelectorAll('[data-cluster-card]');
 		if (!buttons.length || !cards.length) return;
-		const ACTIVE = [
-			'bg-pine-900',
-			'text-white',
-			'border-pine-900',
-			'shadow-soft',
-		];
-		const INACTIVE = [
-			'bg-white',
-			'text-pine-800',
-			'border-pine-200',
-			'hover:bg-pine-50',
-		];
+		const ACTIVE = ['bg-pine-900', 'text-white', 'border-pine-900', 'shadow-soft'];
+		const INACTIVE = ['bg-white', 'text-pine-800', 'border-pine-200', 'hover:bg-pine-50'];
 		function activate(btn) {
 			buttons.forEach(function (b) {
 				b.classList.remove.apply(b.classList, ACTIVE);
@@ -416,6 +710,20 @@ const structuredData = {
 					if (show) card.removeAttribute('hidden');
 					else card.setAttribute('hidden', '');
 				});
+			});
+		});
+
+		// ---- Smooth nav/scrolling highlight ----------------------------
+		const navLinks = document.querySelectorAll('a[href^="#"]');
+		navLinks.forEach(function (link) {
+			link.addEventListener('click', function (e) {
+				const href = this.getAttribute('href');
+				if (!href || href === '#') return;
+				const target = document.querySelector(href);
+				if (target) {
+					e.preventDefault();
+					target.scrollIntoView({ behavior: 'smooth' });
+				}
 			});
 		});
 	})();

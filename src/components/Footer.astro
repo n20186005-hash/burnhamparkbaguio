@@ -1,112 +1,80 @@
 ---
-import { NAV, SITE } from '../consts';
-
-const thisYear = new Date().getFullYear();
+import { SITE, NAV, DISCLAIMER } from '../consts';
+const currentYear = new Date().getFullYear();
 ---
 
-<footer class="mt-24 border-t border-slate-200 bg-gradient-to-b from-slate-50 to-pine-50/40">
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-18">
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-			<!-- Column 1 (4/12): Brand + address -->
-			<div class="sm:col-span-2 lg:col-span-4">
-				<div class="flex items-center gap-3 mb-4">
-					<span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-pine-900 text-white shadow-soft" aria-hidden="true">
-						<svg viewBox="0 0 24 24" fill="none" class="h-6 w-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M12 3c-1.5 2.5-3 4-5 4a5 5 0 0 0-2 9.5A5 5 0 0 0 10 20h4a5 5 0 0 0 5-3.5A5 5 0 0 0 17 7c-2 0-3.5-1.5-5-4Z" />
-							<path d="M12 21v-8" />
-							<path d="M7 13h3" />
-							<path d="M14 13h3" />
-						</svg>
-					</span>
-					<div class="flex flex-col leading-tight">
-						<span class="text-lg font-bold text-pine-950">Burnham Park · Baguio</span>
-						<span class="text-xs uppercase tracking-[0.2em] text-pine-700 font-semibold">Opisyal na Gabay sa Bisita</span>
-					</div>
-				</div>
+<footer class="bg-pine-950 text-white/85">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-18 space-y-12 sm:space-y-14">
 
-				<p class="text-slate-700 leading-relaxed mb-5 max-w-lg">
-					Ang 32.84-ektaryang parke sa puso ng Lungsod ng Baguio. Itinayo noong 1907 ayon sa plano ni
-					Daniel Burnham — ngayon ay pinamamahalaan ng Lungsod ng Baguio.
+		<!-- 1. Sitemap / Quick links -->
+		<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10">
+			<div class="col-span-2 sm:col-span-1">
+				<a href="/" class="inline-flex items-center gap-2.5 font-bold text-lg text-white no-underline hover:opacity-80 transition-opacity duration-200 mb-3">
+					<span aria-hidden="true">🏞️</span> Burnham Park
+				</a>
+				<p class="text-sm text-white/60 leading-relaxed max-w-xs">
+					Isang independiyente at di-komersyal na gabay sa pinakamahalagang pampublikong parke ng Baguio.
 				</p>
-
-				<address class="not-italic text-sm text-slate-700 leading-relaxed bg-white/70 border border-slate-100 rounded-2xl p-4 shadow-soft">
-					<p class="font-semibold text-pine-900 mb-1">Tiyak na Lokasyon</p>
-					<p>{SITE.address}</p>
-					<p class="text-slate-600">Plus Code: {SITE.plusCode}</p>
-					<p class="text-slate-600">
-						Koordinata: {SITE.coordinates.lat.toFixed(5)}°N, {SITE.coordinates.lng.toFixed(5)}°E
-					</p>
-				</address>
 			</div>
 
-			<!-- Column 2 (2/12): Main Navigation -->
-			<div class="sm:col-span-1 lg:col-span-2">
-				<h2 class="text-sm font-bold uppercase tracking-[0.2em] text-pine-800 mb-4">
-					Mga Pahina
-				</h2>
-				<ul class="space-y-1 text-sm">
-					{
-						NAV.slice(0, 4).map((item) => (
-							<li>
-								<a
-									href={item.href}
-									class="inline-flex w-full rounded-xl px-3 py-2 text-slate-700 hover:bg-pine-50 hover:text-pine-800 transition-colors"
-								>
-									{item.label}
-								</a>
-							</li>
-						))
-					}
+			<div>
+				<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">Tungkol sa Parke</h4>
+				<ul class="space-y-2.5">
+					<li><a href="#tungkol" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Tungkol</a></li>
+					<li><a href="#kasaysayan" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Kasaysayan</a></li>
+					<li><a href="#alamat" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Pamana</a></li>
+					<li><a href="#atraksyon" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">12 Atraksyon</a></li>
+					<li><a href="#gawain" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Mga Aktibidad</a></li>
 				</ul>
 			</div>
 
-			<!-- Column 3 (2/12): More pages -->
-			<div class="sm:col-span-1 lg:col-span-2">
-				<h2 class="text-sm font-bold uppercase tracking-[0.2em] text-pine-800 mb-4">
-					Higit Pa
-				</h2>
-				<ul class="space-y-1 text-sm">
-					{
-						NAV.slice(4).map((item) => (
-							<li>
-								<a
-									href={item.href}
-									class="inline-flex w-full rounded-xl px-3 py-2 text-slate-700 hover:bg-pine-50 hover:text-pine-800 transition-colors"
-								>
-									{item.label}
-								</a>
-							</li>
-						))
-					}
+			<div>
+				<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">Plano</h4>
+				<ul class="space-y-2.5">
+					<li><a href="#praktikal" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Praktikal</a></li>
+					<li><a href="#transportasyon" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Transportasyon</a></li>
+					<li><a href="#pagkain" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Pagkain</a></li>
+					<li><a href="#matutuluyan" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Matutuluyan</a></li>
 				</ul>
 			</div>
 
-			<!-- Column 4 (4/12): Quick facts + disclaimer -->
-			<div class="sm:col-span-2 lg:col-span-4">
-				<h2 class="text-sm font-bold uppercase tracking-[0.2em] text-pine-800 mb-4">
-					Mabilis na Paalala
-				</h2>
-				<ul class="space-y-2 text-sm text-slate-700 mb-6">
-					<li class="flex items-start gap-2"><span class="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-pine-500"></span>WALANG BAYAD ang pagpasok.</li>
-					<li class="flex items-start gap-2"><span class="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-pine-500"></span>Bukas 24 oras ang parke.</li>
-					<li class="flex items-start gap-2"><span class="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-pine-500"></span>Pinakamaganda 6–10 ng umaga.</li>
-					<li class="flex items-start gap-2"><span class="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-pine-500"></span>Malamig, magdala ng jacket.</li>
+			<div>
+				<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">Higit Pa</h4>
+				<ul class="space-y-2.5">
+					<li><a href="#kalapit" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Kalapit</a></li>
+					<li><a href="#galeriya" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Galeriya</a></li>
+					<li><a href="#tip" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Mga Tip</a></li>
+					<li><a href="#faq" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">FAQ</a></li>
 				</ul>
+			</div>
 
-				<div class="rounded-2xl border border-rose-sand-200 bg-rose-sand-50/80 p-4 text-xs leading-relaxed text-slate-700">
-					<p class="font-semibold text-rose-sand-700 mb-1">Paunawa</p>
-					Ang site na ito ay <strong>hindi opisyal</strong> at walang kaakibat na pamahalaang lungsod ng Baguio o Kagawaran ng Turismo ng Pilipinas.
-					Maaaring magbago ang mga presyo, oras, at tuntunin — laging suriin ang pinakabagong palatandaan sa lugar bago pumunta.
-				</div>
+			<div>
+				<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">Mapa</h4>
+				<a
+					href={SITE.mapsUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-sm font-semibold text-white hover:bg-white/20 transition-colors duration-200 no-underline"
+				>
+					🗺️ Buksan sa Google Maps
+				</a>
 			</div>
 		</div>
 
-		<div class="mt-14 pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
-			<p>&copy; {thisYear} Burnham Park Baguio Editorial. Lahat ng gabay ay inihanda nang may pag-iingat.</p>
-			<p class="inline-flex items-center gap-2">
-				<span class="inline-block h-1.5 w-1.5 rounded-full bg-pine-500"></span>
-				Binuo sa Baguio · Cordillera Administrative Region, Pilipinas
+		<!-- 2. Disclaimer -->
+		<div class="max-w-3xl pt-8 border-t border-white/10">
+			<p class="text-xs text-white/50 leading-relaxed">
+				{DISCLAIMER.text}
 			</p>
 		</div>
+
+		<!-- 3. Bottom bar -->
+		<div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-white/50">
+			<span>&copy; {currentYear} {SITE.name}. Hindi kaakibat ng gobyerno. CC BY-NC 4.0.</span>
+			<div class="flex flex-wrap gap-4">
+				<a href="/#patalastas" class="hover:text-white transition-colors duration-200 no-underline">Patalastas</a>
+			</div>
+		</div>
+
 	</div>
 </footer>

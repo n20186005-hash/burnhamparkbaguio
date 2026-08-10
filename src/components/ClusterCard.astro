@@ -1,48 +1,30 @@
 ---
 import type { Cluster } from '../consts';
-
-export interface Props {
-	cluster: Cluster;
-}
-
-const { cluster } = Astro.props;
+const { cluster } = Astro.props as { cluster: Cluster };
 ---
 
 <article
-	class="group rounded-xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ease-out flex h-full flex-col overflow-hidden"
+	class="card overflow-hidden flex flex-col h-full transition-transform duration-300 hover:-translate-y-1"
 	data-cluster-card
-	data-cluster-category={cluster.category ?? 'nature'}
+	data-cluster-category={cluster.category}
 >
-	<div class="relative w-full overflow-hidden bg-gradient-to-br from-pine-800 via-pine-700 to-lagoon-700">
-		<div class="absolute inset-0 opacity-20" aria-hidden="true" style="background:
-			radial-gradient(600px 200px at 20% -10%, rgba(255,255,255,0.35), transparent 60%),
-			radial-gradient(500px 180px at 90% 110%, rgba(217,169,176,0.55), transparent 60%);"></div>
-		<div class="relative p-5 sm:p-6 text-white">
-			<p class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-rose-sand-100/90 mb-1.5">
-				{cluster.tagline} · {cluster.minutes}
-			</p>
-			<h3 class="text-lg sm:text-xl font-bold leading-tight">
-				{cluster.title}
-			</h3>
+	<div class="px-5 pt-5 sm:px-6 sm:pt-6 pb-4 flex-1 flex flex-col">
+		<div class="flex items-start justify-between mb-2 gap-3">
+			<h3 class="text-lg sm:text-xl font-bold text-pine-950 leading-snug">{cluster.title}</h3>
+			<span class="chip text-[0.65rem] tracking-[0.1em] shrink-0">
+				⏱ {cluster.minutes}
+			</span>
 		</div>
-	</div>
+		<p class="text-xs text-pine-700/80 font-semibold uppercase tracking-[0.12em] mb-3">{cluster.tagline}</p>
+		<p class="text-sm text-slate-600 leading-relaxed mb-4 flex-1">{cluster.description}</p>
 
-	<div class="flex flex-1 flex-col p-4">
-		<p class="text-sm text-slate-700 leading-relaxed mb-4">
-			{cluster.description}
-		</p>
-
-		<div class="mt-auto space-y-3">
-			<p class="text-[11px] font-bold uppercase tracking-[0.18em] text-pine-700">
-				Pinakamainam para sa
-			</p>
-			<div class="chip-group">
-				{
-					cluster.best.map((tag) => (
-						<span class="chip">{tag}</span>
-					))
-				}
-			</div>
+		<div class="flex flex-wrap gap-1.5 mt-auto pt-3 border-t border-slate-100">
+			<span class="text-[0.65rem] text-slate-400 font-semibold uppercase tracking-[0.1em] mr-1 mt-0.5">Pinakamainam para sa:</span>
+			{cluster.best.map((b) => (
+				<span class="inline-flex px-2 py-0.5 rounded-full text-[0.65rem] font-semibold bg-pine-50 text-pine-700 border border-pine-100">
+					{b}
+				</span>
+			))}
 		</div>
 	</div>
 </article>

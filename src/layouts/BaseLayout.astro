@@ -1,92 +1,122 @@
 ---
-import '../styles/global.css';
-import { SITE } from '../consts';
-import GA4 from '../components/GA4.astro';
-import BaseHead from '../components/BaseHead.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-
-export interface Props {
-	title: string;
-	description?: string;
-	ogImage?: string;
-	ogImageAlt?: string;
-	ogType?: 'website' | 'article';
-	structuredData?: Record<string, unknown>;
-	lang?: string;
-	noIndex?: boolean;
-}
-
+// BaseLayout.astro — wrapper for the single-page Burnham Park guide
 const {
 	title,
 	description,
 	ogImage,
-	ogImageAlt,
-	ogType,
+	ogImageAlt = 'Burnham Park Baguio',
+	ogType = 'website',
 	structuredData,
-	lang = SITE.language,
-	noIndex = false,
+	lang = 'fil',
 } = Astro.props;
-
-const mobileNav = [
-	{ label: 'Mapa', href: '/#mapa', icon: '🗺️' },
-	{ label: 'Pagbiyahe', href: '/pagbiyahe/', icon: '🚌' },
-	{ label: 'Plano', href: '/plano/', icon: '📝' },
-	{ label: 'FAQ', href: '/faq/', icon: '❓' },
-] as const;
 ---
 
 <!doctype html>
-<html lang={lang} dir="ltr" class="scroll-pt-20">
-	<head>
-		<BaseHead
-			title={title}
-			description={description}
-			ogImage={ogImage}
-			ogImageAlt={ogImageAlt}
-			ogType={ogType}
-			structuredData={structuredData}
-		/>
-		{noIndex && <meta name="robots" content="noindex,nofollow" />}
-		<GA4 />
-	</head>
-	<body class="min-h-screen flex flex-col bg-slate-50 font-sans text-slate-900 antialiased">
-		<a
-			href="#main-content"
-			class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-2xl focus:bg-pine-900 focus:px-5 focus:py-3 focus:text-white focus:shadow-card"
-		>
-			Laktawan patungo sa pangunahing nilalaman
-		</a>
+<html lang={lang}>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>{title}</title>
+	<meta name="description" content={description} />
 
-		<Navbar />
+	<!-- Open Graph -->
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:type" content={ogType} />
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:image:alt" content={ogImageAlt || ''} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:site_name" content="Burnham Park Baguio" />
+	<meta property="og:locale" content="fil_PH" />
 
-		<main id="main-content" class="flex-1">
-			<slot />
-		</main>
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={ogImage} />
 
-		<!-- Mobile Bottom Quick Navigation -->
-		<nav
-			aria-label="Mabilis na nabigasyon sa mobile"
-			class="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-cold-200 bg-white/95 backdrop-blur-md safe-bottom"
-		>
-			<ul class="grid grid-cols-4 gap-1 px-2 py-2">
-				{
-					mobileNav.map((n) => (
-						<li>
-							<a
-								href={n.href}
-								class="flex flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-2 text-[11px] sm:text-xs font-semibold text-cold-700 hover:bg-pine-50 hover:text-pine-900 transition-colors"
-							>
-								<span class="text-lg leading-none" aria-hidden="true">{n.icon}</span>
-								<span>{n.label}</span>
-							</a>
-						</li>
-					))
-				}
-			</ul>
-		</nav>
-		<div class="lg:hidden h-16 safe-bottom-spacer" aria-hidden="true"></div>
+	<!-- Robots -->
+	<meta name="robots" content="index, follow" />
+	<link rel="canonical" href="https://burnhamparkbaguio.com/" />
 
-		<Footer />
-	</body>
+	<!-- Favicon -->
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+	<style is:global>
+		/* ======== RESET & GLOBALS ======== */
+		*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+		html{scroll-behavior:smooth;scroll-padding-top:6rem;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%}
+		body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:#1e293b;background:#f9fafb;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+		img{display:block;max-width:100%;height:auto}
+
+		/* ======== TAILWIND LAYER (w/o @tailwind directives — manual) ===== */
+		/* Use astro tailwind integration so these utilities are available */
+
+		/* ======== CUSTOM UTILITY CLASSES ======== */
+		.container-page{max-width:80rem;margin-left:auto;margin-right:auto;padding-left:1rem;padding-right:1rem}
+		@media(min-width:640px){.container-page{padding-left:1.5rem;padding-right:1.5rem}}
+		@media(min-width:1024px){.container-page{padding-left:2rem;padding-right:2rem}}
+
+		.section-pad{padding-top:3rem;padding-bottom:3rem}
+		@media(min-width:640px){.section-pad{padding-top:4rem;padding-bottom:4rem}}
+		@media(min-width:1024px){.section-pad{padding-top:5rem;padding-bottom:5rem}}
+
+		.surface-pine{background:linear-gradient(180deg,#f0f7f0 0%,#f9fafb 100%)}
+
+		/* Cards */
+		.card{background:#fff;border-radius:1.25rem;border:1px solid #e2e8f0;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+		.card:hover{border-color:#cbd5e1}
+		@media(min-width:640px){.card{border-radius:1.5rem}}
+
+		/* Buttons */
+		.btn-primary,.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.75rem 2rem;font-size:0.9375rem;font-weight:700;border-radius:9999px;text-decoration:none;letter-spacing:-0.01em;transition:all 0.2s ease;cursor:pointer;border:1.5px solid transparent}
+		.btn-primary{background:#064e3b;color:#fff;border-color:#064e3b}
+		.btn-primary:hover{background:#065f46;transform:translateY(-1px);box-shadow:0 8px 24px rgba(6,78,59,0.3)}
+		.btn-secondary{background:#fff;color:#064e3b;border-color:#d1d5db}
+		.btn-secondary:hover{background:#f1f5f9;border-color:#94a3b8}
+
+		/* Eyebrow */
+		.eyebrow{display:inline-block;font-size:0.765625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;margin-bottom:0.75rem;color:#166534}
+
+		/* Chips */
+		.chip{display:inline-flex;align-items:center;padding:0.35rem 0.85rem;font-size:0.765625rem;font-weight:600;border:1px solid #cbd5e1;border-radius:9999px;color:#334155;background:#fff;white-space:nowrap}
+
+		/* Hero overlay */
+		.hero-overlay{background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(2,25,17,0.65) 55%,rgba(2,25,17,0.82) 100%)}
+
+		/* Headings */
+		h1{font-size:clamp(1.75rem,5vw,3rem);line-height:1.15;color:#022c22}
+		h2{font-size:clamp(1.375rem,4vw,2.25rem);font-weight:800;line-height:1.2;color:#022c22}
+
+		/* Prose for Filipino */
+		.prose-fil p{margin-bottom:1rem;font-size:1.025rem;line-height:1.8;color:#334155}
+		.prose-fil p:last-child{margin-bottom:0}
+
+		/* Accordion */
+		.accordion-item{border:0;overflow:hidden}
+		.accordion-trigger{display:flex;align-items:flex-start;width:100%;padding:1rem 1.25rem;font-size:0.95rem;font-weight:600;text-align:left;background:transparent;border:0;cursor:pointer;color:#1e293b;list-style:none;gap:0.5rem;transition:background-color 0.15s}
+		.accordion-trigger:hover{background:#f1f5f9}
+		.accordion-trigger::-webkit-details-marker{display:none}
+		.accordion-trigger::marker{display:none;content:''}
+		@media(min-width:640px){.accordion-trigger{padding:1.15rem 1.75rem;font-size:1rem}}
+
+		/* Nav link */
+		.nav-link{text-decoration:none}
+
+		/* Shadow */
+		.shadow-soft{box-shadow:0 4px 14px rgba(0,0,0,0.07)}
+		.shadow-card{box-shadow:0 12px 40px rgba(0,0,0,0.06)}
+
+		/* Print */
+		@media print{.no-print{display:none!important}}
+	</style>
+</head>
+<body>
+
+	<!-- Structured Data -->
+	{structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>}
+
+	<slot />
+</body>
 </html>
