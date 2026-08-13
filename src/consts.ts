@@ -603,9 +603,9 @@ export const PAGE_META = {
 } as const;
 
 // ---- GALLERY IMAGES -------------------------------------------------------------
-export const GALLERY_IMAGES = Array.from({ length: 12 }, (_, i) => ({
+export const GALLERY_IMAGES = Array.from({ length: 18 }, (_, i) => ({
 	src: `/gallery/burnham-park-${i + 1}.jpg`,
-	alt: `Burnham Park Baguio — larawan ${i + 1} sa 12: tanawin ng parke, lagoon, rose garden, pine trees, at mga aktibidad`,
+        alt: `Burnham Park Baguio — larawan ${i + 1} sa 18: tanawin ng parke, lagoon, rose garden, pine trees, at mga aktibidad`,
 }));
 
 // ---- DISCLAIMER -----------------------------------------------------------------
