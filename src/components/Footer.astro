@@ -1,7 +1,21 @@
 ---
 import { SITE, DISCLAIMER } from '../consts';
 const jurisdiction = SITE.jurisdiction;
-const officialSources = SITE.officialSources.en;
+const officialSources = SITE.officialSources.fil;
+const legal = {
+	privacy: {
+		path: '/privacy/',
+		label: 'Patakaran sa Privacy',
+	},
+	terms: {
+		path: '/terms/',
+		label: 'Mga Tuntunin ng Serbisyo',
+	},
+	cookie: {
+		path: '/cookie/',
+		label: 'Mga Setting ng Cookie',
+	},
+};
 ---
 
 <footer class="bg-pine-950 text-white/85">
@@ -62,24 +76,24 @@ const officialSources = SITE.officialSources.en;
 			</div>
 		</div>
 
-		<!-- 2. Site-level neutrality & legal declarations (zh-Hans for legal copy) -->
+		<!-- 2. Site-level neutrality & legal declarations (in TAGALOG for legal copy) -->
 		<div class="pt-8 border-t border-white/10">
 			<div class="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
 				<article class="rounded-2xl bg-white/[0.04] border border-white/10 p-5 sm:p-6 h-full">
 					<p class="text-[0.7rem] sm:text-xs font-bold uppercase tracking-[0.22em] text-white/50 mb-3">
-						项目属性 · Project Status
+						Katayuan ng Proyekto
 					</p>
 					<p class="text-sm text-white/75 leading-relaxed">
-						本网站为一个独立的非营利游客信息指南项目，与任何政府机构、官方景点管理单位或商业运营商均无隶属、合作或赞助关系。
+						Ang {SITE.projectName} ay isang independiyente at di-komersyal na proyektong gabay para sa mga bumibisita. Hindi ito kaakibat, sinang-ayunan, o itinataguyod ng anumang ahensya ng gobyerno, opisyal na tagapamahala ng atraksyon, o mga komersyal na tagapagpatakbo.
 					</p>
 				</article>
 
 				<article class="rounded-2xl bg-white/[0.04] border border-white/10 p-5 sm:p-6 h-full">
 					<p class="text-[0.7rem] sm:text-xs font-bold uppercase tracking-[0.22em] text-white/50 mb-3">
-						信息来源 · Official Sources
+						Mga Pinagmulan ng Impormasyon
 					</p>
 					<p class="text-sm text-white/75 leading-relaxed mb-3">
-						本站关于 <strong class="text-white">{jurisdiction.attractionName}</strong> 的景点信息，均参考并对照考证自以下辖区及国家级公开资料：
+						Ang lahat ng impormasyon tungkol sa <strong class="text-white">{jurisdiction.attractionName}</strong> ay pinagbatay at sinuri mula sa mga pampublikong datos ng mga sumusunod na tanggapan sa antas ng lungsod at bansa:
 					</p>
 					<ul class="space-y-1.5 text-sm text-white/75">
 						{officialSources.map((src) => (
@@ -90,19 +104,19 @@ const officialSources = SITE.officialSources.en;
 						))}
 					</ul>
 					<p class="mt-3 text-xs text-white/60 leading-relaxed">
-						所有内容仅面向信息提供目的，不包含任何商业性推荐、付费收录或背书。
+						Lahat ng nilalaman ay para lamang sa layuning magbigay ng impormasyon. Walang anumang komersyal na rekomendasyon, bayad na pagsasama, o pag-endorso.
 					</p>
 				</article>
 
 				<article class="rounded-2xl bg-white/[0.04] border border-white/10 p-5 sm:p-6 h-full">
 					<p class="text-[0.7rem] sm:text-xs font-bold uppercase tracking-[0.22em] text-white/50 mb-3">
-						图片产权 · Image Rights
+						Karapatan sa Larawan
 					</p>
 					<p class="text-sm text-white/75 leading-relaxed">
-						图片产权：本网站所展示的所有图片产权及版权均归原摄影者所有。
+						Lahat ng larawang ipinapakita sa website na ito ay nananatiling pag-aari at may copyright ng kanilang orihinal na litratista o may-ari ng karapatan.
 					</p>
 					<p class="mt-3 text-xs text-white/60 leading-relaxed">
-						图片仅用于非营利科普介绍与景点上下文说明；若任何权利人对使用方式存在异议，欢迎通过页面所载明的联系方式与我们取得联系。
+						Ang mga larawan ay ginagamit lamang para sa di-komersyal na pagpapaliwanag at konteksto ng pagbisita. Kung ang sinumang may-ari ng karapatan ay may pagtutol sa paraan ng paggamit, maaaring makipag-ugnayan sa amin sa pamamagitan ng nakasaad na paraan sa mga pahina.
 					</p>
 				</article>
 			</div>
@@ -111,41 +125,41 @@ const officialSources = SITE.officialSources.en;
 		<!-- 3. Disclaimer / TAGALOG block -->
 		<div class="max-w-4xl pt-8 border-t border-white/10">
 			<p class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">
-				Patalastas · Disclaimer
+				Patalastas
 			</p>
 			<p class="text-xs text-white/60 leading-relaxed">
 				{DISCLAIMER.text}
 			</p>
 		</div>
 
-		<!-- 4. Legal links (zh-Hans) -->
+		<!-- 4. Legal links -->
 		<div class="pt-8 border-t border-white/10">
 			<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
 				<div class="col-span-2 sm:col-span-3 lg:col-span-2">
-					<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">法律 · Legal</h4>
+					<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">Mga Patakaran</h4>
 					<ul class="space-y-2.5">
 						<li>
 							<a
-								href="/privacy/"
+								href={legal.privacy.path}
 								class="text-sm text-white/75 hover:text-white transition-colors duration-200 no-underline"
 							>
-								隐私政策
+								{legal.privacy.label}
 							</a>
 						</li>
 						<li>
 							<a
-								href="/terms/"
+								href={legal.terms.path}
 								class="text-sm text-white/75 hover:text-white transition-colors duration-200 no-underline"
 							>
-								服务条款
+								{legal.terms.label}
 							</a>
 						</li>
 						<li>
 							<a
-								href="/cookie/"
+								href={legal.cookie.path}
 								class="text-sm text-white/75 hover:text-white transition-colors duration-200 no-underline"
 							>
-								Cookie 设置
+								{legal.cookie.label}
 							</a>
 						</li>
 					</ul>
@@ -156,15 +170,15 @@ const officialSources = SITE.officialSources.en;
 		<!-- 5. Bottom bar -->
 		<div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-white/55">
 			<span>
-				© 2026 {SITE.projectName}. 保留所有权利。
+				© 2026 {SITE.projectName}. Lahat ng karapatan ay nakalaan.
 				<span class="mx-2 text-white/20">·</span>
 				{jurisdiction.attractionName} · {jurisdiction.region} · {jurisdiction.country}
 			</span>
 			<div class="flex flex-wrap gap-x-4 gap-y-2">
 				<a href="/#patalastas" class="hover:text-white transition-colors duration-200 no-underline">Patalastas</a>
-				<a href="/privacy/" class="hover:text-white transition-colors duration-200 no-underline">隐私政策</a>
-				<a href="/terms/" class="hover:text-white transition-colors duration-200 no-underline">服务条款</a>
-				<a href="/cookie/" class="hover:text-white transition-colors duration-200 no-underline">Cookie 设置</a>
+				<a href={legal.privacy.path} class="hover:text-white transition-colors duration-200 no-underline">{legal.privacy.label}</a>
+				<a href={legal.terms.path} class="hover:text-white transition-colors duration-200 no-underline">{legal.terms.label}</a>
+				<a href={legal.cookie.path} class="hover:text-white transition-colors duration-200 no-underline">{legal.cookie.label}</a>
 			</div>
 		</div>
 

@@ -5,6 +5,7 @@ export const SITE = {
 	author: 'Burnham Park Guide',
 	siteUrl: 'https://burnhamparkbaguio.com',
 	language: 'fil',
+	locale: 'fil_PH',
 	address: 'Jose Abad Santos Drive, Baguio, Benguet 2600',
 	coordinates: { lat: 16.4129, lng: 120.5934 },
 	mapsUrl: 'https://maps.app.goo.gl/BurnhamParkBaguio',
@@ -18,11 +19,39 @@ export const SITE = {
 		country: 'Republic of the Philippines',
 	},
 	officialSources: {
-		en: [
+		fil: [
 			'Baguio City Hall',
 			'Baguio City Tourism Office',
-			'Philippine Department of Tourism (DOT)',
+			'Department of Tourism (DOT) ng Pilipinas',
 		],
+	},
+	legalPage: {
+		fil: {
+			privacy: {
+				title: 'Patakaran sa Privacy — Burnham Park Baguio',
+				description:
+					'Patakaran sa privacy ng Burnham Park Baguio Guide: anong datos ang aming kinokolekta, paano namin ito ginagamit, ang mga serbisyo ng ikatlong partido, at ang iyong mga karapatan sa ilalim ng GDPR at iba pang naaangkop na batas.',
+				eyebrow: '🏛️ Patakaran ng Proyekto',
+				heroAlt:
+					'Tanawin ng Burnham Park para sa banner ng pahina ng Patakaran sa Privacy',
+			},
+			terms: {
+				title: 'Mga Tuntunin ng Serbisyo — Burnham Park Baguio',
+				description:
+					'Mga tuntunin at legal na paunawa sa paggamit ng Burnham Park Baguio Guide: saklaw ng paggamit ng nilalaman, kawastuhan ng impormasyon, karapatan sa intelektwal na ari-arian, at limitasyon ng pananagutan.',
+				eyebrow: '🏛️ Patakaran ng Proyekto',
+				heroAlt:
+					'Tanawin ng Burnham Park para sa banner ng pahina ng Mga Tuntunin ng Serbisyo',
+			},
+			cookie: {
+				title: 'Mga Setting ng Cookie — Burnham Park Baguio',
+				description:
+					'Paggamit ng cookie sa Burnham Park Baguio Guide: kinakailangang cookie, cookie para sa pagsusuri, cookie para sa kagustuhan, at cookie para sa pagmemerkado — pati na ang mga paraan ng pamamahala at pahintulot.',
+				eyebrow: '🏛️ Patakaran ng Proyekto',
+				heroAlt:
+					'Detalyeng tanawin ng Burnham Park para sa banner ng pahina ng Mga Setting ng Cookie',
+			},
+		},
 	},
 } as const;
 
@@ -619,28 +648,31 @@ export const PAGE_META = {
 		heroAlt: 'Burnham Lagoon with swan boats and surrounding pine trees in Baguio City — panoramic view',
 	},
 	privacy: {
-		title: '隐私政策 · Burnham Park Baguio',
+		title: 'Patakaran sa Privacy — Burnham Park Baguio',
 		description:
-			'Burnham Park Baguio 独立旅游信息网站的隐私政策：说明我们收集的信息范围、使用方式、第三方服务以及您在 GDPR 及相关法规下享有的各项权利。',
-		eyebrow: '法律信息',
+			'Patakaran sa privacy ng Burnham Park Baguio Guide: anong datos ang aming kinokolekta, paano namin ito ginagamit, ang mga serbisyo ng ikatlong partido, at ang iyong mga karapatan sa ilalim ng GDPR at iba pang naaangkop na batas.',
+		eyebrow: '🏛️ Patakaran ng Proyekto',
 		hero: '/gallery/burnham-park-12.jpg',
-		heroAlt: 'Burnham Park Baguio 景观照片，用于隐私政策页面顶部横幅',
+		heroAlt:
+			'Tanawin ng Burnham Park para sa banner ng pahina ng Patakaran sa Privacy',
 	},
 	terms: {
-		title: '服务条款 · Burnham Park Baguio',
+		title: 'Mga Tuntunin ng Serbisyo — Burnham Park Baguio',
 		description:
-			'Burnham Park Baguio 服务条款：包括内容使用范围、信息准确性、知识产权、责任限制以及访问本网站即视为同意的法律声明。',
-		eyebrow: '法律信息',
+			'Mga tuntunin at legal na paunawa sa paggamit ng Burnham Park Baguio Guide: saklaw ng paggamit ng nilalaman, kawastuhan ng impormasyon, karapatan sa intelektwal na ari-arian, at limitasyon ng pananagutan.',
+		eyebrow: '🏛️ Patakaran ng Proyekto',
 		hero: '/gallery/burnham-park-13.jpg',
-		heroAlt: 'Burnham Park Baguio 绿树与步行道照片，用于服务条款页面顶部横幅',
+		heroAlt:
+			'Tanawin ng Burnham Park para sa banner ng pahina ng Mga Tuntunin ng Serbisyo',
 	},
 	cookie: {
-		title: 'Cookie 设置 · Burnham Park Baguio',
+		title: 'Mga Setting ng Cookie — Burnham Park Baguio',
 		description:
-			'Burnham Park Baguio Cookie 使用说明：必要 Cookie、分析型 Cookie、偏好 Cookie 与营销 Cookie 的用途、开关方式以及同意管理机制。',
-		eyebrow: '法律信息',
+			'Paggamit ng cookie sa Burnham Park Baguio Guide: kinakailangang cookie, cookie para sa pagsusuri, cookie para sa kagustuhan, at cookie para sa pagmemerkado — pati na ang mga paraan ng pamamahala at pahintulot.',
+		eyebrow: '🏛️ Patakaran ng Proyekto',
 		hero: '/gallery/burnham-park-14.jpg',
-		heroAlt: 'Burnham Park Baguio 公园细节照片，用于 Cookie 设置页面顶部横幅',
+		heroAlt:
+			'Detalyeng tanawin ng Burnham Park para sa banner ng pahina ng Mga Setting ng Cookie',
 	},
 } as const;
 
