@@ -1,11 +1,29 @@
 // ---- SITE ----------------------------------------------------------------------
 export const SITE = {
 	name: 'Burnham Park Baguio',
+	projectName: 'Burnham Park Baguio Guide',
 	author: 'Burnham Park Guide',
 	siteUrl: 'https://burnhamparkbaguio.com',
+	language: 'fil',
+	address: 'Jose Abad Santos Drive, Baguio, Benguet 2600',
 	coordinates: { lat: 16.4129, lng: 120.5934 },
 	mapsUrl: 'https://maps.app.goo.gl/BurnhamParkBaguio',
 	mapsEmbed: 'https://www.google.com/maps?q=Burnham%20Park%20Baguio&output=embed',
+	jurisdiction: {
+		attractionName: 'Burnham Park',
+		cityHall: 'Baguio City Hall',
+		tourismOffice: 'Baguio City Tourism Office',
+		nationalTourismAgency: 'Philippine Department of Tourism (DOT)',
+		region: 'Cordillera Administrative Region (CAR)',
+		country: 'Republic of the Philippines',
+	},
+	officialSources: {
+		en: [
+			'Baguio City Hall',
+			'Baguio City Tourism Office',
+			'Philippine Department of Tourism (DOT)',
+		],
+	},
 } as const;
 
 // ---- NAVIGATION (single-page anchors) ------------------------------------------
@@ -599,6 +617,30 @@ export const PAGE_META = {
 		eyebrow: '🏞️ Luntiang Puso ng Lungsod ng Baguio',
 		hero: '/gallery/burnham-park-1.jpg',
 		heroAlt: 'Burnham Lagoon with swan boats and surrounding pine trees in Baguio City — panoramic view',
+	},
+	privacy: {
+		title: '隐私政策 · Burnham Park Baguio',
+		description:
+			'Burnham Park Baguio 独立旅游信息网站的隐私政策：说明我们收集的信息范围、使用方式、第三方服务以及您在 GDPR 及相关法规下享有的各项权利。',
+		eyebrow: '法律信息',
+		hero: '/gallery/burnham-park-12.jpg',
+		heroAlt: 'Burnham Park Baguio 景观照片，用于隐私政策页面顶部横幅',
+	},
+	terms: {
+		title: '服务条款 · Burnham Park Baguio',
+		description:
+			'Burnham Park Baguio 服务条款：包括内容使用范围、信息准确性、知识产权、责任限制以及访问本网站即视为同意的法律声明。',
+		eyebrow: '法律信息',
+		hero: '/gallery/burnham-park-13.jpg',
+		heroAlt: 'Burnham Park Baguio 绿树与步行道照片，用于服务条款页面顶部横幅',
+	},
+	cookie: {
+		title: 'Cookie 设置 · Burnham Park Baguio',
+		description:
+			'Burnham Park Baguio Cookie 使用说明：必要 Cookie、分析型 Cookie、偏好 Cookie 与营销 Cookie 的用途、开关方式以及同意管理机制。',
+		eyebrow: '法律信息',
+		hero: '/gallery/burnham-park-14.jpg',
+		heroAlt: 'Burnham Park Baguio 公园细节照片，用于 Cookie 设置页面顶部横幅',
 	},
 } as const;
 

@@ -1,0 +1,241 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PAGE_META } from '../../consts';
+
+const meta = PAGE_META.privacy;
+const lastUpdated = '2026 年 7 月';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: meta.title,
+	description: meta.description,
+	mainEntity: {
+		'@type': 'CreativeWork',
+		headline: '隐私政策',
+		dateModified: '2026-07-01',
+		author: { '@type': 'Organization', name: 'Burnham Park Baguio Guide' },
+		publisher: { '@type': 'Organization', name: 'Burnham Park Baguio Guide' },
+		inLanguage: 'zh-Hans',
+	},
+};
+---
+
+<BaseLayout
+	title={meta.title}
+	description={meta.description}
+	ogImage={meta.hero}
+	ogImageAlt={meta.heroAlt}
+	ogType="website"
+	structuredData={structuredData}
+	lang="zh-Hans"
+>
+	<!-- Hero -->
+	<section aria-label="页面标题区" class="relative bg-pine-950">
+		<div class="relative w-full h-[360px] sm:h-[420px] md:h-[480px] overflow-hidden">
+			<img
+				src={meta.hero}
+				alt={meta.heroAlt}
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+				class="absolute inset-0 h-full w-full object-cover"
+				style="border-radius:0"
+			/>
+			<div class="absolute inset-0 hero-overlay"></div>
+			<div class="absolute inset-0">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center sm:justify-end pb-10 sm:pb-14 md:pb-16">
+					<nav aria-label="面包屑" class="mb-5 text-xs sm:text-sm">
+						<ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-white/70">
+							<li><a href="/" class="hover:text-white underline underline-offset-4">首页</a></li>
+							<li aria-hidden="true" class="text-white/40">›</li>
+							<li class="font-medium text-white" aria-current="page">隐私政策</li>
+						</ol>
+					</nav>
+					<span class="eyebrow text-white/90" style="text-shadow:0 2px 12px rgba(0,0,0,0.4)">
+						{meta.eyebrow}
+					</span>
+					<h1 class="text-balance text-white font-bold tracking-tight max-w-4xl mb-3 sm:mb-4" style="text-shadow:0 6px 40px rgba(0,0,0,0.55)">
+						隐私政策
+					</h1>
+					<p class="pretty text-white/90 max-w-3xl text-base sm:text-lg leading-relaxed" style="text-shadow:0 2px 18px rgba(0,0,0,0.5)">
+						本文档说明 Burnham Park Baguio Guide（以下简称「我们」）在您访问本站时，如何收集、使用和保护您的个人信息。
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 正文 -->
+	<section class="section-pad">
+		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+			<!-- 最后更新 -->
+			<div class="card border border-pine-100 shadow-soft p-5 sm:p-6 mb-10 sm:mb-12">
+				<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
+					<span class="inline-flex items-center gap-2 font-semibold text-pine-900">
+						<span aria-hidden="true">📅</span>
+						最后更新时间
+					</span>
+					<span class="text-slate-700 font-semibold">{lastUpdated}</span>
+				</div>
+			</div>
+
+			<!-- 导览 -->
+			<div class="surface-pine rounded-3xl shadow-soft border border-pine-100 p-6 sm:p-8 mb-10 sm:mb-12">
+				<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-3">目录速览</p>
+				<nav aria-label="隐私政策目录" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm">
+					<a href="#collect" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">1. 我们收集的信息</a>
+					<a href="#use" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">2. 我们如何使用您的信息</a>
+					<a href="#third-party" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">3. 第三方服务</a>
+					<a href="#rights" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">4. 您的权利</a>
+					<a href="#security" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">5. 信息安全与保留</a>
+					<a href="#contact" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">6. 联系方式与更新</a>
+				</nav>
+			</div>
+
+			<div class="prose-fil !max-w-none">
+				<!-- 1. 收集 -->
+				<section id="collect" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">1. 我们收集的信息</h2>
+					<p>
+						我们仅收集提供服务所必需的<strong>最低限度数据</strong>。在您访问本站点期间，我们可能收集以下几类信息，且不会超出必要范围：
+					</p>
+					<ul>
+						<li>
+							<strong>浏览数据</strong>：包括 IP 地址、浏览器类型与版本、操作系统、访问页面、访问时间、停留时长、来源（Referrer）与退出链接等匿名技术信息。
+						</li>
+						<li>
+							<strong>Cookie 与类似技术</strong>：为确保站点正常运行，以及在您显式同意的前提下进行分析与偏好记忆，我们可能在您的浏览器中设置少量 Cookie 或本地存储项。详见 <a href="/cookie/" class="text-pine-700 font-semibold underline underline-offset-4 decoration-pine-300 hover:text-pine-900 hover:decoration-pine-600">Cookie 设置</a>。
+						</li>
+						<li>
+							<strong>您自愿提供的信息</strong>：若我们后续提供联系表单、订阅或邮件咨询等互动入口，我们仅会保留您主动提交的联系方式与消息内容，且仅用于回应您的请求。
+						</li>
+					</ul>
+					<p>
+						本站为<strong>独立非营利科普项目</strong>，不以出售或交换任何个人数据为目的。我们不会向第三方购买任何个人信息，也不会将您的数据用于定向广告投放。
+					</p>
+				</section>
+
+				<hr />
+
+				<!-- 2. 使用 -->
+				<section id="use" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">2. 我们如何使用您的信息</h2>
+					<p>
+						所有收集到的信息，均严格限定于以下合法且必要的用途，任何超出范围的处理都会事先征得您的明示同意：
+					</p>
+					<ul>
+						<li>
+							<strong>改善网站内容与用户体验</strong>：根据访问频次与路径，识别内容盲区、错误链接与性能瓶颈，持续优化页面结构与阅读体验。
+						</li>
+						<li>
+							<strong>分析流量与使用模式</strong>：用于整体人群级别的聚合统计，评估不同板块的内容质量，不针对任何可识别个人进行分析或画像。
+						</li>
+						<li>
+							<strong>回应请求</strong>：当您主动发起咨询、反馈或订阅时，我们仅在处理该请求的必要期限内使用相应联系方式。
+						</li>
+						<li>
+							<strong>遵守法律义务</strong>：在收到法院、监管机构或其他合法公权力机关依据适用法律发出的有效命令时，我们可能提供最小必要范围的数据。
+						</li>
+					</ul>
+				</section>
+
+				<hr />
+
+				<!-- 3. 第三方 -->
+				<section id="third-party" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">3. 第三方服务</h2>
+					<p>
+						为呈现地图、统计与图片等公共信息功能，本站可能嵌入或调用若干第三方服务。各服务均有其独立的隐私政策与处理机制，请您一并查阅：
+					</p>
+					<ul>
+						<li>
+							<strong>谷歌地图（Google Maps）</strong>：用于嵌入式交互式地图与位置数据展示。当您浏览含地图的页面时，浏览器可能直接向 Google 的服务器发送请求。详情请查阅
+							<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-pine-700 font-semibold underline underline-offset-4 decoration-pine-300 hover:text-pine-900 hover:decoration-pine-600">Google 隐私与条款</a>。
+						</li>
+						<li>
+							<strong>Google Analytics（如启用）</strong>：在您明确授权「分析型 Cookie」的前提下，用于流量聚合统计。所有数据均以匿名方式处理，不收集姓名、邮箱或其他可直接识别您身份的字段。
+						</li>
+						<li>
+							<strong>Unsplash</strong>：部分视觉素材通过 Unsplash 的 CDN 提供图片资源。其图片许可为免费可商用，但您访问相关图片资源时将适用
+							<a href="https://unsplash.com/privacy" target="_blank" rel="noopener noreferrer" class="text-pine-700 font-semibold underline underline-offset-4 decoration-pine-300 hover:text-pine-900 hover:decoration-pine-600">Unsplash 隐私政策</a>。
+						</li>
+					</ul>
+					<p>
+						除上述已披露的必要合作方外，我们不会将您的个人信息共享、出售或授权给任何广告网络、数据经纪或营销公司。
+					</p>
+				</section>
+
+				<hr />
+
+				<!-- 4. 权利 -->
+				<section id="rights" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">4. 您的权利</h2>
+					<p>
+						根据《通用数据保护条例》（<em>General Data Protection Regulation, GDPR</em>）及其他适用的数据保护立法，您对其个人数据享有如下核心权利。我们将在收到请求后的合理期限内，免费处理合法申请：
+					</p>
+					<ul>
+						<li>
+							<strong>访问权</strong>：向您提供一份关于我们正在处理的、与您相关的个人数据副本及处理说明。
+						</li>
+						<li>
+							<strong>更正权</strong>：如发现与您相关的记录存在不准确或不完整之处，您可随时要求我们予以补正。
+						</li>
+						<li>
+							<strong>删除权（被遗忘权）</strong>：在处理目的已达成、同意撤回或处理违法等法定情形下，请求删除您的个人数据。
+						</li>
+						<li>
+							<strong>限制处理权</strong>：对数据处理的合法性、准确性或必要性存疑期间，暂时限制进一步处理。
+						</li>
+						<li>
+							<strong>反对处理权</strong>：基于公共利益或正当利益进行处理时，您可随时依据自身特定情况提出反对；对于直接营销用途的处理，您有权无条件反对。
+						</li>
+						<li>
+							<strong>数据可携权</strong>：在技术可行的情况下，以结构化、机器可读的格式向您或第三方提供您自愿提交的数据。
+						</li>
+						<li>
+							<strong>向监管机构投诉的权利</strong>：如您认为我们的处理活动违反适用的数据保护法，您有权向您常居地、工作地或涉嫌侵权发生地的数据保护监管机构提出申诉。
+						</li>
+					</ul>
+				</section>
+
+				<hr />
+
+				<!-- 5. 安全 -->
+				<section id="security" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">5. 信息安全与保留</h2>
+					<p>
+						我们采取<strong>传输加密（HTTPS/TLS）、最小化收集、访问控制、定期安全审计</strong>等合理技术与组织措施，保障您的个人信息免受未经授权的访问、泄露、篡改或销毁。
+					</p>
+					<p>
+						数据保留严格遵循「<em>目的限制原则</em>」：仅在实现对应处理目的所必需的最短期限内保留个人信息。超出保留期限后，我们将对数据进行不可逆的匿名化处理或物理删除。
+					</p>
+				</section>
+
+				<hr />
+
+				<!-- 6. 联系 -->
+				<section id="contact" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">6. 联系方式与更新</h2>
+					<p>
+						如您对本隐私政策有任何疑问、异议或希望行使法定权利，可通过站点后续公布的正式联系方式与我们取得联系。我们将在核实身份后尽快处理。
+					</p>
+					<p>
+						本政策可能因法律变化、功能升级或服务范围调整而更新。重大变更将在首页显著位置以公告形式说明，并更新本页顶部的「最后更新时间」。变更后的政策自公布之日起生效。
+					</p>
+				</section>
+			</div>
+
+			<!-- 底部返回 -->
+			<div class="mt-12 sm:mt-16 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+				<a href="/" class="btn-primary btn-wide">返回首页
+					<span aria-hidden="true">→</span>
+				</a>
+				<div class="flex flex-wrap gap-3">
+					<a href="/terms/" class="btn-secondary btn-wide">查看服务条款</a>
+					<a href="/cookie/" class="btn-secondary btn-wide">管理 Cookie 偏好</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

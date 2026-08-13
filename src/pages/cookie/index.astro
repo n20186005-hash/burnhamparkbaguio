@@ -1,0 +1,447 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PAGE_META } from '../../consts';
+
+const meta = PAGE_META.cookie;
+const lastUpdated = '2026 年 7 月';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: meta.title,
+	description: meta.description,
+	mainEntity: {
+		'@type': 'CreativeWork',
+		headline: 'Cookie 设置',
+		dateModified: '2026-07-01',
+		author: { '@type': 'Organization', name: 'Burnham Park Baguio Guide' },
+		publisher: { '@type': 'Organization', name: 'Burnham Park Baguio Guide' },
+		inLanguage: 'zh-Hans',
+	},
+};
+---
+
+<BaseLayout
+	title={meta.title}
+	description={meta.description}
+	ogImage={meta.hero}
+	ogImageAlt={meta.heroAlt}
+	ogType="website"
+	structuredData={structuredData}
+	lang="zh-Hans"
+>
+	<!-- Hero -->
+	<section aria-label="页面标题区" class="relative bg-pine-950">
+		<div class="relative w-full h-[360px] sm:h-[420px] md:h-[480px] overflow-hidden">
+			<img
+				src={meta.hero}
+				alt={meta.heroAlt}
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+				class="absolute inset-0 h-full w-full object-cover"
+				style="border-radius:0"
+			/>
+			<div class="absolute inset-0 hero-overlay"></div>
+			<div class="absolute inset-0">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center sm:justify-end pb-10 sm:pb-14 md:pb-16">
+					<nav aria-label="面包屑" class="mb-5 text-xs sm:text-sm">
+						<ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-white/70">
+							<li><a href="/" class="hover:text-white underline underline-offset-4">首页</a></li>
+							<li aria-hidden="true" class="text-white/40">›</li>
+							<li class="font-medium text-white" aria-current="page">Cookie 设置</li>
+						</ol>
+					</nav>
+					<span class="eyebrow text-white/90" style="text-shadow:0 2px 12px rgba(0,0,0,0.4)">
+						{meta.eyebrow}
+					</span>
+					<h1 class="text-balance text-white font-bold tracking-tight max-w-4xl mb-3 sm:mb-4" style="text-shadow:0 6px 40px rgba(0,0,0,0.55)">
+						Cookie 设置
+					</h1>
+					<p class="pretty text-white/90 max-w-3xl text-base sm:text-lg leading-relaxed" style="text-shadow:0 2px 18px rgba(0,0,0,0.5)">
+						我们使用 Cookie 与类似技术来改善您的浏览体验。通过下方面板，您可以逐项了解各类 Cookie 的用途，并管理您的偏好设置。
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 正文 -->
+	<section class="section-pad">
+		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+			<!-- 最后更新 -->
+			<div class="card border border-pine-100 shadow-soft p-5 sm:p-6 mb-10 sm:mb-12">
+				<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
+					<span class="inline-flex items-center gap-2 font-semibold text-pine-900">
+						<span aria-hidden="true">📅</span>
+						最后更新时间
+					</span>
+					<span class="text-slate-700 font-semibold">{lastUpdated}</span>
+				</div>
+			</div>
+
+			<!-- 导览 -->
+			<div class="surface-pine rounded-3xl shadow-soft border border-pine-100 p-6 sm:p-8 mb-10 sm:mb-12">
+				<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-3">目录速览</p>
+				<nav aria-label="Cookie 设置目录" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm">
+					<a href="#intro" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">1. 什么是 Cookie</a>
+					<a href="#necessary" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">2. 必要 Cookie</a>
+					<a href="#analytics" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">3. 分析型 Cookie</a>
+					<a href="#preferences" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">4. 偏好 Cookie</a>
+					<a href="#marketing" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">5. 营销 Cookie</a>
+					<a href="#consent" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">6. 同意管理</a>
+					<a href="#how-to-manage" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">7. 如何自行管理 Cookie</a>
+				</nav>
+			</div>
+
+			<div class="prose-fil !max-w-none">
+				<!-- 1. 介绍 -->
+				<section id="intro" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">1. 什么是 Cookie</h2>
+					<p>
+						Cookie 是网站在您访问时通过浏览器在您的设备上存储的小型文本文件。它们被广泛用于使网站正常运转、提高运行效率、记住用户偏好、识别回访者，以及在获得同意的前提下统计访问流量。
+					</p>
+					<p>
+						类似技术还包括：本地存储（localStorage / sessionStorage）、像素标签（pixel tags）、设备指纹等。本站仅在必要范围内使用上述技术，不会以隐蔽方式收集超出声明目的的信息。
+					</p>
+				</section>
+			</div>
+
+			<!-- Cookie 面板（卡片式，含开关 + 说明） -->
+			<section id="cookie-panel" aria-label="Cookie 偏好管理面板" class="mt-10 sm:mt-14 mb-10 sm:mb-14">
+				<div class="grid grid-cols-1 gap-4 sm:gap-5">
+					<!-- 2. 必要 Cookie -->
+					<article id="necessary" class="card border border-pine-100 shadow-soft p-5 sm:p-6 scroll-mt-28">
+						<div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5">
+							<div class="flex-1">
+								<div class="flex items-center gap-3 mb-3">
+									<span class="text-2xl" aria-hidden="true">🛡️</span>
+									<h3 class="text-lg sm:text-xl font-bold text-pine-950">2. 必要 Cookie</h3>
+								</div>
+								<p class="text-sm text-slate-700 leading-relaxed mb-3">
+									这些 Cookie 对于网站的基本运行至关重要。它们通常仅在您执行相当于服务请求的操作时被设置，例如：维护登录状态、保存购物车内容、确保跨页请求安全以及存储您的隐私同意状态。
+								</p>
+								<p class="text-sm text-slate-700 leading-relaxed mb-3">
+									<strong>用途举例：</strong>
+								</p>
+								<ul class="text-sm text-slate-700 space-y-1.5 list-disc list-outside ms-6">
+									<li>保存您的 Cookie 同意状态，避免每次访问重复询问；</li>
+									<li>保证页面交互与提交动作在会话内的一致性与安全性；</li>
+									<li>在流量高峰或攻击场景下，配合防御机制临时识别异常请求。</li>
+								</ul>
+								<p class="text-xs font-bold uppercase tracking-[0.15em] text-amber-700 mt-4 inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-3 py-1.5">
+									🔒 必要 Cookie · 始终保持活跃
+								</p>
+							</div>
+							<div class="shrink-0 lg:w-40 flex lg:justify-end">
+								<label class="relative inline-flex items-center cursor-not-allowed">
+									<input type="checkbox" checked disabled aria-label="必要 Cookie 始终启用" class="sr-only peer" />
+									<div class="w-12 h-6 bg-pine-700 rounded-full peer-disabled:opacity-100 transition-colors"></div>
+									<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full shadow-sm border border-slate-200 translate-x-6 transition-transform flex items-center justify-center text-[10px] font-bold text-pine-800" aria-hidden="true">✓</div>
+								</label>
+							</div>
+						</div>
+					</article>
+
+					<!-- 3. 分析型 Cookie -->
+					<article id="analytics" class="card border border-pine-100 shadow-soft p-5 sm:p-6 scroll-mt-28">
+						<div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5">
+							<div class="flex-1">
+								<div class="flex items-center gap-3 mb-3">
+									<span class="text-2xl" aria-hidden="true">📊</span>
+									<h3 class="text-lg sm:text-xl font-bold text-pine-950">3. 分析型 Cookie</h3>
+								</div>
+								<p class="text-sm text-slate-700 leading-relaxed mb-3">
+									它们通过收集匿名使用数据，帮助我们了解访客如何与本网站互动。数据仅在您显式同意后才会启用，并且<strong>不以识别特定个人为目的</strong>。
+								</p>
+								<div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 sm:p-5 mb-4">
+									<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-2">
+										<h4 class="text-sm font-bold text-pine-900">Google Analytics</h4>
+										<span class="chip !bg-pine-50 !border-pine-200 !text-pine-800 !text-xs">分析工具</span>
+									</div>
+									<p class="text-sm text-slate-700 leading-relaxed">
+										它会收集访客如何使用我们网站的匿名信息：例如访问页面、停留时长、跳出来源、设备类型等。这些数据会汇总成报告，帮助我们优化内容结构、修复错误链接，提高整体阅读体验。
+									</p>
+								</div>
+								<p class="text-xs text-slate-500">
+									如您启用，我们将默认使用「<em>IP 匿名化</em>」模式，并尽可能限制对可识别个人数据的处理。
+								</p>
+							</div>
+							<div class="shrink-0 lg:w-40 flex lg:justify-end">
+								<label class="relative inline-flex items-center cursor-pointer">
+									<input type="checkbox" data-cookie-switch="analytics" checked aria-label="分析型 Cookie 已启用" class="sr-only peer" />
+									<div class="w-12 h-6 bg-slate-200 rounded-full peer-checked:bg-pine-700 transition-colors"></div>
+									<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full shadow-sm border border-slate-200 transition-transform flex items-center justify-center text-[10px] font-bold peer-checked:translate-x-6 peer-checked:text-pine-800" aria-hidden="true">
+										<span data-cookie-toggle-icon="analytics">✓</span>
+									</div>
+								</label>
+								<p data-cookie-status="analytics" class="ml-3 mt-2 lg:mt-0 text-xs font-bold text-pine-800 lg:hidden">已激活</p>
+							</div>
+						</div>
+					</article>
+
+					<!-- 4. 偏好 Cookie -->
+					<article id="preferences" class="card border border-pine-100 shadow-soft p-5 sm:p-6 scroll-mt-28">
+						<div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5">
+							<div class="flex-1">
+								<div class="flex items-center gap-3 mb-3">
+									<span class="text-2xl" aria-hidden="true">⚙️</span>
+									<h3 class="text-lg sm:text-xl font-bold text-pine-950">4. 偏好 Cookie</h3>
+								</div>
+								<p class="text-sm text-slate-700 leading-relaxed mb-3">
+									它们用于记住您在多次访问之间的偏好设置，以便在您再次访问时提供更贴合使用习惯的体验（例如界面主题、显示密度、字体大小偏好等）。
+								</p>
+								<div class="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 sm:p-5">
+									<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-2">
+										<h4 class="text-sm font-bold text-pine-900">用户偏好</h4>
+										<span class="chip !bg-pine-50 !border-pine-200 !text-pine-800 !text-xs">体验设置</span>
+									</div>
+									<p class="text-sm text-slate-700 leading-relaxed">
+										保存您的语言偏好、界面主题与展示模式、Cookie 同意层级、搜索筛选与排序习惯等网站设置。
+									</p>
+								</div>
+							</div>
+							<div class="shrink-0 lg:w-40 flex lg:justify-end">
+								<label class="relative inline-flex items-center cursor-pointer">
+									<input type="checkbox" data-cookie-switch="preferences" checked aria-label="偏好 Cookie 已启用" class="sr-only peer" />
+									<div class="w-12 h-6 bg-slate-200 rounded-full peer-checked:bg-pine-700 transition-colors"></div>
+									<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full shadow-sm border border-slate-200 transition-transform flex items-center justify-center text-[10px] font-bold peer-checked:translate-x-6 peer-checked:text-pine-800" aria-hidden="true">
+										<span data-cookie-toggle-icon="preferences">✓</span>
+									</div>
+								</label>
+								<p data-cookie-status="preferences" class="ml-3 mt-2 lg:mt-0 text-xs font-bold text-pine-800 lg:hidden">已激活</p>
+							</div>
+						</div>
+					</article>
+
+					<!-- 5. 营销 Cookie -->
+					<article id="marketing" class="card border border-pine-100 shadow-soft p-5 sm:p-6 scroll-mt-28">
+						<div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5">
+							<div class="flex-1">
+								<div class="flex items-center gap-3 mb-3">
+									<span class="text-2xl" aria-hidden="true">📣</span>
+									<h3 class="text-lg sm:text-xl font-bold text-pine-950">5. 营销 Cookie</h3>
+								</div>
+								<p class="text-sm text-slate-700 leading-relaxed mb-3">
+									它们通常由广告合作伙伴设置，用于跨站建立您的兴趣画像，从而在其他平台上为您展示更相关的广告，并衡量广告活动的投放效果。
+								</p>
+								<div class="rounded-2xl border border-rose-sand-100 bg-rose-sand-50/60 p-4 sm:p-5">
+									<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-2">
+										<h4 class="text-sm font-bold text-rose-sand-800">个性化广告</h4>
+										<span class="chip !bg-white/70 !border-rose-sand-200 !text-rose-sand-700 !text-xs">默认停用</span>
+									</div>
+									<p class="text-sm text-slate-700 leading-relaxed">
+										根据您的浏览兴趣与画像，在第三方站点推送相关内容或广告。此类 Cookie 不会在您未明确同意的情况下启用。
+									</p>
+								</div>
+							</div>
+							<div class="shrink-0 lg:w-40 flex lg:justify-end">
+								<label class="relative inline-flex items-center cursor-pointer">
+									<input type="checkbox" data-cookie-switch="marketing" aria-label="营销 Cookie 已停用" class="sr-only peer" />
+									<div class="w-12 h-6 bg-slate-200 rounded-full peer-checked:bg-pine-700 transition-colors"></div>
+									<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full shadow-sm border border-slate-200 transition-transform flex items-center justify-center text-[10px] font-bold peer-checked:translate-x-6 peer-checked:text-pine-800" aria-hidden="true">
+										<span data-cookie-toggle-icon="marketing">—</span>
+									</div>
+								</label>
+								<p data-cookie-status="marketing" class="ml-3 mt-2 lg:mt-0 text-xs font-bold text-slate-500 lg:hidden">已停用</p>
+							</div>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<div class="prose-fil !max-w-none">
+				<!-- 6. 同意管理 -->
+				<section id="consent" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">6. 同意管理</h2>
+					<p>
+						通过本页面，您可以随时查看、调整或撤销您的 Cookie 偏好设置。所有选择均会保存在您当前设备的浏览器中，不会上传至我们的服务器。
+					</p>
+					<p>
+						在您点击「保存偏好设置」前，我们会默认：
+					</p>
+					<ul>
+						<li>启用必要 Cookie（无法关闭）；</li>
+						<li>分析型与偏好 Cookie 默认处于建议启用状态，您可随时关闭；</li>
+						<li>营销 Cookie 默认<strong>停用</strong>，仅在您主动开启时生效。</li>
+					</ul>
+					<p>
+						<strong>请注意：</strong>禁用某些 Cookie 可能会影响网站的功能表现（例如无法记住您的主题偏好、无法生成匿名流量统计等），但不会影响核心阅读与访问能力。
+					</p>
+				</section>
+
+				<hr />
+
+				<!-- 7. 自行管理 -->
+				<section id="how-to-manage" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">7. 如何自行管理 Cookie</h2>
+					<p>
+						除通过本页面板外，您也可以直接通过浏览器内置设置管理或删除 Cookie。常用浏览器的入口参考如下（名称或路径随版本更新可能略有变化）：
+					</p>
+					<ul>
+						<li><strong>Chrome / Edge / Brave：</strong>设置 → 隐私和安全 → Cookie 及其他网站数据；</li>
+						<li><strong>Firefox：</strong>设置 → 隐私与安全 → Cookie 和网站数据；</li>
+						<li><strong>Safari（macOS）：</strong>设置 → 隐私 → 管理网站数据；</li>
+						<li><strong>Safari（iOS）：</strong>设置 → Safari → 高级 → 网站数据；</li>
+						<li><strong>移动端浏览器：</strong>一般在设置 → 隐私 / 安全性中可找到对应选项。</li>
+					</ul>
+					<p>
+						您也可以在部分浏览器中启用「<em>不追踪（Do Not Track）</em>」信号。在我们明确未针对该信号建立自动化处理前，将仍以本页的 Cookie 偏好为准。
+					</p>
+				</section>
+			</div>
+
+			<!-- 保存 / 拒绝 操作栏 -->
+			<section aria-label="Cookie 同意操作栏" class="mt-12 sm:mt-16">
+				<div class="surface-pine rounded-[2rem] border border-pine-100 shadow-card p-6 sm:p-8 md:p-10">
+					<h2 class="h2 mb-3 text-pine-950">确认您的偏好设置</h2>
+					<p class="text-slate-700 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
+						请根据您的需要调整上方各项开关，然后点击下方按钮保存设置。您也可以一键拒绝所有非必要 Cookie。
+					</p>
+
+					<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+						<div id="cookie-preference-summary" class="text-xs sm:text-sm text-slate-600">
+							当前设置：必要 Cookie <strong class="text-pine-800">启用</strong>，分析型
+							<span data-cookie-summary="analytics" class="font-semibold text-pine-800">启用</span>，偏好
+							<span data-cookie-summary="preferences" class="font-semibold text-pine-800">启用</span>，营销
+							<span data-cookie-summary="marketing" class="font-semibold text-slate-500">停用</span>。
+						</div>
+						<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+							<button type="button" data-cookie-action="reject" class="btn-secondary btn-wide">
+								拒绝一切
+							</button>
+							<button type="button" data-cookie-action="accept" class="btn-primary btn-wide">
+								保存偏好设置
+								<span aria-hidden="true">→</span>
+							</button>
+						</div>
+					</div>
+
+					<p id="cookie-saved-notice" class="hidden mt-5 text-sm font-semibold text-pine-800 inline-flex items-center gap-2 rounded-2xl bg-pine-50 border border-pine-200 px-4 py-2.5">
+						✅ 已保存您的 Cookie 偏好设置。刷新页面后即会按上述配置生效。
+					</p>
+				</div>
+			</section>
+
+			<!-- 底部返回 -->
+			<div class="mt-12 sm:mt-16 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+				<a href="/" class="btn-primary btn-wide">返回首页
+					<span aria-hidden="true">→</span>
+				</a>
+				<div class="flex flex-wrap gap-3">
+					<a href="/privacy/" class="btn-secondary btn-wide">查看隐私政策</a>
+					<a href="/terms/" class="btn-secondary btn-wide">查看服务条款</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
+
+<script is:inline>
+	(function () {
+		'use strict';
+
+		const STORAGE_KEY = 'bp_cookie_preferences_v1';
+		const CATEGORIES = ['analytics', 'preferences', 'marketing'];
+		const DEFAULTS = { analytics: true, preferences: true, marketing: false };
+
+		function readPreferences() {
+			try {
+				const raw = localStorage.getItem(STORAGE_KEY);
+				if (!raw) return Object.assign({}, DEFAULTS);
+				const parsed = JSON.parse(raw);
+				const result = {};
+				CATEGORIES.forEach(function (cat) {
+					result[cat] = typeof parsed[cat] === 'boolean' ? parsed[cat] : !!DEFAULTS[cat];
+				});
+				return result;
+			} catch (e) {
+				return Object.assign({}, DEFAULTS);
+			}
+		}
+
+		function writePreferences(prefs) {
+			try {
+				localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+			} catch (e) {}
+		}
+
+		function applyUI(prefs) {
+			CATEGORIES.forEach(function (cat) {
+				const on = !!prefs[cat];
+				const switchEl = document.querySelector('[data-cookie-switch="' + cat + '"]');
+				const iconEl = document.querySelector('[data-cookie-toggle-icon="' + cat + '"]');
+				const statusEl = document.querySelector('[data-cookie-status="' + cat + '"]');
+				const summaryEl = document.querySelector('[data-cookie-summary="' + cat + '"]');
+
+				if (switchEl) switchEl.checked = on;
+				if (iconEl) iconEl.textContent = on ? '✓' : '—';
+				if (statusEl) {
+					statusEl.textContent = on ? '已激活' : '已停用';
+					statusEl.classList.remove('text-pine-800', 'text-slate-500');
+					statusEl.classList.add(on ? 'text-pine-800' : 'text-slate-500');
+				}
+				if (summaryEl) {
+					summaryEl.textContent = on ? '启用' : '停用';
+					summaryEl.classList.remove('text-pine-800', 'text-slate-500');
+					summaryEl.classList.add(on ? 'text-pine-800' : 'text-slate-500');
+				}
+			});
+		}
+
+		function collectFromUI() {
+			const prefs = {};
+			CATEGORIES.forEach(function (cat) {
+				const switchEl = document.querySelector('[data-cookie-switch="' + cat + '"]');
+				prefs[cat] = switchEl ? !!switchEl.checked : !!DEFAULTS[cat];
+			});
+			return prefs;
+		}
+
+		function showSavedNotice() {
+			const el = document.getElementById('cookie-saved-notice');
+			if (!el) return;
+			el.classList.remove('hidden');
+			el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			window.clearTimeout(showSavedNotice._t);
+			showSavedNotice._t = window.setTimeout(function () {
+				el.classList.add('hidden');
+			}, 6000);
+		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			const initial = readPreferences();
+			applyUI(initial);
+
+			CATEGORIES.forEach(function (cat) {
+				const switchEl = document.querySelector('[data-cookie-switch="' + cat + '"]');
+				if (!switchEl) return;
+				switchEl.addEventListener('change', function () {
+					const next = collectFromUI();
+					applyUI(next);
+				});
+			});
+
+			const acceptBtn = document.querySelector('[data-cookie-action="accept"]');
+			const rejectBtn = document.querySelector('[data-cookie-action="reject"]');
+
+			if (acceptBtn) {
+				acceptBtn.addEventListener('click', function () {
+					const next = collectFromUI();
+					writePreferences(next);
+					applyUI(next);
+					showSavedNotice();
+				});
+			}
+
+			if (rejectBtn) {
+				rejectBtn.addEventListener('click', function () {
+					const next = { analytics: false, preferences: false, marketing: false };
+					writePreferences(next);
+					applyUI(next);
+					showSavedNotice();
+				});
+			}
+		});
+	})();
+</script>

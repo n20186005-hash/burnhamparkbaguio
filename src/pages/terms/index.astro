@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PAGE_META } from '../../consts';
+
+const meta = PAGE_META.terms;
+const lastUpdated = '2026 年 7 月';
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebPage',
+	name: meta.title,
+	description: meta.description,
+	mainEntity: {
+		'@type': 'CreativeWork',
+		headline: '服务条款',
+		dateModified: '2026-07-01',
+		author: { '@type': 'Organization', name: 'Burnham Park Baguio Guide' },
+		publisher: { '@type': 'Organization', name: 'Burnham Park Baguio Guide' },
+		inLanguage: 'zh-Hans',
+	},
+};
+---
+
+<BaseLayout
+	title={meta.title}
+	description={meta.description}
+	ogImage={meta.hero}
+	ogImageAlt={meta.heroAlt}
+	ogType="website"
+	structuredData={structuredData}
+	lang="zh-Hans"
+>
+	<!-- Hero -->
+	<section aria-label="页面标题区" class="relative bg-pine-950">
+		<div class="relative w-full h-[360px] sm:h-[420px] md:h-[480px] overflow-hidden">
+			<img
+				src={meta.hero}
+				alt={meta.heroAlt}
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+				class="absolute inset-0 h-full w-full object-cover"
+				style="border-radius:0"
+			/>
+			<div class="absolute inset-0 hero-overlay"></div>
+			<div class="absolute inset-0">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center sm:justify-end pb-10 sm:pb-14 md:pb-16">
+					<nav aria-label="面包屑" class="mb-5 text-xs sm:text-sm">
+						<ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-white/70">
+							<li><a href="/" class="hover:text-white underline underline-offset-4">首页</a></li>
+							<li aria-hidden="true" class="text-white/40">›</li>
+							<li class="font-medium text-white" aria-current="page">服务条款</li>
+						</ol>
+					</nav>
+					<span class="eyebrow text-white/90" style="text-shadow:0 2px 12px rgba(0,0,0,0.4)">
+						{meta.eyebrow}
+					</span>
+					<h1 class="text-balance text-white font-bold tracking-tight max-w-4xl mb-3 sm:mb-4" style="text-shadow:0 6px 40px rgba(0,0,0,0.55)">
+						服务条款
+					</h1>
+					<p class="pretty text-white/90 max-w-3xl text-base sm:text-lg leading-relaxed" style="text-shadow:0 2px 18px rgba(0,0,0,0.5)">
+						请在访问或使用 Burnham Park Baguio Guide 之前，仔细阅读以下服务条款。访问本站即视为您已阅读、理解并同意受本条款的约束。
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 正文 -->
+	<section class="section-pad">
+		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+			<!-- 最后更新 -->
+			<div class="card border border-pine-100 shadow-soft p-5 sm:p-6 mb-10 sm:mb-12">
+				<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
+					<span class="inline-flex items-center gap-2 font-semibold text-pine-900">
+						<span aria-hidden="true">📅</span>
+						最后更新时间
+					</span>
+					<span class="text-slate-700 font-semibold">{lastUpdated}</span>
+				</div>
+			</div>
+
+			<!-- 导览 -->
+			<div class="surface-pine rounded-3xl shadow-soft border border-pine-100 p-6 sm:p-8 mb-10 sm:mb-12">
+				<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-3">目录速览</p>
+				<nav aria-label="服务条款目录" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm">
+					<a href="#acceptance" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">1. 条款接受与适用范围</a>
+					<a href="#content-use" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">2. 内容使用</a>
+					<a href="#accuracy" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">3. 信息的准确性</a>
+					<a href="#ip" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">4. 知识产权</a>
+					<a href="#liability" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">5. 责任限制</a>
+					<a href="#links" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">6. 外部链接与第三方</a>
+					<a href="#changes" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">7. 条款变更与终止</a>
+					<a href="#legal" class="block rounded-xl px-3.5 py-2.5 bg-white/80 text-slate-800 hover:bg-white hover:text-pine-900">8. 适用法律与争议解决</a>
+				</nav>
+			</div>
+
+			<div class="prose-fil !max-w-none">
+				<!-- 1. 接受 -->
+				<section id="acceptance" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">1. 条款接受与适用范围</h2>
+					<p>
+						访问和使用 Burnham Park Baguio Guide（以下简称「本站」或「本网站」），即表示您确认已阅读、理解并同意受本服务条款（以下简称「本条款」）的全部约束。如您不同意本条款中的任何部分，请勿继续访问本站或使用本站所提供的任何信息与服务。
+					</p>
+					<p>
+						本条款适用于本站及其所有子页面、内容资产与功能模块。与特定功能相关的附加规则、公告或声明，一经公布即构成本条款的补充组成部分，与本条款具有同等效力。
+					</p>
+				</section>
+
+				<hr />
+
+				<!-- 2. 内容使用 -->
+				<section id="content-use" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">2. 内容使用</h2>
+					<p>
+						本站所有内容<strong>仅供一般参考与非商业性个人使用</strong>，不构成任何形式的专业建议（包括但不限于法律、医疗、财务、旅行规划或安全建议）。我们是一家<strong>独立的第三方旅游信息网站</strong>，与任何旅游景点、政府机构、交通运营商、酒店或商业经营者<strong>均无直接关联、隶属或合作关系</strong>。
+					</p>
+					<p>
+						在遵循相关知识产权条款且不侵害任何第三方合法权益的前提下，您可以：
+					</p>
+					<ul>
+						<li>出于个人学习、规划行程或科普目的浏览、保存与打印页面内容；</li>
+						<li>在未修改原文且注明「来源：Burnham Park Baguio Guide」并附有效原文链接的前提下，进行非盈利性引用或摘要。</li>
+					</ul>
+					<p>
+						未经书面授权，您不得对全站或部分内容进行复制、分发、镜像、转售、二次创作、抓取、自动化批量复制或用于任何商业目的。
+					</p>
+				</section>
+
+				<hr />
+
+				<!-- 3. 准确性 -->
+				<section id="accuracy" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">3. 信息的准确性</h2>
+					<p>
+						我们高度重视信息质量，并力求提供<strong>准确、及时、中立</strong>的旅行信息。然而，公园管理政策、开放时段、交通路线、停车规则、活动安排、票价、节假日制度与现场条件等均可能随时变化。
+					</p>
+					<p>
+						因此，我们<strong>无法保证所有信息在任何时间点的完整性或实时准确性</strong>。页面中的数据与陈述可能与现场实际情况存在出入，恕不另行通知。
+					</p>
+					<p>
+						<strong>请务必在出行前通过官方渠道核实所有关键信息</strong>，包括但不限于：
+					</p>
+					<ul>
+						<li>Burnham Park 官方公告或 City Environment and Parks Management Office (CEPMO) 的最新通知；</li>
+						<li>当地交通部门、机场、客运站与地图服务的实时路况与运营状态；</li>
+						<li>活动主办方、酒店或您所入住机构的现场条款与特殊要求；</li>
+						<li>天气、环境与公共卫生部门的出行警示。</li>
+					</ul>
+				</section>
+
+				<hr />
+
+				<!-- 4. 知识产权 -->
+				<section id="ip" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">4. 知识产权</h2>
+					<p>
+						本网站的整体设计、页面布局、交互逻辑、原创文案、插画、标志与汇编作品，其相关知识产权依法归属于 Burnham Park Baguio Guide 或其合法授权方所有。未经授权，任何人不得以任何形式进行整体或局部复制、反向工程或再分发。
+					</p>
+					<p>
+						本站使用的图片素材，如无特别标注，来自
+						<a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer" class="text-pine-700 font-semibold underline underline-offset-4 decoration-pine-300 hover:text-pine-900 hover:decoration-pine-600">Unsplash</a>
+						及其他已获得合法许可的图片平台，并严格遵守其服务条款与许可协议。如您认为任何内容可能侵害您的著作权或肖像权，请通过我们公布的联系方式以书面形式告知，我们将在核实后依法处理。
+					</p>
+					<p>
+						本网站嵌入与引用的 Google 地图数据、地理编码与地图界面，其一切权利均归 Google LLC 所有。相关使用行为同时受
+						<a href="https://cloud.google.com/maps-platform/terms" target="_blank" rel="noopener noreferrer" class="text-pine-700 font-semibold underline underline-offset-4 decoration-pine-300 hover:text-pine-900 hover:decoration-pine-600">Google Maps Platform 服务条款</a>
+						的约束。
+					</p>
+				</section>
+
+				<hr />
+
+				<!-- 5. 责任 -->
+				<section id="liability" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">5. 责任限制</h2>
+					<p>
+						在适用法律允许的最大范围内，本网站按「<strong>现状（AS IS）</strong>」与「<strong>可获得（AS AVAILABLE）</strong>」原则提供，不对信息的准确性、完整性、时效性、稳定性、无错误或适用于特定目的作出任何明示或默示的保证或陈述。
+					</p>
+					<p>
+						我们不承担任何直接、间接、附带、特殊、衍生或惩罚性的损害赔偿责任，包括但不限于：
+					</p>
+					<ul>
+						<li>因使用、信赖或依据本站信息而作出的旅行决策、行程安排、预订或消费行为所造成的任何损失或不便；</li>
+						<li>因网络中断、服务暂停、数据错误、链接失效、恶意软件或第三方攻击导致的使用中断或数据丢失；</li>
+						<li>因访问、依赖或转载本站信息而对第三人造成的人身伤害、财产损失或经济后果。</li>
+					</ul>
+					<p>
+						您应对自身访问本站与基于本站内容所作出的一切决定承担全部责任，并在出行时采取合理的谨慎与注意义务。
+					</p>
+				</section>
+
+				<hr />
+
+				<!-- 6. 外部链接 -->
+				<section id="links" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">6. 外部链接与第三方</h2>
+					<p>
+						为便于您进一步获取信息，本站可能在适当位置插入指向第三方网站或服务的超链接。我们对这些外部站点的内容、隐私政策、服务条款或准确性不具有控制权，亦不承担任何审核、担保或连带责任。您访问外部链接时应自行评估风险，并遵守该第三方的相应规则。
+					</p>
+				</section>
+
+				<hr />
+
+				<!-- 7. 变更 -->
+				<section id="changes" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">7. 条款变更与终止</h2>
+					<p>
+						我们保留在法律法规允许范围内，根据业务调整、功能迭代或合规要求对本条款进行<strong>单方修改与更新</strong>的权利。任何重大变更将在首页显著位置公告，并更新本页顶部的「最后更新时间」。
+					</p>
+					<p>
+						修订后的条款自发布之时起即时生效。您在变更后继续访问或使用本站，即视为您已接受修改后的条款。如您不同意变更后的内容，请立即停止使用本站。
+					</p>
+					<p>
+						若您违反本条款，我们有权在不事先通知的情况下，限制或终止您访问本站的权限，并保留依法追究相应责任的权利。
+					</p>
+				</section>
+
+				<hr />
+
+				<!-- 8. 法律 -->
+				<section id="legal" class="scroll-mt-28">
+					<h2 class="h2 mb-5 text-pine-950">8. 适用法律与争议解决</h2>
+					<p>
+						本条款的订立、生效、解释、履行与争议解决，原则上适用<strong>菲律宾共和国法律</strong>（不含冲突法规则）。
+					</p>
+					<p>
+						因本条款或使用本站所产生的任何争议，双方应先行友好协商解决；协商不成的，任何一方可向 Baguio 所在地具有管辖权的法院提起诉讼。如您所在司法管辖区的消费者保护法赋予您不可排除的法定权利，则本条款中与之冲突的部分仅在法律允许的最宽范围内对您适用。
+					</p>
+				</section>
+			</div>
+
+			<!-- 底部返回 -->
+			<div class="mt-12 sm:mt-16 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+				<a href="/" class="btn-primary btn-wide">返回首页
+					<span aria-hidden="true">→</span>
+				</a>
+				<div class="flex flex-wrap gap-3">
+					<a href="/privacy/" class="btn-secondary btn-wide">查看隐私政策</a>
+					<a href="/cookie/" class="btn-secondary btn-wide">管理 Cookie 偏好</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
