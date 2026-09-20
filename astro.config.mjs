@@ -17,6 +17,8 @@ export default defineConfig({
 			changefreq: 'monthly',
 			priority: 0.7,
 			lastmod: new Date(),
+			// Huwag isama ang offline fallback page ng PWA sa sitemap
+			filter: (page) => !page.includes('/offline/'),
 		}),
 	],
 	vite: {

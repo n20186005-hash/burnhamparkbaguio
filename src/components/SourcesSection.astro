@@ -1,0 +1,93 @@
+---
+// SourcesSection — bloke ng mga pinagmulan (E-E-A-T).
+// Dito nakalista ang Google Maps (para sa rating at mga review), mga opisyal na ahensya ng
+// gobyerno, at iba pang pampublikong sanggunian. Lahat ng papalabas na link ay nananatiling
+// bukas (walang tinanggal na link papuntang Google).
+import { OFFICIAL_SOURCES, GOOGLE_REVIEWS, ENTITY } from '../consts';
+
+const sameSourceNote = GOOGLE_REVIEWS.sourceNote;
+---
+
+<section class="section-pad" aria-label="Mga pinagmulan ng impormasyon" id="mga-sanggunian">
+	<div class="container-page">
+		<div class="max-w-3xl mb-8 sm:mb-12">
+			<span class="eyebrow">📚 Mga Pinagmulan (Sources)</span>
+			<h2 class="text-balance mb-4">
+				Saan nanggaling ang impormasyon tungkol sa {ENTITY.attractionFullName}
+			</h2>
+			<p class="text-slate-700 text-lg leading-relaxed">
+				Ang gabay na ito ay independiyente at di-komersyal. Nakalista sa ibaba ang mga pinagmulan
+				kung saan sinuri ang impormasyon — kabilang ang opisyal na tanggapan ng gobyerno at ang
+				mga review ng mga gumagamit ng Google Maps.
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+			{OFFICIAL_SOURCES.map((s) => (
+				<article class="card p-5 sm:p-6 flex flex-col h-full">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-bold uppercase tracking-[0.18em] text-pine-700">
+							{s.kind === 'reviews' ? '⭐ Mga Review' : s.kind === 'government' ? '🏛️ Opisyal' : '📖 Sanggunian'}
+						</span>
+						{s.sync && (
+							<span class="text-[0.7rem] font-semibold text-slate-500">
+								· {s.sync}
+							</span>
+						)}
+					</div>
+
+					<h3 class="text-base sm:text-lg font-bold text-pine-950 mb-1.5">{s.title}</h3>
+					<p class="text-xs sm:text-sm font-medium text-slate-500 mb-2.5">{s.titleFil}</p>
+					<p class="text-sm text-slate-600 leading-relaxed mb-4 flex-1">{s.desc}</p>
+
+					{s.sameSourceNote && (
+						<p class="text-[0.7rem] sm:text-xs leading-relaxed text-slate-500 mb-3">
+							{sameSourceNote}
+						</p>
+					)}
+
+					<a
+						href={s.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex items-center gap-1.5 text-sm font-semibold text-pine-800 hover:text-pine-950 underline underline-offset-4 decoration-pine-300 hover:decoration-pine-600"
+					>
+						{s.kind === 'reviews' ? GOOGLE_REVIEWS.viewAllLabel : 'Buksan ang opisyal na pahina'}
+						<span aria-hidden="true">↗</span>
+					</a>
+				</article>
+			))}
+		</div>
+
+		<!-- Paalala sa paggamit ng nilalamang mula sa Google Maps -->
+		<div class="mt-6 sm:mt-8 rounded-[1.5rem] border border-slate-200 bg-white p-5 sm:p-6">
+			<p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-3">
+				Paalala sa Rating at Mga Review
+			</p>
+			<p class="text-sm text-slate-700 leading-relaxed">
+				Rating at bilang ng review：
+				<strong>{GOOGLE_REVIEWS.rating} / {GOOGLE_REVIEWS.ratingScale}</strong>
+				（{GOOGLE_REVIEWS.reviewCountFormatted} review）· 同步时间 {GOOGLE_REVIEWS.syncLabel} · 资料来源：{GOOGLE_REVIEWS.sourceLabel}
+			</p>
+			<p class="mt-2 text-sm text-slate-700 leading-relaxed">
+				{GOOGLE_REVIEWS.sourceNote}
+			</p>
+			<p class="mt-2 text-xs text-slate-500 leading-relaxed">
+				{GOOGLE_REVIEWS.sourceNoteFil}
+			</p>
+			<p class="mt-3 text-xs text-slate-500 leading-relaxed">
+				Ang mga review ay ipinapakita lamang sa pahinang ito at hindi isinasama sa structured data
+				(JSON-LD). Para sa pinakabagong rating at kabuuang review, bisitahin ang listing ng Burnham Park
+				sa Google Maps：
+				<a
+					href={GOOGLE_REVIEWS.reviewsUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="font-semibold text-pine-800 underline underline-offset-4 decoration-pine-300 hover:decoration-pine-600"
+				>
+					{GOOGLE_REVIEWS.viewAllLabel} ↗
+				</a>
+			</p>
+		</div>
+	</div>
+</section>

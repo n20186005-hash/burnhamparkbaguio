@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../consts';
+
+const title = 'Offline — Burnham Park Baguio';
+const description =
+	'Wala kang koneksyon sa internet. Ang pahinang ito ay naka-cache mula sa Burnham Park Baguio Guide.';
+---
+
+<BaseLayout title={title} description={description} ogImage="/gallery/burnham-park-1.jpg" noIndex={true}>
+	<section class="section-pad">
+		<div class="container-page max-w-2xl text-center">
+			<span class="eyebrow">📴 Walang Koneksyon</span>
+			<h1 class="mb-5 text-pine-950">Offline ka ngayon</h1>
+			<p class="text-slate-700 text-lg leading-relaxed mb-8">
+				Hindi maabot ang network. Kapag bumalik ang iyong koneksyon, buksan muli ang gabay sa
+				Burnham Park para sa pinakabagong impormasyon sa lokasyon, mapa, at mga atraksyon.
+			</p>
+			<div class="flex flex-col sm:flex-row items-stretch justify-center gap-3">
+				<a href="/" class="btn-primary btn-wide">Bumalik sa Home</a>
+				<a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary btn-wide">
+					🗺️ Buksan sa Google Maps
+				</a>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

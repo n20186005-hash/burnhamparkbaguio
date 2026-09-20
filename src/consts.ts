@@ -8,8 +8,11 @@ export const SITE = {
 	locale: 'fil_PH',
 	address: 'Jose Abad Santos Drive, Baguio, Benguet 2600',
 	coordinates: { lat: 16.4129, lng: 120.5934 },
-	mapsUrl: 'https://maps.app.goo.gl/BurnhamParkBaguio',
+	mapsUrl: 'https://maps.app.goo.gl/ADvAac4CUWcDbzdDA',
+	mapsShareUrl: 'https://maps.app.goo.gl/ADvAac4CUWcDbzdDA',
+	plusCode: 'CH6V+X5 Baguio, Benguet, Philippines',
 	mapsEmbed: 'https://www.google.com/maps?q=Burnham%20Park%20Baguio&output=embed',
+	mapsReviewsUrl: 'https://maps.app.goo.gl/ADvAac4CUWcDbzdDA',
 	jurisdiction: {
 		attractionName: 'Burnham Park',
 		cityHall: 'Baguio City Hall',
@@ -55,6 +58,152 @@ export const SITE = {
 	},
 } as const;
 
+// ---- ENTITY BINDING (single-attraction SEO) -------------------------------------
+// Mga variable ng entity para sa iisang atraksyon — ginagamit sa JSON-LD, TDK, H1–H2,
+// alt ng larawan at mga semantic na pangungusap sa katawan ng pahina.
+export const ENTITY = {
+	domainName: 'burnhamparkbaguio.com',
+	attractionFullName: 'Burnham Park (Burnham Park Reservation)',
+	attractionShortName: 'Burnham Park Baguio',
+	attractionPlainName: 'Burnham Park',
+	cityName: 'Baguio',
+	stateProvince: 'Benguet',
+	countryName: 'Philippines',
+	countryNameLocal: 'Pilipinas',
+	countryCode2Letter: 'PH',
+	postalCode: '2600',
+	latitude: 16.4129,
+	longitude: 120.5934,
+	plusCode: 'CH6V+X5 Baguio, Benguet, Philippines',
+	streetAddress: 'Jose Abad Santos Dr',
+	mapsShareUrl: 'https://maps.app.goo.gl/ADvAac4CUWcDbzdDA',
+	mapsEmbedSrc: 'https://www.google.com/maps?q=Burnham%20Park%20Baguio&output=embed',
+	nearbyLandmark1: 'Session Road',
+	nearbyLandmark2: 'Baguio Cathedral',
+	govtTourismUrl: 'https://www.tourism.gov.ph/',
+	cityGovUrl: 'https://baguio.gov.ph/',
+} as const;
+
+// Hierarchy ng lokasyon: Atraksyon → Lungsod → Lalawigan → Bansa
+export const ENTITY_HIERARCHY = [
+	'Burnham Park',
+	'Baguio',
+	'Benguet',
+	'Philippines',
+] as const;
+
+// ---- GOOGLE MAPS RATING & REVIEWS (hindi isinasama sa JSON-LD) ------------------
+// Tandaan: ang rating at bilang ng review ay ipinapakita lamang sa pahina (HTML) at
+// HINDI isinasama sa structured data, upang maiwasan ang peligro ng maling pag-angkin
+// (misattribution) sa nilalamang pag-aari ng mga gumagamit ng Google Maps.
+export const GOOGLE_REVIEWS = {
+	source: 'Google Maps',
+	sourceLabel: '谷歌地图（Google Maps）',
+	sourceLabelFil: 'Google Maps (Google 地图)',
+	rating: 4.5,
+	ratingScale: 5,
+	reviewCount: 32833,
+	reviewCountFormatted: '32,833',
+	category: 'City park',
+	syncLabel: '2026 年 9 月',
+	syncLabelFil: 'Setyembre 2026',
+	// Pangunahing linya ng pinagmulan ( Chinese, ayon sa kinakailangang teksto )
+	creditLine:
+		'评分与评价数同步自谷歌地图（Google Maps）用户评价 · 2026 年 9 月 · 点击查看谷歌地图全部评价↗',
+	// Buong pahayag ng pinagmulan at copyright para sa bloke ng mga review
+	sourceNote:
+		'同步自 Google 地图用户评价，同步时间 2026 年 9 月；版权归原作者与 Google 地图所有',
+	sourceNoteFil:
+		'Naka-sync mula sa mga review ng gumagamit ng Google Maps, oras ng pag-sync: Setyembre 2026；ang copyright ay pag-aari ng orihinal na may-akda at ng Google Maps.',
+	viewAllLabel: '在谷歌地图查看全部评价',
+	viewAllLabelFil: 'Tingnan ang lahat ng review sa Google Maps',
+	introLabel: '评价来自谷歌地图用户评价',
+	reviewsUrl: 'https://maps.app.goo.gl/ADvAac4CUWcDbzdDA',
+} as const;
+
+// Mga paulit-ulit na tema na lumilitaw sa mga review sa Google Maps (buod lamang,
+// hindi direktang sipi ng partikular na review ng sinumang gumagamit).
+export const GOOGLE_REVIEW_THEMES = [
+	{
+		icon: '📍',
+		title: 'Lokasyon at Akses',
+		desc: 'Napakadaling puntahan mula sa Session Road — nasa mismong sentro ng Baguio at maraming jeepney at taxi na dumadaan.',
+	},
+	{
+		icon: '🛶',
+		title: 'Lagoon at Pamamangka',
+		desc: 'Ang pagbangka sa lawa at ang mga sisneng bangka ang pinakabibanggit na karanasan ng mga pamilya.',
+	},
+	{
+		icon: '🌹',
+		title: 'Rose Garden at mga Bulaklak',
+		desc: 'Madalas purihin ang mga hagdan-hagdang hardin ng rosas — lalo na kapag Nobyembre hanggang Marso.',
+	},
+	{
+		icon: '🌲',
+		title: 'Luntiang Kapaligiran',
+		desc: 'Ang sariwang hangin, mga punong pine, at tahimik na umaga ang dahilan kung bakit inirerekomenda ito para sa jogging at paglalakad.',
+	},
+	{
+		icon: '🎟️',
+		title: 'Libre at Pampamilya',
+		desc: 'Palaging nababanggit na walang entrance fee kaya abot-kaya ito para sa pamilya at grupo.',
+	},
+	{
+		icon: '🕐',
+		title: 'Oras ng Pagbisita',
+		desc: 'Maraming review ang nagpapaalala na mas tahimik ang parke bago mag-9:00 ng umaga.',
+	},
+] as const;
+
+// ---- OFFICIAL / AUTHORITATIVE SOURCES -------------------------------------------
+export const OFFICIAL_SOURCES = [
+	{
+		title: '评价 · Google Maps 用户评价',
+		titleFil: 'Rating at mga review ng mga gumagamit ng Google Maps',
+		url: 'https://maps.app.goo.gl/ADvAac4CUWcDbzdDA',
+		sync: '2026 年 9 月',
+		syncFil: 'Setyembre 2026',
+		desc: 'Rating na 4.5 / 5 mula sa 32,833 review ng mga gumagamit ng Google Maps para sa Burnham Park (City park).',
+		sameSourceNote: true,
+		external: true,
+		kind: 'reviews',
+	},
+	{
+		title: 'Philippine Department of Tourism (DOT)',
+		titleFil: 'Kagawaran ng Turismo ng Pilipinas (DOT)',
+		url: 'https://www.tourism.gov.ph/',
+		sync: '',
+		syncFil: '',
+		desc: 'Opisyal na pambansang ahensya ng turismo — mga patakaran, anunsyo, at pangkalahatang impormasyon sa paglalakbay sa Pilipinas.',
+		sameSourceNote: false,
+		external: true,
+		kind: 'government',
+	},
+	{
+		title: 'Baguio City Government',
+		titleFil: 'Pamahalaang Lungsod ng Baguio',
+		url: 'https://baguio.gov.ph/',
+		sync: '',
+		syncFil: '',
+		desc: 'Opisyal na pamahalaang lokal na namamahala sa Burnham Park sa pamamagitan ng CEPMO — mga ordinansa, abiso, at anunsyo ng lungsod.',
+		sameSourceNote: false,
+		external: true,
+		kind: 'government',
+	},
+	{
+		title: 'Wikipedia — Burnham Park (Baguio)',
+		titleFil: 'Wikipedia — Burnham Park (Baguio)',
+		url: 'https://en.wikipedia.org/wiki/Burnham_Park_(Baguio)',
+		sync: '',
+		syncFil: '',
+		desc: 'Pampublikong sanggunian para sa kasaysayan ng Burnham Park Reservation at ng Burnham Plan ng 1905.',
+		sameSourceNote: false,
+		external: true,
+		kind: 'reference',
+	},
+] as const;
+
 // ---- NAVIGATION (single-page anchors) ------------------------------------------
 export const NAV = [
 	{ href: '#tungkol', label: 'Tungkol' },
@@ -68,6 +217,8 @@ export const NAV = [
 	{ href: '#mapa', label: 'Mapa' },
 	{ href: '#tip', label: 'Mga Tip' },
 	{ href: '#faq', label: 'FAQ' },
+	{ href: '#mga-review', label: 'Rating' },
+	{ href: '#mga-sanggunian', label: 'Sanggunian' },
 ] as const;
 
 // ---- KEY INFO ------------------------------------------------------------------
@@ -640,12 +791,13 @@ export const PAGE_IMAGES = {
 // ---- PAGE META ------------------------------------------------------------------
 export const PAGE_META = {
 	home: {
-		title: 'Burnham Park Baguio — Luntiang Puso ng Lungsod | Libreng Gabay sa Parke',
+		title: 'Burnham Park (Baguio) — Gabay sa Pagbisita, Mapa at Lokasyon',
 		description:
-			'Kumpletong gabay sa Burnham Park Baguio — 12 na atraksyon, kasaysayan, mga gawain, mapa, oras ng pagbisita, at praktikal na impormasyon. Libre, di-komersyal, at para sa lahat.',
+			'Gabay sa lokasyon ng Burnham Park Baguio: mapa, oras ng pagbisita, 12 atraksyon, kasaysayan, mga gawain, kalapit na Session Road at Baguio Cathedral sa Lungsod ng Baguio, Benguet, Pilipinas.',
 		eyebrow: '🏞️ Luntiang Puso ng Lungsod ng Baguio',
 		hero: '/gallery/burnham-park-1.jpg',
-		heroAlt: 'Burnham Lagoon with swan boats and surrounding pine trees in Baguio City — panoramic view',
+		heroAlt:
+			'Burnham Park — main view of Burnham Lagoon with swan boats and pine trees in Baguio, Benguet, Philippines',
 	},
 	privacy: {
 		title: 'Patakaran sa Privacy — Burnham Park Baguio',

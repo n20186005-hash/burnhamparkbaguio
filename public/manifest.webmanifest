@@ -1,0 +1,75 @@
+{
+	"name": "Burnham Park Baguio — Gabay sa Pagbisita",
+	"short_name": "Burnham Park",
+	"description": "Gabay sa lokasyon ng Burnham Park Baguio: mapa, oras ng pagbisita, 12 atraksyon, kasaysayan, mga gawain, kalapit na Session Road at Baguio Cathedral sa Lungsod ng Baguio, Benguet, Pilipinas.",
+	"id": "/",
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"display_override": ["standalone", "minimal-ui", "browser"],
+	"orientation": "any",
+	"dir": "ltr",
+	"lang": "fil",
+	"categories": ["travel", "navigation", "lifestyle"],
+	"background_color": "#f8faf8",
+	"theme_color": "#1f3a2e",
+	"prefer_related_applications": false,
+	"icons": [
+		{
+			"src": "/icons/icon-192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/icons/icon-512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/icons/icon-512-maskable.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/icons/apple-touch-icon.png",
+			"sizes": "180x180",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/favicon.svg",
+			"sizes": "any",
+			"type": "image/svg+xml",
+			"purpose": "any"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "Mapa ng Burnham Park",
+			"short_name": "Mapa",
+			"url": "/#mapa",
+			"description": "Buksan ang interactive na mapa ng Burnham Park"
+		},
+		{
+			"name": "Mga Atraksyon",
+			"short_name": "Atraksyon",
+			"url": "/#atraksyon",
+			"description": "Tingnan ang 12 bahagi ng Burnham Park"
+		},
+		{
+			"name": "Rating at Mga Review",
+			"short_name": "Rating",
+			"url": "/#mga-review",
+			"description": "Rating ng Burnham Park mula sa mga gumagamit ng Google Maps"
+		},
+		{
+			"name": "FAQ",
+			"short_name": "FAQ",
+			"url": "/#faq",
+			"description": "Mga madalas itanong tungkol sa Burnham Park"
+		}
+	]
+}

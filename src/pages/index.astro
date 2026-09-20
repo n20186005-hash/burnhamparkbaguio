@@ -2,48 +2,88 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import KeyInfoCard from '../components/KeyInfoCard.astro';
 import ClusterCard from '../components/ClusterCard.astro';
+import RatingSummary from '../components/RatingSummary.astro';
+import SourcesSection from '../components/SourcesSection.astro';
 import {
 	SITE, NAV, CLUSTERS, CLUSTER_CATEGORIES, KEY_INFO, PAGE_META, PAGE_IMAGES,
 	HISTORY_TIMELINE, LEGENDS, ACTIVITIES, FOOD_TYPES, ACCOMMODATION_TYPES,
 	NEARBY_ATTRACTIONS, PRACTICAL_INFO, TRANSPORT_OPTIONS, TIPS, FAQS,
-	SEASONS, GALLERY_IMAGES, DISCLAIMER,
+	SEASONS, GALLERY_IMAGES, DISCLAIMER, ENTITY, ENTITY_HIERARCHY, OFFICIAL_SOURCES,
 } from '../consts';
 
 const meta = PAGE_META.home;
 
+const absUrl = (src: string) => (src.startsWith('http') ? src : new URL(src, SITE.siteUrl).toString());
+
+// Hierarchy ng lokasyon: Atraksyon → Lungsod → Lalawigan → Bansa
+const hierarchyLine = ENTITY_HIERARCHY.join(' → ');
+
+// HINDI isinasama ang rating at mga review sa JSON-LD — tanging impormasyon lamang ng entity
+// (pangalan, address, coordinates,FAQ) ang nilalagay sa structured data.
 const structuredData = {
 	'@context': 'https://schema.org',
 	'@graph': [
 		{
 			'@type': 'TouristAttraction',
-			'@id': `${SITE.siteUrl}/#park`,
-			name: 'Burnham Park (Burnham Park Reservation)',
-			alternateName: ['Burnham Park Baguio', 'Burnham Park Reservation'],
-			description: meta.description,
-			url: SITE.siteUrl,
-			image: [meta.hero],
+			'@id': `https://${ENTITY.domainName}/#attraction`,
+			name: ENTITY.attractionFullName,
+			alternateName: [
+				ENTITY.attractionShortName,
+				ENTITY.attractionPlainName,
+				`${ENTITY.cityName} ${ENTITY.attractionPlainName}`,
+				'Burnham Park Reservation',
+			],
+			description: `Comprehensive visitor guide to ${ENTITY.attractionPlainName} in ${ENTITY.cityName}, ${ENTITY.stateProvince}, ${ENTITY.countryName}.`,
+			url: `https://${ENTITY.domainName}`,
+			image: [
+				absUrl(meta.hero),
+				absUrl(PAGE_IMAGES.aboutPark),
+				absUrl(PAGE_IMAGES.panagbenga),
+				absUrl('/gallery/burnham-park-4.jpg'),
+			],
+			additionalType: 'https://schema.org/Park',
 			address: {
 				'@type': 'PostalAddress',
-				streetAddress: 'Jose Abad Santos Drive',
-				addressLocality: 'Baguio',
-				addressRegion: 'Benguet',
-				postalCode: '2600',
-				addressCountry: { '@type': 'Country', name: 'PH' },
+				streetAddress: ENTITY.streetAddress,
+				addressLocality: ENTITY.cityName,
+				addressRegion: ENTITY.stateProvince,
+				postalCode: ENTITY.postalCode,
+				addressCountry: ENTITY.countryCode2Letter,
 			},
 			geo: {
 				'@type': 'GeoCoordinates',
-				latitude: SITE.coordinates.lat,
-				longitude: SITE.coordinates.lng,
+				latitude: ENTITY.latitude,
+				longitude: ENTITY.longitude,
 			},
+			hasMap: ENTITY.mapsShareUrl,
+			isAccessibleForFree: true,
 			openingHoursSpecification: [{
 				'@type': 'OpeningHoursSpecification',
 				dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
 				opens: '00:00', closes: '23:59',
 			}],
+			publicAccess: 'https://schema.org/PublicAccess',
 			priceRange: 'Free',
 			wheelchairAccessible: true,
 			touristType: ['Pamilya', 'Magkapareha', 'Bakasyonista', 'Mahilig sa kasaysayan'],
-			sameAs: ['https://en.wikipedia.org/wiki/Burnham_Park_(Baguio)'],
+			containedInPlace: {
+				'@type': 'AdministrativeArea',
+				name: ENTITY.cityName,
+				containedInPlace: {
+					'@type': 'State',
+					name: ENTITY.stateProvince,
+					containedInPlace: {
+						'@type': 'Country',
+						name: ENTITY.countryName,
+					},
+				},
+			},
+			sameAs: [
+				ENTITY.mapsShareUrl,
+				ENTITY.govtTourismUrl,
+				ENTITY.cityGovUrl,
+				'https://en.wikipedia.org/wiki/Burnham_Park_(Baguio)',
+			],
 		},
 		{
 			'@type': 'WebSite',
@@ -56,6 +96,15 @@ const structuredData = {
 				target: `${SITE.siteUrl}/?s={search_term_string}`,
 				'query-input': 'required name=search_term_string',
 			},
+		},
+		{
+			'@type': 'FAQPage',
+			'@id': `https://${ENTITY.domainName}/#faq`,
+			mainEntity: FAQS.map((faq) => ({
+				'@type': 'Question',
+				name: faq.q,
+				acceptedAnswer: { '@type': 'Answer', text: faq.a },
+			})),
 		},
 	],
 };
@@ -91,8 +140,11 @@ const structuredData = {
 						{meta.eyebrow}
 					</span>
 					<h1 class="text-balance text-white font-bold tracking-tight max-w-4xl mb-4 sm:mb-5" style="text-shadow:0 6px 40px rgba(0,0,0,0.55)">
-						Burnham Park — Luntiang Puso ng Lungsod ng Baguio
+						{ENTITY.attractionPlainName} ({ENTITY.cityName}) — Luntiang Puso ng Lungsod ng Baguio
 					</h1>
+					<p class="mb-4 text-[0.7rem] sm:text-xs font-semibold uppercase tracking-[0.16em] text-white/70" style="text-shadow:0 2px 12px rgba(0,0,0,0.45)">
+						{hierarchyLine}
+					</p>
 					<p class="pretty text-white/90 max-w-2xl text-base sm:text-xl md:text-2xl leading-relaxed mb-6 sm:mb-8" style="text-shadow:0 2px 18px rgba(0,0,0,0.5)">
 						{meta.description}
 					</p>
@@ -122,16 +174,33 @@ const structuredData = {
 	<KeyInfoCard />
 
 	<!-- =================================================================== -->
+	<!-- 2.5 RATING AT MGA REVIEW (Google Maps)                              -->
+	<!-- =================================================================== -->
+	<RatingSummary />
+
+	<!-- =================================================================== -->
 	<!-- 3. TUNGKOL (About)                                                  -->
 	<!-- =================================================================== -->
 	<section class="section-pad" aria-label="Tungkol sa Burnham Park" id="tungkol">
 		<div class="container-page grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
 			<div class="lg:col-span-7">
-				<span class="eyebrow">Tungkol sa Burnham Park</span>
+				<span class="eyebrow">Tungkol sa {ENTITY.attractionFullName}</span>
 				<h2 class="text-balance mb-6">
-					Isang 32.84-ektaryang parke na inihanda ni Daniel Burnham, na nasa dating lupain ng mga Ibaloi.
+					About {ENTITY.attractionPlainName} ({ENTITY.cityName}) — isang 32.84-ektaryang parke na inihanda ni Daniel Burnham, sa dating lupain ng mga Ibaloi.
 				</h2>
+				<!-- 4.2 Hierarchy ng lokasyon (Atraksyon → Lungsod → Lalawigan → Bansa) -->
+				<p class="mb-5 text-[0.7rem] sm:text-xs font-semibold uppercase tracking-[0.16em] text-pine-700">
+					{hierarchyLine}
+				</p>
 				<div class="prose-fil !max-w-none">
+					<!-- 4.1 Pahayag ng pagkakapantay ng pangalan -->
+					<p>
+						Maligayang pagdating sa <strong>{ENTITY.attractionFullName}</strong>, na kilala bilang
+						sentrong <strong>{ENTITY.attractionShortName}</strong>. Matatagpuan ito sa puso ng
+						<strong>{ENTITY.cityName}</strong>, <strong>{ENTITY.stateProvince}</strong>,
+						<strong>{ENTITY.countryName}</strong>, at nagsisilbing pangunahing destinasyon ng mga
+						bumibisita sa rehiyon.
+					</p>
 					<p>
 						Ang <strong>Burnham Park</strong> ay ang pinakasikat at pinakamahalagang pampublikong
 						parke ng <strong>Lungsod ng Baguio</strong>, ang tinaguriang Summer Capital ng Pilipinas.
@@ -516,11 +585,15 @@ const structuredData = {
 			<div class="max-w-3xl mb-10 sm:mb-14">
 				<span class="eyebrow">📍 Mga Kalapit na Atraksyon</span>
 				<h2 class="text-balance mb-5">
-					Iba pang lugar na dapat bisitahin sa Baguio — lahat malapit sa Burnham Park.
+					Landmarks &amp; Attractions Around {ENTITY.attractionShortName}
 				</h2>
+				<!-- 4.3 Semantic cluster sentence: mga landmark na malapit sa atraksyon -->
 				<p class="text-slate-700 text-lg leading-relaxed">
-					Ang Burnham Park ay nasa puso ng Baguio kaya maraming iba pang atraksyon na
-					kayang lakarin o isang maikling biyahe lamang ang layo.
+					Kapag bumibisita sa <strong>{ENTITY.attractionFullName}</strong>, madaling marating ng mga
+					bisita ang mga paligid na landmark at punto ng interes, kabilang ang
+					<strong>{ENTITY.nearbyLandmark1}</strong> at <strong>{ENTITY.nearbyLandmark2}</strong>.
+					Ang Burnham Park ay nasa puso ng Baguio kaya marami pang ibang atraksyon na kayang lakarin
+					o isang maikling biyahe lamang ang layo.
 				</p>
 			</div>
 
@@ -576,9 +649,11 @@ const structuredData = {
 			<div class="max-w-3xl mb-8 sm:mb-10">
 				<span class="eyebrow">🗺️ Mapa ng Parke</span>
 				<h2 class="text-balance mb-5">
-					Hanapin ang Lagoon, Rose Garden, at paradahan gamit ang interactive na mapa.
+					Location &amp; How to Visit {ENTITY.attractionShortName} in {ENTITY.cityName}
 				</h2>
 				<p class="text-slate-700 text-lg leading-relaxed">
+					Ang {ENTITY.attractionPlainName} ay nasa {ENTITY.streetAddress}, {ENTITY.cityName},
+					{ENTITY.stateProvince} {ENTITY.postalCode}, {ENTITY.countryName}（Plus code: {ENTITY.plusCode}）.
 					Naka-embed na Google Map ng Burnham Park. Mag-zoom at mag-click sa marker
 					para i-diretso ang Google Maps navigation.
 				</p>
@@ -608,6 +683,36 @@ const structuredData = {
 						<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🅿️</span><span><strong>Jose Abad Santos Dr</strong> — pinakamalapit na paradahan</span></li>
 					</ul>
 				</div>
+			</div>
+
+			<!-- 5. Mga awtoritatibong papalabas na link (gobyerno / opisyal na turismo) -->
+			<div class="mt-6 rounded-[1.5rem] border border-pine-100 bg-white/80 p-5 sm:p-6">
+				<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-3">
+					🏛️ Mga Opisyal na Sanggunian
+				</p>
+				<p class="text-sm text-slate-700 leading-relaxed mb-4">
+					Para sa mga opisyal na update at impormasyon sa rehiyonal na turismo, bisitahin ang mga
+					sumusunod na awtoritatibong pahina（binubuksan sa bagong tab）:
+				</p>
+				<ul class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm">
+					{OFFICIAL_SOURCES.filter((s) => s.url.startsWith('http')).map((s) => (
+						<li>
+							<a
+								href={s.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-start gap-2 font-semibold text-pine-800 underline underline-offset-4 decoration-pine-300 hover:text-pine-950 hover:decoration-pine-600"
+							>
+								<span aria-hidden="true">🔗</span>
+								<span>{s.title}</span>
+							</a>
+						</li>
+					))}
+				</ul>
+				<p class="mt-4 text-xs text-slate-500 leading-relaxed">
+					Ang Burnham Park Baguio Guide ay isang independiyenteng proyekto at hindi kaakibat ng mga
+					opisyal na tanggapang nabanggit sa itaas.
+				</p>
 			</div>
 		</div>
 	</section>
@@ -666,6 +771,11 @@ const structuredData = {
 			</div>
 		</div>
 	</section>
+
+	<!-- =================================================================== -->
+	<!-- 17. MGA PINAGMULAN (Sources) — E-E-A-T                               -->
+	<!-- =================================================================== -->
+	<SourcesSection />
 
 	<!-- =================================================================== -->
 	<!-- 17. DISCLAIMER                                                       -->
