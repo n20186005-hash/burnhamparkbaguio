@@ -1,0 +1,59 @@
+---
+// Detalyadong transport guide — inilalagay sa loob ng seksyong #transportasyon.
+// Tanging uri ng transportasyon at pangkalahatang impormasyon ang ibinibigay;
+// walang itinatampok na partikular na kumpanya bilang rekomendasyon.
+import { TRANSPORT_GUIDE, ENTITY } from '../consts';
+---
+
+<div id="papunta" class="mt-12 sm:mt-16">
+	<div class="max-w-3xl mb-7 sm:mb-9">
+		<span class="eyebrow">🧭 Detalyadong Gabay Papuntang Parke</span>
+		<h3 class="text-balance mb-4">
+			Hakbang-hakbang na ruta papuntang {ENTITY.attractionPlainName} mula sa paliparan, terminal, at sentro ng lungsod
+		</h3>
+		<p class="text-slate-700 leading-relaxed">
+			Walang paliparan sa mismong Lungsod ng Baguio — karamihan sa mga bisita ay dumarating sa
+			Clark International Airport o mula Kalakhang Maynila bago magpatuloy sa biyaheng paakyat ng bundok.
+			Ang mga oras at pamasahe sa ibaba ay humigit-kumulang lamang at maaaring magbago;
+			suriin sa opisyal na tanggapan o terminal bago bumiyahe.
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+		{TRANSPORT_GUIDE.map((item) => (
+			<article class="card p-5 sm:p-6 flex flex-col h-full border border-pine-100">
+				<div class="flex items-start gap-3 mb-4">
+					<span class="text-2xl shrink-0" aria-hidden="true">{item.icon}</span>
+					<div>
+						<h4 class="text-base sm:text-lg font-bold text-pine-950 leading-snug">{item.mode}</h4>
+						<div class="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-[0.72rem] font-semibold text-pine-700">
+							<span>⏱️ {item.duration}</span>
+							<span>🎟️ {item.fare}</span>
+						</div>
+					</div>
+				</div>
+
+				<ol class="space-y-2 text-sm text-slate-700 leading-relaxed flex-1">
+					{item.steps.map((step, idx) => (
+						<li class="flex items-start gap-2.5">
+							<span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-pine-100 text-[0.7rem] font-bold text-pine-800">
+								{idx + 1}
+							</span>
+							<span>{step}</span>
+						</li>
+					))}
+				</ol>
+
+				<p class="mt-4 rounded-xl bg-pine-50 px-3.5 py-2.5 text-[0.78rem] leading-relaxed text-pine-900">
+					<span aria-hidden="true">💡</span> {item.tip}
+				</p>
+			</article>
+		))}
+	</div>
+
+	<p class="mt-5 text-xs text-slate-500 leading-relaxed">
+		Paalala：independenteng gabay ito at hindi kumikita sa anumang tiket o reservation. Walang partikular na
+		operator ng bus, taxi, o ride-hailing ang itinatampok o inirerekomenda — pumili ayon sa opisyal na iskedyul,
+		pamasahe, at kaligtasan.
+	</p>
+</div>

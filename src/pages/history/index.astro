@@ -1,0 +1,180 @@
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { PAGE_META, HISTORY_TIMELINE, HISTORY_CONTEXT, LEGENDS, ENTITY } from '../../consts';
+
+const meta = PAGE_META.history;
+
+const faqs = [
+	{
+		q: 'Sino ang nagdisenyo ng Burnham Park?',
+		a: 'Ang pangkalahatang plano ay gawa ng Amerikanong arkitekto at city planner na si Daniel Hudson Burnham (1846–1912), na inimbitahan sa Pilipinas noong 1904. Ang aktuwal na pagpapatayo mula 1907 ay pinangunahan ni William E. Parsons, ang itinalagang arkitekto ng gobyerno para sa Pilipinas.',
+	},
+	{
+		q: 'Kanino ipinangalan ang Burnham Park?',
+		a: 'Ipinangalan ito kay Daniel Hudson Burnham bilang pagkilala sa kanyang 1905 plan para sa Baguio. Opisyal na itinalaga ang lugar bilang “Burnham Park Reservation” noong 1925 sa pamamagitan ng Proklamasyon Blg. 64 ni Gobernador-Heneral Leonard Wood.',
+	},
+	{
+		q: 'Ano ang orihinal na pangalan ng lugar bago ito naging parke?',
+		a: 'Kafagway — isang malawak na parang at pastulan ng mga Ibaloi, isa sa mga katutubong pangkat ng Cordillera. Ang salitang Kafagway ay karaniwang isinasalin bilang “malawak na parang”.',
+	},
+	{
+		q: 'Ilang taon na ang Burnham Park?',
+		a: 'Mahigit isang siglo. Sinimulan ang pagpapatayo noong 1907, at opisyal na itinalaga ang reserbasyon noong 1925. Ngayon, ito ay pinangangasiwaan ng City Environment and Parks Management Office (CEPMO) ng Lungsod ng Baguio.',
+	},
+	{
+		q: 'Ano ang papel ni Daniel Burnham sa Pilipinas bukod sa Baguio?',
+		a: 'Bukod sa plan para sa Baguio, gumawa rin si Burnham ng plano para sa Maynila — parehong inatasan noong panahon ni Gobernador William Howard Taft at ng Philippine Commission. Ang Burnham Plan ng Baguio ay itinuturing na isa sa pinakamahalagang halimbawa ng City Beautiful Movement sa labas ng Estados Unidos.',
+	},
+	{
+		q: 'May makikita pa bang bakas ng orihinal na plano sa parke?',
+		a: 'Oo. Ang pinakakapansin-pansin ay ang pagkaka-disposisyon ng parke bilang sentro ng lungsod: mula sa Burnham Park ay abot sa loob lamang ng ilang minutong lakad ang Session Road, Katedral ng Baguio, at mga pampublikong pamilihan — eksakto ang layunin ng planong iniharap noong 1905.',
+	},
+] as const;
+
+const facts = [
+	{ label: 'Sukat ng reserbasyon', value: '32.84 ektarya' },
+	{ label: 'Taon ng nararapat na plano', value: '1905 (Burnham Plan)' },
+	{ label: 'Opisyal na pagtatalaga', value: '1925 · Proklamasyon Blg. 64' },
+	{ label: 'Simula ng pagpapatayo', value: '1907 · William E. Parsons' },
+	{ label: 'Tagapangasiwa ngayon', value: 'CEPMO, Lungsod ng Baguio' },
+	{ label: 'Elebasyon', value: '~1,500 metro' },
+];
+---
+
+<DetailLayout
+	title={meta.title}
+	description={meta.description}
+	hero={meta.hero}
+	heroAlt={meta.heroAlt}
+	eyebrow={meta.eyebrow}
+	h1="Kasaysayan ng Burnham Park — sino ang nagdisenyo at bakit"
+	intro="Maikling sagot: ang Burnham Park ay ipinangalan at dinisenyo batay sa plano ng Amerikanong arkitekto na si Daniel Hudson Burnham, na inatasan ng Philippine Commission noong 1904 na gawing “hill station” ang Baguio. Bago naging parke, ang lugar ay Kafagway — pastulan at pamayanan ng mga Ibaloi."
+	slug="history"
+	faqs={faqs}
+>
+	<!-- Direktang sagot sa mga madalas na hinahanap -->
+	<section class="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+		<article class="card p-5 sm:p-6 lg:col-span-2">
+			<p class="eyebrow">🏛️ Sino ang nagdisenyo</p>
+			<h2 class="mb-3">Daniel Hudson Burnham (1846–1912)</h2>
+			<p class="text-slate-700 leading-relaxed mb-3">
+				Si Daniel Hudson Burnham ay isa sa pinakamaimpluwensyang city planner sa kasaysayan ng Estados Unidos —
+				kilala bilang may-akda ng <em>City Beautiful Movement</em>, ang paniniwalang ang mga parke, malalapad na
+				daanan, at maayos na pampublikong espasyo ay nagpapabuti sa kalusugan at pag-uugali ng mga mamamayan.
+				Sa Pilipinas, humakbang siya lampas sa isang gusali: inilatag niya ang balangkas ng isang buong lungsod.
+			</p>
+			<p class="text-slate-700 leading-relaxed">
+				Sa planong iniharap noong 1905, ang Burnham Park ang naging <strong>“green heart”</strong> ng Baguio —
+				isang malawak na parke sa gitna, napapalibutan ng mga gusali ng pamahalaan, paaralan, at sonang
+				residensyal. Hindi ito palamuti: imprastruktura ito na hanggang ngayon ay nararamdaman — ang parke ang
+				baga ng lungsod at 				ang pinakamadaling paraan para marating ang
+				<a href="/how-to-get-there/" class="text-pine-700 font-semibold underline">Session Road</a>,
+				ang Katedral ng Baguio, at mga pampublikong pamilihan sa loob lamang ng ilang minutong lakad.
+			</p>
+		</article>
+
+		<article class="card p-5 sm:p-6 bg-pine-50 border-pine-100">
+			<p class="eyebrow text-pine-700">📌 Mga Pangunahing Datos</p>
+			<dl class="mt-3 space-y-3 text-sm">
+				{facts.map((f) => (
+					<div>
+						<dt class="text-slate-500">{f.label}</dt>
+						<dd class="font-bold text-pine-950 leading-snug">{f.value}</dd>
+					</div>
+				))}
+			</dl>
+		</article>
+	</section>
+
+	<!-- Timeline -->
+	<section class="mt-12 sm:mt-14" id="timeline">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🕰️ Timeline</span>
+			<h2 class="text-balance">Paano nabuo ang parke, taon-taon</h2>
+		</div>
+		<div class="overflow-x-auto -mx-1 px-1">
+			<table class="w-full min-w-[560px] text-left border-collapse text-sm">
+				<thead>
+					<tr class="text-[0.7rem] uppercase tracking-wider text-slate-500 border-b border-slate-200">
+						<th class="py-2 pr-4 font-semibold">Taon</th>
+						<th class="py-2 pr-4 font-semibold">Pangyayari</th>
+						<th class="py-2 font-semibold">Bakit ito mahalaga</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						HISTORY_TIMELINE.map((item) => (
+							<tr class="border-b border-slate-100 last:border-0 align-top">
+								<td class="py-3 pr-4 font-bold text-pine-950 whitespace-nowrap">{item.year}</td>
+								<td class="py-3 pr-4 font-semibold text-slate-700">{item.title}</td>
+								<td class="py-3 text-slate-600 leading-relaxed" set:html={item.desc}></td>
+							</tr>
+						))
+					}
+				</tbody>
+			</table>
+		</div>
+		<p class="mt-4 text-sm text-slate-500">
+			Mas gusto mo bang basahin ang buong kwento kasama ang mga larawan?
+			<a href="/#kasaysayan" class="text-pine-700 font-semibold underline">Pumunta sa seksyong Kasaysayan sa pangunahing pahina</a>.
+		</p>
+	</section>
+
+	<!-- Konteksto -->
+	<section class="mt-12 sm:mt-14">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🔍 Konteksto</span>
+			<h2 class="text-balance">Tatlong bagay na nagpapaliwanag sa itsura ng parke ngayon</h2>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+			{
+				HISTORY_CONTEXT.map((c) => (
+					<article class="card p-5 sm:p-6">
+						<span class="text-2xl" aria-hidden="true">{c.icon}</span>
+						<h3 class="mt-2 mb-2 font-bold text-pine-950">{c.title}</h3>
+						<p class="text-sm text-slate-600 leading-relaxed" set:html={c.desc}></p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- Pamana -->
+	<section class="mt-12 sm:mt-14">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🌿 Pamana at Identidad</span>
+			<h2 class="text-balance">Higit pa sa pangalan: ang mga kwentong bumubuo sa parke</h2>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+			{
+				LEGENDS.map((l) => (
+					<article class="card p-5 sm:p-6">
+						<h3 class="flex items-center gap-2 font-bold text-pine-950 mb-2">
+							<span aria-hidden="true">{l.icon}</span> {l.title}
+						</h3>
+						<p class="text-sm text-slate-600 leading-relaxed" set:html={l.desc}></p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="mt-12 sm:mt-14">
+		<div class="card p-5 sm:p-6 border-pine-100 bg-pine-50">
+			<h2 class="mb-2">Paano binibisita ang kasaysayang ito sa loob ng parke</h2>
+			<p class="text-slate-700 leading-relaxed mb-3">
+				Ang pamana ay hindi lamang nasa mga palatandaan. Tatlong lugar sa loob ng parke ang direktang
+				nagpapakita ng kwento: ang <strong>Igorot Garden</strong> para sa mga Ibaloi at kultura ng Cordillera,
+				ang <strong>Melvin Jones Grandstand</strong> para sa papel ng parke bilang tanghalan ng lungsod (kabilang
+				ang Panagbenga tuwing Pebrero), at ang mismong <strong>Burnham Lagoon</strong> na bahagi ng orihinal na
+				planong inilatag noong unang dekada ng 1900s.
+			</p>
+			<p class="text-slate-700 leading-relaxed">
+				Para sa ruta na dumadaan sa tatlong ito nang hindi nahihirapan sa paglakad, tingnan ang
+				<a href="/park-map-and-attractions/" class="text-pine-700 font-semibold underline">mapa ng parke at 12 atraksyon</a>.
+				Ang {ENTITY.attractionPlainName} ay nasa {ENTITY.latitude}°N {ENTITY.longitude}°E —
+				<a href={ENTITY.mapsShareUrl} target="_blank" rel="noopener noreferrer" class="text-pine-700 font-semibold underline">buksan sa Google Maps ↗</a>.
+			</p>
+		</div>
+	</section>
+</DetailLayout>

@@ -1,0 +1,170 @@
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { PAGE_META, FOOD_TYPES, NEARBY_ATTRACTIONS } from '../../consts';
+
+const meta = PAGE_META.food;
+
+const zones = [
+	{
+		name: 'Sa loob ng parke — meryenda at inumin',
+		walk: 'Nasa loob na',
+		desc: 'Mga nagtitinda ng strawberry taho, ice cream, inumin, at mangang merienda sa paligid ng lagoon. Pinakamadaling opsyon kapag ayaw mo munang lumayo sa damuhan.',
+		tip: 'Magdala ng pera — karamihan ay hindi tumatanggap ng card.',
+	},
+	{
+		name: 'Session Road — kainan at kapehan',
+		walk: '1–5 minutong lakad',
+		desc: 'Ang pinakasiksik na hanay ng kainan sa Baguio: mga panaderya, kapehan, fast food, at mga kainan ng lutuing Cordilleran. Ito ang pangunahing sentro ng pagkain malapit sa parke.',
+		tip: 'Tuwing tanghali at Sabado-Linggo ay mabilis mapuno ang mga sikat na kainan — maagang kumain o magpareserba.',
+	},
+	{
+		name: 'Lower Session Road at Abanao Street',
+		walk: '5–10 minutong lakad',
+		desc: 'Mas abot-kaya: mga karinderya, maliit na kainan, at tindahan ng pansit at lugaw. Dito karaniwang kumakain ang mga lokal na nagtatrabaho sa sentro.',
+		tip: 'Mainam kung naghahanap ka ng mas murang hapunan pagkatapos maglakad sa parke.',
+	},
+	{
+		name: 'Baguio Public Market',
+		walk: '~800 m / 10–12 minuto',
+		desc: 'Para sa sariwang prutas at gulay ng Cordillera, strawberry jam, ube halaya, peanut brittle, at iba pang pasalubong. Abot-kaya at masagana.',
+		tip: 'Mas maganda kung umaga ang punta — mas sariwa ang paninda at hindi pa gaanong siksikan.',
+	},
+];
+
+const tips = [
+	{
+		title: 'Umpisahan ang araw sa strawberry taho',
+		desc: 'Ang bersyon ng Baguio ng taho ay may strawberry syrup sa halip na arnibal — makikita sa mga naglalako sa paligid ng parke tuwing umaga.',
+	},
+	{
+		title: 'Subukan ang lutuing Cordilleran',
+		desc: 'Pinikpikan, pinuneg, at inandila ay mga lokal na putahe na mahirap hanapin sa labas ng rehiyon. Magtanong sa mga kainan malapit sa Session Road at sa paligid ng palengke.',
+	},
+	{
+		title: 'Magdala ng eksaktong pera',
+		desc: 'Maraming maliliit na tindahan at naglalako ang hindi tumatanggap ng card. Panatilihin ang mga barya at maliliit na pera para sa meryenda at palikuran.',
+	},
+	{
+		title: 'Huwag magpakain ng wildlife',
+		desc: 'Kaunting tira-tirang pagkain ay nakakasira sa tirahan ng mga ibon at hayop sa parke. Itapon ang balot sa tamang basurahan o iuwi ito.',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Puwede bang kumain sa loob ng Burnham Park?',
+		a: 'Oo. Hinihikayat ang piknik sa mga damuhan at bangko sa paligid ng lagoon. May mga nagtitinda rin ng meryenda at inumin sa loob ng parke. Itapon lamang ang basura sa tamang lalagyan o iuwi ito.',
+	},
+	{
+		q: 'Ano ang dapat kainin malapit sa Burnham Park?',
+		a: 'Tatlong klasiko: strawberry taho para sa umaga, lutuing Cordilleran tulad ng pinikpikan para sa tanghap, at sariwang prutas o strawberry jam mula sa Baguio Public Market bilang pasalubong.',
+	},
+	{
+		q: 'Gaano kalayo ang mga restaurant mula sa parke?',
+		a: 'Ang Session Road ay 1–5 minutong lakad mula sa hilagang gilid ng parke, kaya napakaraming pagpipilian sa loob ng ilang minuto. Ang Public Market ay nasa 10–12 minuto.',
+	},
+	{
+		q: 'May murang pagkain ba malapit sa parke?',
+		a: 'Oo — mga karinderya at maliit na kainan sa Lower Session Road at Abanao Street ay 5–10 minuto lamang at mas abot-kaya kaysa sa mga restaurant sa pangunahing kalsada.',
+	},
+	{
+		q: 'Saan bibili ng pasalubong?',
+		a: 'Ang Baguio Public Market ang pinakasulit para sa strawberry jam, ube halaya, peanut brittle, at iba pang produkto ng Cordillera — mga 800 metro mula sa parke.',
+	},
+	{
+		q: 'Ano ang presyo ng kainan malapit sa parke?',
+		a: 'Nagkakaiba ito ayon sa uri ng kainan at panahon. Sa pangkalahatan, mas mura ang mga karinderya kaysa sa restaurant sa Session Road. Bilang gabay, maghanda ng eksaktong pera para sa mga nagtitinda sa parke at sa mga palikuran.',
+	},
+] as const;
+
+const market = NEARBY_ATTRACTIONS.find((n) => n.title === 'Baguio Public Market');
+---
+
+<DetailLayout
+	title={meta.title}
+	description={meta.description}
+	hero={meta.hero}
+	heroAlt={meta.heroAlt}
+	eyebrow={meta.eyebrow}
+	h1="Pagkain at kainan malapit sa Burnham Park"
+	intro="Ang Burnham Park ay napapalibutan ng mga kainan — mula mga naglalako ng strawberry taho sa tabi ng lagoon hanggang sa mga restaurant, panaderya, at lutuing Cordilleran sa Session Road na ilang minuto lamang ang layo. Narito kung ano ang dapat subukan at kung saan makakakuha ng pinakasulit na halaga."
+	slug="food-and-restaurants"
+	faqs={faqs}
+>
+	<!-- 1. Ano ang kakanin -->
+	<section class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+		{FOOD_TYPES.map((f) => (
+			<div class="card p-5 sm:p-6 flex items-start gap-4">
+				<span class="text-3xl shrink-0" aria-hidden="true">{f.icon}</span>
+				<div>
+					<h3 class="font-bold text-pine-950 mb-1.5">{f.title}</h3>
+					<p class="text-sm text-slate-600 leading-relaxed">{f.desc}</p>
+				</div>
+			</div>
+		))}
+	</section>
+
+	<!-- 2. Saan kakain -->
+	<section class="mt-12 sm:mt-14" id="saan-kakain">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🍽️ Mga Sona ng Kainan</span>
+			<h2 class="text-balance">Saan kakain ayon sa layo mula sa parke</h2>
+		</div>
+		<div class="overflow-x-auto -mx-1 px-1">
+			<table class="w-full min-w-[620px] text-left border-collapse text-sm">
+				<thead>
+					<tr class="text-[0.7rem] uppercase tracking-wider text-slate-500 border-b border-slate-200">
+						<th class="py-2 pr-4 font-semibold">Lugar</th>
+						<th class="py-2 pr-4 font-semibold">Layo mula sa parke</th>
+						<th class="py-2 pr-4 font-semibold">Ano ang aasahan</th>
+						<th class="py-2 font-semibold">Paalala</th>
+					</tr>
+				</thead>
+				<tbody>
+					{zones.map((z) => (
+						<tr class="border-b border-slate-100 last:border-0">
+							<td class="py-3 pr-4 font-semibold text-pine-950">{z.name}</td>
+							<td class="py-3 pr-4 text-slate-700 whitespace-nowrap">{z.walk}</td>
+							<td class="py-3 pr-4 text-slate-600 leading-relaxed">{z.desc}</td>
+							<td class="py-3 text-slate-600 leading-relaxed">{z.tip}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		{market && (
+			<p class="mt-4 text-sm text-slate-600">
+				Ang {market.title} ({market.dist}) ay isa ring kapaki-pakinabang na hintuan bago umalis ng lungsod.
+				Tingnan ang <a href="/how-to-get-there/" class="text-pine-700 font-semibold underline">mga distansya at ruta</a>.
+			</p>
+		)}
+	</section>
+
+	<!-- 3. Mga tip -->
+	<section class="mt-12 sm:mt-14">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">💡 Mga Tip sa Pagkain</span>
+			<h2 class="text-balance">Paano masulit ang pagkain malapit sa parke</h2>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+			{tips.map((t) => (
+				<div class="card p-5">
+					<h3 class="font-bold text-pine-950 mb-1.5">{t.title}</h3>
+					<p class="text-sm text-slate-600 leading-relaxed">{t.desc}</p>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<section class="mt-12 sm:mt-14">
+		<div class="card p-5 sm:p-6 border-pine-100 bg-pine-50">
+			<h2 class="mb-2">Planuhin ang buong araw</h2>
+			<p class="text-slate-700 leading-relaxed">
+				Madaling pagsamahin ang kainan at paglibot: umaga sa parke (6–9 AM), tanghali sa Session Road, hapon
+				sa Rose Garden o pamamangka sa lagoon, at bago umalis ay dumaan sa palengke para sa pasalubong.
+				Kung kailangan mo ng matutuluyan malapit sa mga kainan, tingnan ang
+				<a href="/where-to-stay/" class="text-pine-700 font-semibold underline">gabay sa matutuluyan</a>.
+			</p>
+		</div>
+	</section>
+</DetailLayout>

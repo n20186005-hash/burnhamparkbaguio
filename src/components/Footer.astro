@@ -1,5 +1,6 @@
 ---
-import { SITE, DISCLAIMER, OFFICIAL_SOURCES, GOOGLE_REVIEWS } from '../consts';
+import { SITE, DISCLAIMER, OFFICIAL_SOURCES, GOOGLE_REVIEWS, DETAIL_GUIDES } from '../consts';
+const base = Astro.url.pathname === '/' ? '' : '/';
 const jurisdiction = SITE.jurisdiction;
 const officialSources = SITE.officialSources.fil;
 const linkedSources = OFFICIAL_SOURCES.filter((s) => s.url.startsWith('http'));
@@ -23,7 +24,7 @@ const legal = {
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-18 space-y-12 sm:space-y-14">
 
 		<!-- 1. Sitemap / Quick links -->
-		<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10">
+		<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 sm:gap-10">
 			<div class="col-span-2 sm:col-span-1">
 				<a href="/" class="inline-flex items-center gap-2.5 font-bold text-lg text-white no-underline hover:opacity-80 transition-opacity duration-200 mb-3">
 					<span aria-hidden="true">🏞️</span> Burnham Park
@@ -36,33 +37,46 @@ const legal = {
 			<div>
 				<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">Tungkol sa Parke</h4>
 				<ul class="space-y-2.5">
-					<li><a href="#tungkol" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Tungkol</a></li>
-					<li><a href="#kasaysayan" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Kasaysayan</a></li>
-					<li><a href="#alamat" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Pamana</a></li>
-					<li><a href="#atraksyon" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">12 Atraksyon</a></li>
-					<li><a href="#gawain" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Mga Aktibidad</a></li>
+					<li><a href={`${base}#tungkol`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Tungkol</a></li>
+					<li><a href={`${base}#kasaysayan`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Kasaysayan</a></li>
+					<li><a href={`${base}#alamat`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Pamana</a></li>
+					<li><a href={`${base}#atraksyon`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">12 Atraksyon</a></li>
+					<li><a href={`${base}#gawain`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Mga Aktibidad</a></li>
 				</ul>
 			</div>
 
 			<div>
 				<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">Plano</h4>
 				<ul class="space-y-2.5">
-					<li><a href="#praktikal" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Praktikal</a></li>
-					<li><a href="#transportasyon" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Transportasyon</a></li>
-					<li><a href="#pagkain" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Pagkain</a></li>
-					<li><a href="#matutuluyan" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Matutuluyan</a></li>
+					<li><a href={`${base}#praktikal`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Praktikal</a></li>
+					<li><a href={`${base}#transportasyon`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Transportasyon</a></li>
+					<li><a href={`${base}#pagkain`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Pagkain</a></li>
+					<li><a href={`${base}#matutuluyan`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Matutuluyan</a></li>
 				</ul>
 			</div>
 
 			<div>
 				<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">Higit Pa</h4>
 				<ul class="space-y-2.5">
-					<li><a href="#kalapit" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Kalapit</a></li>
-					<li><a href="#galeriya" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Galeriya</a></li>
-					<li><a href="#tip" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Mga Tip</a></li>
-					<li><a href="#faq" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">FAQ</a></li>
-					<li><a href="#mga-review" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Rating</a></li>
-					<li><a href="#mga-sanggunian" class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Mga Pinagmulan</a></li>
+					<li><a href={`${base}#kalapit`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Kalapit</a></li>
+					<li><a href={`${base}#galeriya`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Galeriya</a></li>
+					<li><a href={`${base}#tip`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Mga Tip</a></li>
+					<li><a href={`${base}#faq`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">FAQ</a></li>
+					<li><a href={`${base}#mga-review`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Rating</a></li>
+					<li><a href={`${base}#mga-sanggunian`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">Mga Pinagmulan</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h4 class="text-xs font-bold uppercase tracking-[0.2em] text-white/50 mb-3">Mga Gabay</h4>
+				<ul class="space-y-2.5">
+					{DETAIL_GUIDES.map((g) => (
+						<li>
+							<a href={`/${g.slug}/`} class="text-sm text-white/70 hover:text-white transition-colors duration-200 no-underline">
+								{g.navLabel}
+							</a>
+						</li>
+					))}
 				</ul>
 			</div>
 

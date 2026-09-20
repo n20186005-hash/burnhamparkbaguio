@@ -1,24 +1,64 @@
-# build output
+# ---------------------------------------------------------------------------
+# Manual deployment to Cloudflare Workers / Pages — only the built assets are
+# uploaded (dist/client + dist/server + wrangler.toml). Everything below is
+# local-only or generated, so it should never be pushed or uploaded.
+# ---------------------------------------------------------------------------
+
+# build output (Astro + @astrojs/cloudflare produce dist/client and dist/server)
 dist/
-# generated types
+dist-static/
+dist-client/
+dist-server/
+.output/
+.vercel/
+
+# Cloudflare Workers local dev state
+.wrangler/
+wrangler.toml.bak
+.mf/
+
+# generated Astro types
 .astro/
 
 # dependencies
 node_modules/
+.pnpm-store/
 
-# logs
+# logs (install/debug output — must not be uploaded)
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+install.log
+install.err
+*.log
 
+# local verification helpers / scratch files (temporary, delete after use)
+astro.config.static.mjs
+verify-check.mjs
+tmp/
+temp/
 
-# environment variables
+# environment variables and secrets (never upload)
 .env
-.env.production
+.env.*
+.dev.vars
+.dev.vars.*
+!.env.example
 
-# macOS-specific files
+# editor / OS noise
 .DS_Store
-
-# jetbrains setting folder
+Thumbs.db
+desktop.ini
 .idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# caches
+.eslintcache
+.cache/
+.parcel-cache/
+coverage/
+.playwright-cache/

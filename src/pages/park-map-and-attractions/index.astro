@@ -1,0 +1,224 @@
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { PAGE_META, SITE, CLUSTERS, ENTITY } from '../../consts';
+
+const meta = PAGE_META.parkMap;
+
+const categoryLabels: Record<string, string> = {
+	water: 'Tubig at Lawa',
+	nature: 'Kalikasan',
+	events: 'Kaganapan',
+	play: 'Palaruan',
+	sports: 'Palakasan',
+	culture: 'Kultura',
+	monument: 'Bantayog',
+	facility: 'Pasilidad',
+	garden: 'Hardin',
+	scenic: 'Tanawin',
+};
+
+const label = (cat: string) => categoryLabels[cat] ?? cat.charAt(0).toUpperCase() + cat.slice(1);
+
+const totalMinutes = { quick: '1.5–2 oras', full: '3–4 oras', day: '6–8 oras' };
+
+const routes = [
+	{
+		name: 'Mabilis na loop (lagoon at mga hardin)',
+		time: totalMinutes.quick,
+		steps: ['Burnham Lagoon', 'Rose Garden', 'Igorot Garden'],
+		why: 'Pinakasikat na unang paglalakad — patag, may lilim, at lahat malapit sa pangunahing pasukan.',
+	},
+	{
+		name: 'Klasikong kalahating araw',
+		time: totalMinutes.full,
+		steps: ['Burnham Lagoon', 'Rose Garden', "Children's Playground", 'Melvin Jones Grandstand', 'Orchidarium'],
+		why: 'Sakop ang lawa, mga hardin, palaruan at grandstand — sapat para sa karamihan ng mga pamilya.',
+	},
+	{
+		name: 'Buong araw na may aktibidad',
+		time: totalMinutes.day,
+		steps: ['Bike lane at Athletic Bowl', 'Burnham Lagoon', 'Rose Garden', 'Melvin Jones Grandstand', 'Igorot Garden', 'Orchidarium'],
+		why: 'Kasama ang pamamangka, upa ng bisikleta, at mahabang pahinga sa damuhan — mainam kung hindi nagmamadali.',
+	},
+];
+
+const entrances = [
+	{
+		name: 'Gilid ng Jose Abad Santos Drive (lagoon side)',
+		best: 'Pinakamadaling pasukan kung galing ka ng taxi o jeepney',
+		note: 'Pinakapatag ang daan papuntang mga bangko, boat station, at lawa. Ito rin ang pinakamalapit sa street parking.',
+	},
+	{
+		name: 'Gilid ng Harrison Road',
+		best: 'Malapit sa Rose Garden at Melvin Jones Grandstand',
+		note: 'Mas tahimik kaysa sa lagoon side. Madalas na mas kaunting tao kahit tuwing Sabado at Linggo ng hapon.',
+	},
+	{
+		name: 'Baba ng Session Road',
+		best: 'Kung naglalakad ka mula sa sentro ng lungsod',
+		note: 'Diretsong tawid mula sa Session Road — gamitin ang mga itinalagang tawiran, lalo na kapag kasama ang mga bata.',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Ilang oras kailangan para malibot ang Burnham Park?',
+		a: 'Para sa mabilis na loop sa lagoon at mga hardin: 1.5–2 oras. Para sa karaniwang pagbisita: 3–4 na oras. Kung isasama mo ang pamamangka, upa ng bisikleta, at mahabang pahinga: 6–8 oras.',
+	},
+	{
+		q: 'Ilang atraksyon meron ang Burnham Park?',
+		a: 'Labindalawang (12) natukoy na cluster — mula Burnham Lagoon at Rose Garden hanggang Orchidarium, Igorot Garden, Athletic Bowl, at Melvin Jones Grandstand.',
+	},
+	{
+		q: 'Saan pinakamaganda pumasok?',
+		a: 'Depende sa iyong pupuntahan: ang gilid ng Jose Abad Santos Drive ang pinakamalapit sa lagoon at mga bangko; ang Harrison Road naman ay mas malapit sa Rose Garden at grandstand.',
+	},
+	{
+		q: 'May bike lane ba sa loob ng parke?',
+		a: 'Oo, may nakalaan na bike lane sa mga pangunahing daanan, at maraming tindahan ng upa ng bisikleta sa paligid. Ipinatutupad ang speed limit at priority sa naglalakad — mag-ingat sa mga pamilyang may kasamang bata.',
+	},
+	{
+		q: 'Puwede bang mag-jogging o maglakad nang mas matagal?',
+		a: 'Oo. Popular ang Athletic Bowl at ang loop sa paligid ng lagoon para sa jogging. Ang mga 6–9 AM na oras ay pinakamalamig at pinakatahimik.',
+	},
+	{
+		q: 'Accessible ba ang parke para sa wheelchair at nakatatanda?',
+		a: 'Ang mga pangunahing daanan sa paligid ng lagoon ay sementado at may mga ramp, kaya accessible ang karamihan ng ruta. May mga bahaging hindi fully accessible — piliin ang lagoon at mga pangunahing kalsada para sa pinakamadaling karanasan.',
+	},
+	{
+		q: 'Gaano kalalim ang Burnham Lagoon?',
+		a: 'Hindi inilalathala ng lungsod ang eksaktong lalim, ngunit kilala itong mababaw na lawa na ginawa para sa pamamangka, hindi para sa paglangoy. Ipinagbabawal ang paglangoy — dahil sa kaligtasan at kalinisan ng tubig.',
+	},
+] as const;
+---
+
+<DetailLayout
+	title={meta.title}
+	description={meta.description}
+	hero={meta.hero}
+	heroAlt={meta.heroAlt}
+	eyebrow={meta.eyebrow}
+	h1="Mapa ng Burnham Park at ang 12 atraksyon"
+	intro="Isang malaking reserbasyon na may 32.84 ektarya ang Burnham Park, kaya nakakalito kung walang mapa. Narito ang interactive na mapa, ang buong listahan ng 12 cluster na may tinatayang oras ng paglalakad, at tatlong handang ruta depende sa oras na mayroon ka."
+	slug="park-map-and-attractions"
+	faqs={faqs}
+>
+	<!-- 1. Mapa -->
+	<section class="mt-10" id="mapa">
+		<div class="card overflow-hidden p-0 border-pine-100">
+			<div class="relative w-full h-[320px] sm:h-[400px] md:h-[460px] bg-slate-100">
+				<iframe
+					src={SITE.mapsEmbed}
+					title="Mapa ng Burnham Park sa Baguio"
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					allowfullscreen
+					class="absolute inset-0 h-full w-full border-0"
+				></iframe>
+			</div>
+			<div class="p-5 sm:p-6 md:p-7 bg-gradient-to-br from-cold-50 via-white to-pine-50/60">
+				<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-3">📍 Mga Pangunahing Landmark sa mapa</p>
+				<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-sm text-slate-800">
+					<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🦢</span><span><strong>Burnham Lagoon</strong> — bangka at picnic area</span></li>
+					<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🌹</span><span><strong>Rose Garden</strong> — pinakamaganda Nobyembre hanggang Marso</span></li>
+					<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🏟️</span><span><strong>Melvin Jones Grandstand</strong> — venue ng Panagbenga</span></li>
+					<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🏃</span><span><strong>Athletic Bowl</strong> — jogging at basketball</span></li>
+					<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🪴</span><span><strong>Orchidarium</strong> — mga orchid ng Cordillera</span></li>
+					<li class="inline-flex items-start gap-2"><span aria-hidden="true" class="mt-0.5">🅿️</span><span><strong>Jose Abad Santos Dr</strong> — pinakamalapit na paradahan</span></li>
+				</ul>
+				<p class="mt-4 text-sm text-slate-600">
+					Buongscreen na mapa: <a href={ENTITY.mapsShareUrl} target="_blank" rel="noopener noreferrer" class="text-pine-700 font-semibold underline">buksan sa Google Maps ↗</a>
+					· plus code: {ENTITY.plusCode}
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 2. 12 cluster -->
+	<section class="mt-12 sm:mt-14" id="atraksyon">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🌳 Labindalawang Cluster</span>
+			<h2 class="text-balance">Lahat ng atraksyon sa loob ng parke</h2>
+			<p class="mt-3 text-slate-700 leading-relaxed">
+				Ang bilang sa kanan ay tinatayang oras ng paglalakad kung titingnan mo ito nang hindi nagmamadali —
+				kabilang ang oras para sa litrato at pag-upo.
+			</p>
+		</div>
+		<div class="overflow-x-auto -mx-1 px-1">
+			<table class="w-full min-w-[620px] text-left border-collapse text-sm">
+				<thead>
+					<tr class="text-[0.7rem] uppercase tracking-wider text-slate-500 border-b border-slate-200">
+						<th class="py-2 pr-4 font-semibold">Cluster</th>
+						<th class="py-2 pr-4 font-semibold">Uri</th>
+						<th class="py-2 pr-4 font-semibold">Oras</th>
+						<th class="py-2 font-semibold">Pinakamainam para sa</th>
+					</tr>
+				</thead>
+				<tbody>
+					{CLUSTERS.map((c) => (
+						<tr class="border-b border-slate-100 last:border-0">
+							<td class="py-3 pr-4">
+								<span class="font-semibold text-pine-950">{c.title}</span>
+								<span class="block text-xs text-slate-500">{c.tagline}</span>
+							</td>
+							<td class="py-3 pr-4 text-slate-600 whitespace-nowrap">{label(c.category)}</td>
+							<td class="py-3 pr-4 text-slate-700 whitespace-nowrap">{c.minutes}</td>
+							<td class="py-3 text-slate-600">{c.best.join(' · ')}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p class="mt-4 text-sm text-slate-600">
+			Gusto mo ng mas malalim na kwento sa bawat lugar? Basahin ang
+			<a href="/#mgaatraksyon" class="text-pine-700 font-semibold underline">buong gabay sa mga atraksyon</a>
+			at ang <a href="/history/" class="text-pine-700 font-semibold underline">kasaysayan ng parke</a>.
+		</p>
+	</section>
+
+	<!-- 3. Mga ruta -->
+	<section class="mt-12 sm:mt-14" id="ruta">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🚶 Mga Ruta</span>
+			<h2 class="text-balance">Tatlong handang ruta ayon sa oras na mayroon ka</h2>
+		</div>
+		<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+			{routes.map((r) => (
+				<div class="card p-5 sm:p-6">
+					<p class="chip mb-3">{r.time}</p>
+					<h3 class="font-bold text-pine-950 mb-2">{r.name}</h3>
+					<ol class="space-y-1.5 text-sm text-slate-700">
+						{r.steps.map((s, i) => (
+							<li class="flex gap-2">
+								<span class="text-pine-600 font-bold shrink-0" aria-hidden="true">{i + 1}.</span>
+								<span>{s}</span>
+							</li>
+						))}
+					</ol>
+					<p class="mt-3 text-sm text-slate-600 leading-relaxed">{r.why}</p>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<!-- 4. Mga pasukan -->
+	<section class="mt-12 sm:mt-14" id="pasukan">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🚪 Mga Pasukan</span>
+			<h2 class="text-balance">Saan pinakamainam pumasok</h2>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+			{entrances.map((e) => (
+				<div class="card p-5">
+					<h3 class="font-bold text-pine-950 mb-1.5">{e.name}</h3>
+					<p class="text-sm font-semibold text-pine-700 mb-2">{e.best}</p>
+					<p class="text-sm text-slate-600 leading-relaxed">{e.note}</p>
+				</div>
+			))}
+		</div>
+		<p class="mt-4 text-sm text-slate-600">
+			Walang bayad sa alinmang pasukan. Para sa mga oras ng operasyon at kung aling aktibidad ang may bayad,
+			tingnan ang <a href="/opening-hours/" class="text-pine-700 font-semibold underline">oras at bayad</a>.
+		</p>
+	</section>
+</DetailLayout>

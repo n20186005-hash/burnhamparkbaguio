@@ -1,0 +1,159 @@
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { PAGE_META, ACCOMMODATION_TYPES } from '../../consts';
+
+const meta = PAGE_META.whereToStay;
+
+const bookingTips = [
+	{
+		title: 'Panagbenga (Pebrero): magpareserba nang maaga',
+		desc: 'Ang pinakamalaking pista ng Baguio ay ginaganap tuwing Pebrero at ang mga hotel malapit sa parke ay nauubusan ng kuwarto nang ilang linggo bago pa man magsimula. Kung Pebrero ang biyahe, planuhin ito nang mas maaga.',
+	},
+	{
+		title: 'Unahin ang layo sa parke kaysa sa tanawin kung maaga ang lakad',
+		desc: 'Kung ang plano mo ay maglakad tuwing 6–9 ng umaga, ang lodging na 1–5 minuto mula sa parke ay mas malaking tulong kaysa sa malawak na kuwarto na kailangan pa ng taxi.',
+	},
+	{
+		title: 'Asahan ang paakyat na daan pabalik',
+		desc: 'Maraming hotel sa Session Road ay paakyat pabalik mula sa parke. Kung may kasamang nakatatanda o bata, piliin ang mga nasa Jose Abad Santos Drive o Harrison Road.',
+	},
+	{
+		title: 'Tanungin ang paradahan bago mag-book',
+		desc: 'Limitado ang paradahan sa paligid ng parke. Kung magdadala ng sasakyan, kumpirmahin muna sa hotel kung may sarili silang parking.',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Saan pinakamaganda mag-stay malapit sa Burnham Park?',
+		a: 'Para sa karamihan, ang mga hotel at inn sa Jose Abad Santos Drive at Harrison Road — 1–5 minuto lamang mula sa mga pangunahing pasukan. Kung gusto mong malapit sa kainan, ang Session Road ay 10–15 minutong lakad.',
+	},
+	{
+		q: 'May budget accommodation ba malapit sa parke?',
+		a: 'Oo. Maraming pension house, transient, at backpacker hostel sa paligid ng Magsaysay Avenue, Abanao Street, at malapit sa Public Market — karaniwang 10–20 minutong lakad mula sa parke.',
+	},
+	{
+		q: 'Mas mainam bang manatili sa labas ng sentro para sa tanawin?',
+		a: 'Depende sa biyahe. Ang mga lugar tulad ng Outlook Drive at Leonard Wood Road ay may tanawin at tahimik, ngunit kailangan ng taxi papuntang parke (10–20 minuto). Kung limitado ang oras, mas praktikal ang sentro.',
+	},
+	{
+		q: 'Kailangan ko bang mag-book nang maaga tuwing Pebrero?',
+		a: 'Oo. Tuwing Panagbenga ang parke ang pangunahing venue, kaya nauubusan agad ng kuwarto ang mga lodging sa sentro. Mag-book nang ilang linggo o buwan bago ang petsa.',
+	},
+	{
+		q: 'Ligtas bang maglakad pabalik sa hotel galing parke sa gabi?',
+		a: 'Ang parke ay bukas 24 oras at may nagpapatrolyang security guard. Manatili sa mga lugar na may ilaw at maraming tao, at piliin ang mga ruta sa mga pangunahing kalsada gaya ng Session Road.',
+	},
+	{
+		q: 'Gaano kalayo ang mga hotel mula sa parke?',
+		a: 'Mula 1–5 minuto (Jose Abad Santos Drive at Harrison Road), hanggang 10–15 minutong lakad (Session Road at paligid ng palengke), hanggang 10–20 minutong taxi (mga lugar na may tanawin).',
+	},
+] as const;
+---
+
+<DetailLayout
+	title={meta.title}
+	description={meta.description}
+	hero={meta.hero}
+	heroAlt={meta.heroAlt}
+	eyebrow={meta.eyebrow}
+	h1="Matutuluyan malapit sa Burnham Park"
+	intro="Ang pinakamahusay na lugar kung saan matutulog ay nakadepende sa kung gaano kaaga gusto mong maglakad sa parke. Narito ang apat na uri ng matutuluyan malapit sa Burnham Park — mula mga ilang hakbang mula sa pasukan hanggang sa mga tahimik na lugar na may tanawin."
+	slug="where-to-stay"
+	faqs={faqs}
+>
+	<!-- 1. Mga uri ng matutuluyan -->
+	<section class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+		{ACCOMMODATION_TYPES.map((a) => (
+			<div class="card p-5 sm:p-6">
+				<div class="flex items-start gap-3">
+					<span class="text-3xl shrink-0" aria-hidden="true">{a.icon}</span>
+					<div>
+						<h3 class="font-bold text-pine-950">{a.title}</h3>
+						<p class="text-xs font-semibold text-pine-700 uppercase tracking-wider">{a.areas}</p>
+					</div>
+				</div>
+				<p class="mt-3 text-sm text-slate-600 leading-relaxed">{a.desc}</p>
+				<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+					<div>
+						<p class="font-bold text-pine-800 mb-1">Bentahe</p>
+						<ul class="list-disc list-outside ms-5 space-y-1 text-slate-700">
+							{a.pros.map((p) => (<li>{p}</li>))}
+						</ul>
+					</div>
+					<div>
+						<p class="font-bold text-slate-700 mb-1">Isaalang-alang</p>
+						<ul class="list-disc list-outside ms-5 space-y-1 text-slate-600">
+							{a.cons.map((c) => (<li>{c}</li>))}
+						</ul>
+					</div>
+				</div>
+			</div>
+		))}
+	</section>
+
+	<!-- 2. Layo -->
+	<section class="mt-12 sm:mt-14" id="layo">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">📏 Layò mula sa Parke</span>
+			<h2 class="text-balance">Ano ang ibig sabihin ng “malapit sa Burnham Park”</h2>
+			<p class="mt-3 text-slate-700 leading-relaxed">
+				Dahil nasa gitna ng lungsod ang parke, kahit ang mga lugar na wala sa mismong tabi nito ay nasa loob
+				lamang ng sampung minutong lakad. Gamitin ang mga sumusunod bilang batayan sa pagpili.
+			</p>
+		</div>
+		<div class="overflow-x-auto -mx-1 px-1">
+			<table class="w-full min-w-[560px] text-left border-collapse text-sm">
+				<thead>
+					<tr class="text-[0.7rem] uppercase tracking-wider text-slate-500 border-b border-slate-200">
+						<th class="py-2 pr-4 font-semibold">Lugar</th>
+						<th class="py-2 pr-4 font-semibold">Oras patungong parke</th>
+						<th class="py-2 font-semibold">Pinakamainam para sa</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="border-b border-slate-100">
+						<td class="py-3 pr-4 font-semibold text-pine-950">Jose Abad Santos Drive · Harrison Road</td>
+						<td class="py-3 pr-4 text-slate-700 whitespace-nowrap">1–5 minutong lakad</td>
+						<td class="py-3 text-slate-600">Pamilya, nakatatanda, maagang lakad sa umaga</td>
+					</tr>
+					<tr class="border-b border-slate-100">
+						<td class="py-3 pr-4 font-semibold text-pine-950">Session Road (itaas at ibaba)</td>
+						<td class="py-3 pr-4 text-slate-700 whitespace-nowrap">10–15 minutong lakad pababa</td>
+						<td class="py-3 text-slate-600">Mahilig sa kainan, pamimili, at nightlife</td>
+					</tr>
+					<tr class="border-b border-slate-100">
+						<td class="py-3 pr-4 font-semibold text-pine-950">Abanao · Magsaysay Avenue · paligid ng palengke</td>
+						<td class="py-3 pr-4 text-slate-700 whitespace-nowrap">10–20 minutong lakad</td>
+						<td class="py-3 text-slate-600">Badyet, tunay na lokal na karanasan, murang kainan</td>
+					</tr>
+					<tr class="border-b border-slate-100 last:border-0">
+						<td class="py-3 pr-4 font-semibold text-pine-950">Outlook Drive · Leonard Wood · Mines View area</td>
+						<td class="py-3 pr-4 text-slate-700 whitespace-nowrap">10–20 minuto sakay ng taxi</td>
+						<td class="py-3 text-slate-600">Tanawin, katahimikan, mas maluwag na espasyo</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+	<!-- 3. Tips sa pag-book -->
+	<section class="mt-12 sm:mt-14" id="pag-book">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">📅 Pag-book</span>
+			<h2 class="text-balance">Mga dapat tandaan bago magreserba</h2>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+			{bookingTips.map((b) => (
+				<div class="card p-5">
+					<h3 class="font-bold text-pine-950 mb-1.5">{b.title}</h3>
+					<p class="text-sm text-slate-600 leading-relaxed">{b.desc}</p>
+				</div>
+			))}
+		</div>
+		<p class="mt-4 text-sm text-slate-600">
+			Para sa mismong mga distansya ng lakad mula sa parke papuntang SM City Baguio at iba pang landmark,
+			tingnan ang <a href="/how-to-get-there/" class="text-pine-700 font-semibold underline">gabay sa transportasyon</a>.
+		</p>
+	</section>
+</DetailLayout>

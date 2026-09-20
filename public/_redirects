@@ -1,10 +1,12 @@
-# Burnham Park Baguio — Cloudflare Pages Redirects
-# Redirect legacy multi-page URLs to single-page anchors
+# Burnham Park Baguio — Redirects ng mga lumang (Tagalog) URL
+# Ang mga pahinang ito ay dating "stub" lamang na nagsusumite patungo sa pangunahing pahina,
+# ngunit nakakakuha pa rin ng impresyon mula sa mga query na nasa Ingles. Ngayon ay may mga
+# sariling nilalaman (at English slug) ang bawat isa, kaya dito na nakaturo ang mga ito.
+# (Kapag hindi suportado ng host ang _redirects, gumagana pa rin ang meta-refresh sa bawat pahina.)
 
-/plano/           /#tungkol         301
-/pagbiyahe/        /#transportasyon   301
-/kasaysayan/       /#kasaysayan       301
-/oras/             /#transportasyon   301
-/pagkain/          /#pagkain          301
-/matutuluyan/      /#matutuluyan      301
-/faq/              /#faq              301
+/kasaysayan/       /history/                     301
+/oras/             /opening-hours/               301
+/pagbiyahe/        /how-to-get-there/            301
+/plano/            /park-map-and-attractions/    301
+/pagkain/          /food-and-restaurants/        301
+/matutuluyan/      /where-to-stay/               301

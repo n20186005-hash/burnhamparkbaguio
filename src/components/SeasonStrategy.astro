@@ -1,0 +1,170 @@
+---
+// Estratehiya sa pagbisita ayon sa season + tala ng klima (12 buwan) + umiiral na mga highlight ng season.
+import { SEASONS, SEASON_STRATEGY, CLIMATE_MONTHS, ENTITY } from '../consts';
+
+const maxRain = Math.max(...CLIMATE_MONTHS.map((m) => m.rain));
+
+const band = (rain: number) => {
+	if (rain >= maxRain * 0.5) return 'bg-sky-700';
+	if (rain >= maxRain * 0.25) return 'bg-sky-500';
+	if (rain >= maxRain * 0.1) return 'bg-sky-300';
+	return 'bg-amber-300';
+};
+
+const crowdStyle = (crowd: string) =>
+	crowd.includes('Pinakakaunti') || crowd.startsWith('Mababa')
+		? 'bg-pine-100 text-pine-800'
+		: crowd.includes('Mataas') || crowd.includes('pinakamataong')
+			? 'bg-amber-100 text-amber-800'
+			: 'bg-slate-100 text-slate-700';
+---
+
+<section class="section-pad" aria-label="Estratehiya sa pagbisita ayon sa season" id="estratehiya">
+	<div class="container-page">
+		<div class="max-w-3xl mb-9 sm:mb-12">
+			<span class="eyebrow">📊 Tala ng Klima at Estratehiya</span>
+			<h2 class="text-balance mb-4">
+				Suriin bago pumunta: klima, kalagayan ng parke, at estratehiya ayon sa buwan sa {ENTITY.cityName}
+			</h2>
+			<p class="text-slate-700 text-lg leading-relaxed">
+				Pinagsasama ng seksyong ito ang tatlong aspeto — meteorolohikal (temperatura at ulan), kalagayan ng
+				parke (linaw ng lagoon, pamumulaklak, at daloy ng tubig), at karanasan ng bisita (dagsa ng tao at
+				damit). Ang mga numero ay humigit-kumulang na karaniwang halaga mula sa opisyal na tala ng klima
+				para sa Lungsod ng Baguio — gamitin lamang bilang gabay sa pagpaplano, hindi bilang araw-araw na
+				pagtataya. Palaging suriin ang live na modyul ng panahon sa itaas bago bumiyahe.
+			</p>
+		</div>
+
+		<!-- 1. Mga highlight ng season -->
+		<div class="mb-10 sm:mb-14">
+			<h3 class="text-lg sm:text-xl font-bold text-pine-950 mb-2">
+				1 · Pinakamagandang panahon para bumisita
+			</h3>
+			<p class="text-sm text-slate-600 mb-5 max-w-2xl leading-relaxed">
+				Apat na yugto ng taon sa Baguio at kung ano ang aasahan sa bawat isa.
+			</p>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+				{SEASONS.map((s) => (
+					<article class="card p-5 flex flex-col h-full">
+						<span class="text-3xl mb-3" aria-hidden="true">{s.icon}</span>
+						<h4 class="text-base font-bold text-pine-950 mb-2 leading-snug">{s.title}</h4>
+						<p class="text-sm text-slate-600 leading-relaxed flex-1">{s.desc}</p>
+					</article>
+				))}
+			</div>
+		</div>
+
+		<!-- 2. Estratehiya ayon sa season -->
+		<div class="mb-10 sm:mb-14">
+			<h3 class="text-lg sm:text-xl font-bold text-pine-950 mb-2">
+				2 · Estratehiya sa pagbisita ayon sa season
+			</h3>
+			<p class="text-sm text-slate-600 mb-5 max-w-2xl leading-relaxed">
+				Pagsasama-sama ng klima, kalagayan ng parke, dagsa ng tao, at tamang damit.
+			</p>
+
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+				{SEASON_STRATEGY.map((row) => (
+					<article class="card p-5 sm:p-6 border border-pine-100 flex flex-col h-full">
+						<div class="flex items-start gap-3 mb-4">
+							<span class="text-2xl shrink-0" aria-hidden="true">{row.icon}</span>
+							<div>
+								<h4 class="text-base sm:text-lg font-bold text-pine-950 leading-snug">{row.season}</h4>
+								<p class="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-pine-700 mt-1">
+									{row.months}
+								</p>
+							</div>
+						</div>
+
+						<dl class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4 text-[0.78rem]">
+							<div class="rounded-xl bg-pine-50 px-3 py-2">
+								<dt class="text-slate-500">Temperatura</dt>
+								<dd class="font-bold text-pine-950">{row.temp}</dd>
+							</div>
+							<div class="rounded-xl bg-sky-50 px-3 py-2">
+								<dt class="text-slate-500">Ulan</dt>
+								<dd class="font-bold text-sky-900">{row.rain}</dd>
+							</div>
+							<div class={`rounded-xl px-3 py-2 ${crowdStyle(row.crowd)}`}>
+								<dt class="opacity-70">Dagsa ng tao</dt>
+								<dd class="font-bold">{row.crowd}</dd>
+							</div>
+						</dl>
+
+						<div class="space-y-2.5 text-sm text-slate-700 leading-relaxed flex-1">
+							<p>
+								<span class="font-bold text-pine-950">Kalagayan ng parke：</span>
+								{row.condition}
+							</p>
+							<p>
+								<span class="font-bold text-pine-950">Dadalhin：</span>
+								{row.gear}
+							</p>
+							<p>
+								<span class="font-bold text-pine-950">Estratehiya：</span>
+								{row.strategy}
+							</p>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+
+		<!-- 3. Tala ng klima bawat buwan -->
+		<div>
+			<h3 class="text-lg sm:text-xl font-bold text-pine-950 mb-2">
+				3 · Karaniwang klima bawat buwan
+			</h3>
+			<p class="text-sm text-slate-600 mb-5 max-w-2xl leading-relaxed">
+				Temperatura, ulan, at kung kailan pinaka-angkop ang pagbisita para sa bawat buwan.
+			</p>
+
+			<div class="card border border-pine-100 overflow-hidden">
+				<div class="overflow-x-auto">
+					<table class="w-full min-w-[640px] text-left border-collapse">
+						<thead>
+							<tr class="text-[0.7rem] uppercase tracking-wider text-slate-500 border-b border-slate-200">
+								<th class="py-3 px-4 font-semibold">Buwan</th>
+								<th class="py-3 px-4 font-semibold">Baba / Taas</th>
+								<th class="py-3 px-4 font-semibold">Ulan (mm)</th>
+								<th class="py-3 px-4 font-semibold">Araw na may ulan</th>
+								<th class="py-3 px-4 font-semibold">Paalala sa pagpaplano</th>
+							</tr>
+						</thead>
+						<tbody>
+							{CLIMATE_MONTHS.map((m) => (
+								<tr class="border-b border-slate-100 last:border-0 hover:bg-pine-50/50">
+									<td class="py-3 px-4 font-bold text-pine-950 whitespace-nowrap">{m.month}</td>
+									<td class="py-3 px-4 text-sm whitespace-nowrap">
+										<span class="text-slate-500">{m.low}°</span>
+										<span class="text-slate-400"> / </span>
+										<span class="font-semibold text-slate-800">{m.high}°</span>
+									</td>
+									<td class="py-3 px-4">
+										<div class="flex items-center gap-2">
+											<span class="text-sm font-semibold text-slate-700 w-12">{m.rain}</span>
+											<span class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden min-w-[80px]">
+												<span
+													class={`block h-full rounded-full ${band(m.rain)}`}
+													style={`width:${Math.max(4, Math.round((m.rain / maxRain) * 100))}%`}
+												></span>
+											</span>
+										</div>
+									</td>
+									<td class="py-3 px-4 text-sm text-slate-700 whitespace-nowrap">{m.rainDays} araw</td>
+									<td class="py-3 px-4 text-[0.8rem] text-slate-600 leading-relaxed">{m.note}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<p class="mt-4 text-xs text-slate-500 leading-relaxed">
+				Ang mga bilang ay humigit-kumulang na karaniwang halaga mula sa opisyal na tala ng klima para sa
+				Lungsod ng Baguio（panahong 1991–2020）. Dahil nasa 1,500 metro ang elebasyon, maaaring mag-iba nang
+				malaki ang aktwal na kondisyon sa loob ng iisang araw.
+			</p>
+		</div>
+	</div>
+</section>

@@ -4,11 +4,17 @@ import KeyInfoCard from '../components/KeyInfoCard.astro';
 import ClusterCard from '../components/ClusterCard.astro';
 import RatingSummary from '../components/RatingSummary.astro';
 import SourcesSection from '../components/SourcesSection.astro';
+import WeatherForecast from '../components/WeatherForecast.astro';
+import SeasonStrategy from '../components/SeasonStrategy.astro';
+import VisitorRoutes from '../components/VisitorRoutes.astro';
+import VisitorServices from '../components/VisitorServices.astro';
+import TransportGuide from '../components/TransportGuide.astro';
+import ScienceNotes from '../components/ScienceNotes.astro';
 import {
 	SITE, NAV, CLUSTERS, CLUSTER_CATEGORIES, KEY_INFO, PAGE_META, PAGE_IMAGES,
-	HISTORY_TIMELINE, LEGENDS, ACTIVITIES, FOOD_TYPES, ACCOMMODATION_TYPES,
-	NEARBY_ATTRACTIONS, PRACTICAL_INFO, TRANSPORT_OPTIONS, TIPS, FAQS,
-	SEASONS, GALLERY_IMAGES, DISCLAIMER, ENTITY, ENTITY_HIERARCHY, OFFICIAL_SOURCES,
+	HISTORY_TIMELINE, HISTORY_CONTEXT, LEGENDS, ACTIVITIES, FOOD_TYPES, ACCOMMODATION_TYPES,
+	NEARBY_ATTRACTIONS, PRACTICAL_INFO, TRANSPORT_OPTIONS, TIPS, FAQS, DETAIL_GUIDES,
+	GALLERY_IMAGES, DISCLAIMER, ENTITY, ENTITY_HIERARCHY, OFFICIAL_SOURCES,
 } from '../consts';
 
 const meta = PAGE_META.home;
@@ -179,6 +185,16 @@ const structuredData = {
 	<RatingSummary />
 
 	<!-- =================================================================== -->
+	<!-- 2.6 PANAHON: live na lagay ng panahon + 7-araw na pagtataya          -->
+	<!-- =================================================================== -->
+	<WeatherForecast />
+
+	<!-- =================================================================== -->
+	<!-- 2.7 ESTRATEHIYA AYON SA SEASON + TALA NG KLIMA                       -->
+	<!-- =================================================================== -->
+	<SeasonStrategy />
+
+	<!-- =================================================================== -->
 	<!-- 3. TUNGKOL (About)                                                  -->
 	<!-- =================================================================== -->
 	<section class="section-pad" aria-label="Tungkol sa Burnham Park" id="tungkol">
@@ -281,6 +297,17 @@ const structuredData = {
 					ng plano para sa Maynila at Baguio — at ang Burnham Park ang naging "green heart" ng
 					kanyang plano. Narito ang mahalagang mga pangyayari sa kasaysayan ng parke:
 				</p>
+			</div>
+
+			<!-- Konteksto ng kwento bago ang timeline -->
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-10 sm:mb-14">
+				{HISTORY_CONTEXT.map((ctx) => (
+					<article class="card p-5 sm:p-6 flex flex-col h-full">
+						<span class="text-2xl mb-3" aria-hidden="true">{ctx.icon}</span>
+						<h3 class="text-base font-bold text-pine-950 mb-2 leading-snug">{ctx.title}</h3>
+						<p class="text-sm text-slate-600 leading-relaxed flex-1" set:html={ctx.desc}></p>
+					</article>
+				))}
 			</div>
 
 			<ol class="relative border-s-2 border-pine-300 ms-3 sm:ms-5">
@@ -406,6 +433,11 @@ const structuredData = {
 	</section>
 
 	<!-- =================================================================== -->
+	<!-- 7.5 MGA RUTA: ayon sa uri ng bisita + half-day / full-day            -->
+	<!-- =================================================================== -->
+	<VisitorRoutes />
+
+	<!-- =================================================================== -->
 	<!-- 8. PRAKTIKAL NA IMPORMASYON (Facilities & Services)                  -->
 	<!-- =================================================================== -->
 	<section class="section-pad surface-pine" aria-label="Praktikal na impormasyon" id="praktikal">
@@ -430,6 +462,11 @@ const structuredData = {
 			</div>
 		</div>
 	</section>
+
+	<!-- =================================================================== -->
+	<!-- 8.5 MGA SERBISYO AT PASILIDAD (uri lamang, walang tiyak na negosyo)  -->
+	<!-- =================================================================== -->
+	<VisitorServices />
 
 	<!-- =================================================================== -->
 	<!-- 9. PAGKAIN (Food Types) — uri lamang, walang tiyak na kainan        -->
@@ -560,20 +597,7 @@ const structuredData = {
 				</div>
 			</div>
 
-			<!-- Seasons -->
-			<div class="mt-12">
-				<span class="eyebrow">📅 Panahon at Klima</span>
-				<h2 class="text-2xl sm:text-3xl font-bold text-pine-950 mb-6">Pinakamagandang panahon para bumisita</h2>
-				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-					{SEASONS.map((s) => (
-						<div class="card p-5 sm:p-6 flex flex-col items-start">
-							<span class="text-3xl mb-3" aria-hidden="true">{s.icon}</span>
-							<h3 class="font-bold text-pine-950 mb-2">{s.title}</h3>
-							<p class="text-sm text-slate-600 leading-relaxed">{s.desc}</p>
-						</div>
-					))}
-				</div>
-			</div>
+			<TransportGuide />
 		</div>
 	</section>
 
@@ -718,6 +742,11 @@ const structuredData = {
 	</section>
 
 	<!-- =================================================================== -->
+	<!-- 14.5 AGHAM AT RESPONSIBILIDAD NG BISITA                             -->
+	<!-- =================================================================== -->
+	<ScienceNotes />
+
+	<!-- =================================================================== -->
 	<!-- 15. MGA TIP                                                          -->
 	<!-- =================================================================== -->
 	<section class="section-pad" aria-label="Mga tip para sa bisita" id="tip">
@@ -738,6 +767,37 @@ const structuredData = {
 							<p class="text-sm text-slate-600 leading-relaxed">{t.desc}</p>
 						</div>
 					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- =================================================================== -->
+	<!-- 15.5 MGA DETALYADONG GABAY (hub patungo sa mga subpahina)            -->
+	<!-- =================================================================== -->
+	<section class="section-pad" aria-label="Mga detalyadong gabay" id="mga-gabay">
+		<div class="container-page">
+			<div class="max-w-3xl mb-10 sm:mb-14">
+				<span class="eyebrow">🧭 Mga Detalyadong Gabay</span>
+				<h2 class="text-balance mb-5">
+					Kailangan mo ng mas malalim na detalye? Pumili ng paksa.
+				</h2>
+				<p class="text-slate-700 text-lg leading-relaxed">
+					Ang mga pahinang ito ay naglalaman ng mas mahahabang sagot — kabuuang kasaysayan, eksaktong oras at
+					bayad, ruta at distansya ng lakad, mapa ng parke, at mga tanong na madalas itanong bago magbiyahe.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+				{DETAIL_GUIDES.map((g) => (
+					<a href={`/${g.slug}/`} class="card card-hover p-5 sm:p-6 flex items-start gap-4 no-underline group">
+						<span class="text-3xl shrink-0" aria-hidden="true">{g.icon}</span>
+						<span>
+							<span class="block font-bold text-pine-950 group-hover:text-pine-700">{g.navLabel}</span>
+							<span class="block text-[0.7rem] uppercase tracking-wider text-slate-400">{g.enLabel}</span>
+							<span class="mt-1.5 block text-sm text-slate-600 leading-relaxed">{g.blurb}</span>
+						</span>
+					</a>
 				))}
 			</div>
 		</div>

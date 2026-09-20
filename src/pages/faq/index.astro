@@ -1,10 +1,83 @@
-<!DOCTYPE html>
-<html lang="fil">
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="refresh" content="0;url=/#faq" />
-	<title>Nagre-redirect — Burnham Park</title>
-	<link rel="canonical" href="https://burnhamparkbaguio.com/#faq" />
-</head>
-<body><p>Nagre-redirect... <a href="/#faq">Mag-click dito</a>.</p></body>
-</html>
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { PAGE_META, FAQS, KEY_INFO } from '../../consts';
+
+const meta = PAGE_META.faq;
+
+const extraFaqs = [
+	{
+		q: 'Puwede bang magdala ng maleta o luggage sa parke?',
+		a: 'Walang locker o opisyal na luggage drop sa loob ng parke. Kung galing ka pa lang ng bus o papaalis na, mas mainam na iwan muna ang bagahe sa iyong matutuluyan o sa terminal bago maglakad sa parke.',
+	},
+	{
+		q: 'Pinapayagan ba ang mga alagang hayop?',
+		a: 'Karaniwang pinapayagan ang mga aso kung may tali at nasusunod ang paglilinis ng mga dumi. Igalang ang ibang bisita at ilayo ang alaga sa mga palaruan at mga lugar na matao.',
+	},
+	{
+		q: 'Puwede bang magpalipad ng drone?',
+		a: 'Ang Baguio ay may mga patakaran sa pagpapalipad ng drone sa mga pampublikong lugar, lalo na kapag may kaganapan. Bago magpalipad, magtanong sa City Environment and Parks Management Office (CEPMO) o sa mga naka-duty na bantay ng parke.',
+	},
+	{
+		q: 'May ATM o lugar na pwede magpalit ng pera malapit sa parke?',
+		a: 'Oo — maraming bangko at ATM sa kahabaan ng Session Road ilang minuto lamang mula sa parke. Magdala pa rin ng barya para sa mga palikuran at maliliit na tindahan.',
+	},
+	{
+		q: 'Pinapayagan ba ang paninigarilyo at inuming nakalalasing?',
+		a: 'Ipinapatupad ng lungsod ang mga patakaran sa paninigarilyo sa mga pampublikong lugar. Gamitin ang mga itinalagang lugar at itapon nang tama ang upos. Para sa inuming nakalalasing, igalang ang mga patakaran ng parke at iwasan ang mga lugar na maraming pamilya at bata.',
+	},
+	{
+		q: 'Saan pinakamaganda bumili ng pasalubong?',
+		a: 'Ang Baguio Public Market (~800 m mula sa parke) ay may strawberry jam, ube halaya, peanut brittle, at iba pang produkto ng Cordillera sa pinakasulit na presyo.',
+	},
+	{
+		q: 'Ano ang dapat gawin kapag umulan nang malakas habang nasa parke?',
+		a: 'Lumayo sa mga punong pine na maaaring mabali ng hangin at pumwesto malapit sa mga gusali o sa mga sementadong daanan malapit sa Session Road. Huwag sumakay ng bangka kapag may pagkulog. Suriin ang lagay ng panahon bago maglakad pabalik.',
+	},
+	{
+		q: 'May Wi-Fi ba sa Burnham Park?',
+		a: 'May mga programa ang lungsod para sa libreng Wi-Fi sa ilang pampublikong lugar, ngunit hindi ito palaging maaasahan. Mas ligtas na magplano gamit ang sariling mobile data.',
+	},
+];
+
+const allFaqs = [...FAQS, ...extraFaqs];
+---
+
+<DetailLayout
+	title={meta.title}
+	description={meta.description}
+	hero={meta.hero}
+	heroAlt={meta.heroAlt}
+	eyebrow={meta.eyebrow}
+	h1="Mga Madalas Itanong tungkol sa Burnham Park"
+	intro="Ang mga sagot sa mga pinakakaraniwang tanong ng mga bisita — bayad sa pagpasok, oras ng pagbubukas, pamamangka sa lawa, paradahan, kaligtasan sa gabi, Panagbenga, at accessibility. Kung hindi mo makita ang iyong tanong, tingnan ang mga detalyadong gabay sa dulo ng pahinang ito."
+	slug="faq"
+	faqs={allFaqs}
+>
+	<!-- Mabilis na sagot -->
+	<section class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+		{KEY_INFO.map((k) => (
+			<div class="card p-4 sm:p-5">
+				<p class="text-[0.7rem] uppercase tracking-wider text-slate-500 font-semibold">{k.label}</p>
+				<p class="mt-1 text-xl sm:text-2xl font-bold text-pine-950 leading-tight">{k.value}</p>
+				<p class="mt-1 text-xs text-slate-600">{k.sub}</p>
+			</div>
+		))}
+	</section>
+
+	<!-- Bakit ito ang madalas itanong -->
+	<section class="mt-12 sm:mt-14">
+		<div class="card p-5 sm:p-6 border-pine-100 bg-pine-50">
+			<h2 class="mb-2">Tatlong bagay na pinakamahalagang malaman bago pumunta</h2>
+			<ol class="mt-3 space-y-2 text-slate-700 leading-relaxed">
+				<li><strong>1. Libre ang pasok.</strong> Walang entrance fee sa anumang bahagi ng parke.</li>
+				<li><strong>2. Bukas 24 oras.</strong> Walang oras ng pagsasara — ngunit may sariling oras ang mga operator ng bangka at upa ng bisikleta.</li>
+				<li><strong>3. Sentro ito ng lungsod.</strong> Karamihan ng mga pagbisita ay pinagsasama ang parke sa Session Road, Katedral ng Baguio, at palengke sa loob ng kalahating araw.</li>
+			</ol>
+			<p class="mt-4 text-sm text-slate-600">
+				Detalyadong impormasyon: <a href="/opening-hours/" class="text-pine-700 font-semibold underline">oras at bayad</a> ·
+				<a href="/how-to-get-there/" class="text-pine-700 font-semibold underline">transportasyon at paradahan</a> ·
+				<a href="/park-map-and-attractions/" class="text-pine-700 font-semibold underline">mapa at 12 atraksyon</a>.
+			</p>
+		</div>
+	</section>
+</DetailLayout>

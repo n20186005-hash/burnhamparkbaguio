@@ -1,0 +1,130 @@
+---
+// Mga ruta: (1) nakabatay sa uri ng bisita, (2) pangkalahatang half-day / full-day.
+import { VISITOR_PROFILES, ITINERARIES, ENTITY } from '../consts';
+---
+
+<section class="section-pad surface-pine" aria-label="Mga ruta at itineraryo" id="ruta">
+	<div class="container-page">
+		<div class="max-w-3xl mb-9 sm:mb-12">
+			<span class="eyebrow">🗺️ Mga Ruta sa Pagbisita</span>
+			<h2 class="text-balance mb-4">
+				Tatlong ruta ayon sa uri ng bisita, at dalawang pangkalahatang itineraryo para sa {ENTITY.attractionPlainName}
+			</h2>
+			<p class="text-slate-700 text-lg leading-relaxed">
+				Malaki ang parke (32.84 ektarya at 12 na sona) kaya mahalaga ang pagpili ng ruta ayon sa
+				lakas, kasama, at oras. Pumili ng rutang akma sa inyong grupo — hindi kailangang tapusin lahat.
+			</p>
+		</div>
+
+		<!-- 1. Ruta ayon sa uri ng bisita -->
+		<div class="mb-12 sm:mb-16">
+			<h3 class="text-lg sm:text-xl font-bold text-pine-950 mb-2">
+				1 · Ruta ayon sa uri ng bisita
+			</h3>
+			<p class="text-sm text-slate-600 mb-6 max-w-2xl leading-relaxed">
+				Tatlong opsyon: pamilyang may bata, mahilig sa litrato at kalikasan, at mababang lakas /
+				accessibility-first. Maaaring pagsamahin ang mga bahagi ayon sa lagay ng panahon.
+			</p>
+
+			<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+				{VISITOR_PROFILES.map((p) => (
+					<article class="card p-5 sm:p-6 flex flex-col h-full border border-pine-100">
+						<div class="flex items-start gap-3 mb-3">
+							<span class="text-3xl shrink-0" aria-hidden="true">{p.icon}</span>
+							<div>
+								<h4 class="text-base sm:text-lg font-bold text-pine-950 leading-snug">{p.title}</h4>
+								<p class="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-pine-700 mt-1">
+									⏱️ {p.duration}
+								</p>
+							</div>
+						</div>
+
+						<p class="text-sm text-slate-600 leading-relaxed mb-4">{p.tagline}</p>
+
+						<div class="flex flex-wrap gap-1.5 mb-4">
+							{p.pills.map((pill) => (
+								<span class="rounded-full bg-pine-50 px-2.5 py-1 text-[0.7rem] font-semibold text-pine-800">
+									{pill}
+								</span>
+							))}
+						</div>
+
+						<ol class="relative border-l border-pine-200 pl-4 space-y-3 flex-1">
+							{p.stops.map((s) => (
+								<li>
+									<p class="text-sm font-bold text-pine-950 leading-snug">
+										{s.place}
+										<span class="ml-1 text-[0.7rem] font-semibold text-pine-700">· {s.minutes} min</span>
+									</p>
+									<p class="text-[0.8rem] text-slate-600 leading-relaxed">{s.note}</p>
+								</li>
+							))}
+						</ol>
+
+						<ul class="mt-5 space-y-2 border-t border-pine-100 pt-4">
+							{p.notes.map((n) => (
+								<li class="flex items-start gap-2 text-[0.78rem] text-slate-600 leading-relaxed">
+									<span aria-hidden="true" class="text-pine-600">✓</span>
+									<span>{n}</span>
+								</li>
+							))}
+						</ul>
+					</article>
+				))}
+			</div>
+		</div>
+
+		<!-- 2. Pangkalahatang itineraryo -->
+		<div>
+			<h3 class="text-lg sm:text-xl font-bold text-pine-950 mb-2">
+				2 · Inirerekomendang pangkalat na itineraryo (half-day / full-day)
+			</h3>
+			<p class="text-sm text-slate-600 mb-6 max-w-2xl leading-relaxed">
+				Ang mga oras ay maaaring i-adjust ayon sa pagsikat ng araw, trapiko, at lagay ng panahon.
+				Gamitin ang ruta bilang balangkas — hindi bilang mahigpit na iskedyul.
+			</p>
+
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+				{ITINERARIES.map((it) => (
+					<article class="card p-5 sm:p-6 flex flex-col h-full border border-pine-100">
+						<div class="flex items-start justify-between gap-3 mb-3">
+							<div class="flex items-start gap-3">
+								<span class="text-2xl shrink-0" aria-hidden="true">{it.icon}</span>
+								<div>
+									<h4 class="text-base sm:text-lg font-bold text-pine-950 leading-snug">{it.title}</h4>
+									<p class="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-pine-700 mt-1">
+										⏱️ {it.duration}
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<p class="text-sm text-slate-600 leading-relaxed mb-3">{it.tagline}</p>
+
+						<div class="flex flex-wrap gap-1.5 mb-4">
+							{it.pills.map((pill) => (
+								<span class="rounded-full bg-sky-50 px-2.5 py-1 text-[0.7rem] font-semibold text-sky-800">
+									{pill}
+								</span>
+							))}
+						</div>
+
+						<ol class="space-y-3 flex-1">
+							{it.legs.map((leg) => (
+								<li class="grid grid-cols-[auto,1fr] gap-3">
+									<span class="rounded-lg bg-pine-950 px-2 py-1 text-[0.68rem] font-bold text-white whitespace-nowrap">
+										{leg.time}
+									</span>
+									<div>
+										<p class="text-sm font-bold text-pine-950 leading-snug">{leg.title}</p>
+										<p class="text-[0.8rem] text-slate-600 leading-relaxed">{leg.detail}</p>
+									</div>
+								</li>
+							))}
+						</ol>
+					</article>
+				))}
+			</div>
+		</div>
+	</div>
+</section>

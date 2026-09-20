@@ -1,6 +1,8 @@
 ---
 import { NAV, SITE } from '../consts';
 const mapsUrl = SITE.mapsUrl;
+// Sa mga subpahina, ang mga anchor ng nabigasyon ay dapat tumuro sa pangunahing pahina
+const anchorBase = Astro.url.pathname === '/' ? '' : '/';
 ---
 
 <header class="site-header bg-white/85 backdrop-blur-md border-b border-pine-100 sticky top-0 z-40">
@@ -17,7 +19,7 @@ const mapsUrl = SITE.mapsUrl;
 			<nav class="hidden lg:flex items-center gap-1 overflow-x-auto" aria-label="Pangunahing nabigasyon">
 				{NAV.map((item) => (
 					<a
-						href={item.href}
+						href={`${anchorBase}${item.href}`}
 						class="nav-link inline-flex items-center px-2.5 py-1.5 rounded-lg text-sm font-semibold text-slate-700 hover:text-pine-900 hover:bg-pine-50 transition-colors duration-200 whitespace-nowrap"
 					>
 						{item.label}

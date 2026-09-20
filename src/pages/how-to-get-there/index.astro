@@ -1,0 +1,244 @@
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { PAGE_META, TRANSPORT_OPTIONS, WALKING_DISTANCES, ENTITY, OFFICIAL_SOURCES } from '../../consts';
+
+const meta = PAGE_META.howToGetThere;
+
+const parkingTips = [
+	{
+		title: 'Jose Abad Santos Drive',
+		desc: 'Ang kalsadang dumadaloy sa tabi ng lawa — pinakamalapit na street parking papuntang Burnham Lagoon. Bumibilis mapuno ito kapag umaga ng Sabado at Linggo.',
+	},
+	{
+		title: 'Harrison Road',
+		desc: 'Alternatibong gilid ng parke (malapit sa Rose Garden at Melvin Jones Grandstand). Mas kaunting tao kaysa sa lagoon side tuwing tanghali.',
+	},
+	{
+		title: 'Mga pampublikong parking building sa sentro',
+		desc: 'Kapag puno ang street parking, ang mga parking building malapit sa Session Road ay 5–10 minutong lakad lamang mula sa parke.',
+	},
+	{
+		title: 'Dumating bago mag-9:00 ng umaga',
+		desc: 'Kung hindi mo kayang iwan ang sasakyan, ito ang pinakapraktikal na payo: maagang pagpunta ang tanging sigurado, lalo na tuwing Panagbenga at Kapaskuhan.',
+	},
+];
+
+const fromTerminals = [
+	{
+		from: 'Mula sa mga bus terminal ng partido ng GOVERNOR PACK ROAD',
+		how: '5–10 minutong taxi, o ~15–20 minutong lakad pababa',
+		note: 'Dito karaniwang dumadaan ang mga long-distance bus mula Maynila at Pangasinan. Pababa ang daan papuntang parke — madaling lakarin kung magaan ang dala.',
+	},
+	{
+		from: 'Mula sa SM City Baguio',
+		how: '~500 metro / 7 minutong lakad',
+		note: 'Lumabas patungong Session Road at bumaba pakanan. Patag hanggang bahagyang paakyat sa huling bahagi.',
+	},
+	{
+		from: 'Mula sa Session Road at mga hotel sa paligid nito',
+		how: '1–8 minutong lakad pababa',
+		note: 'Tandaan: pababa papuntang parke, kaya paakyat pabalik — maglaan ng ekstrang oras para sa mga nakatatanda.',
+	},
+	{
+		from: 'Mula sa Baguio Cathedral',
+		how: '~700 metro / 10 minutong lakad pababa',
+		note: 'Pwede mong pagsamahin sa isang lakad: Cathedral → Session Road → Burnham Park, lahat nasa loob ng 15 minuto.',
+	},
+];
+
+const faqs = [
+	{
+		q: 'Saan eksaktong matatagpuan ang Burnham Park?',
+		a: 'Nasa gitna ng Lungsod ng Baguio, sa pagitan ng Jose Abad Santos Drive at Harrison Road, at katabi lamang ng Session Road. Ito ang sentro ng lungsod — mahirap itong ikaligaw dahil lampas-kaunti lang mula sa anumang pangunahing landmark ng Baguio.',
+	},
+	{
+		q: 'Puwede bang lakarin mula SM City Baguio papuntang Burnham Park?',
+		a: 'Oo, mga 500 metro o 7 minutong lakad lamang. Lumabas patungong Session Road at bumaba papuntang parke. Ito ang isa sa pinakamadalas na ruta ng mga bisita.',
+	},
+	{
+		q: 'May paradahan ba sa Burnham Park?',
+		a: 'Limitado. May street parking sa gilid ng Jose Abad Santos Drive at Harrison Road, ngunit mabilis mapuno. Tuwing katapusan ng linggo at Panagbenga, mas mainam na gumamit ng taxi, Grab, o jeepney.',
+	},
+	{
+		q: 'Paano pumunta kung galing ako ng bus terminal?',
+		a: 'Ang mga terminal ng bus sa paligid ng Governor Pack Road ay 5–10 minuto lamang mula sa parke sakay ng taxi. Kung magaan ang dala, mga 15–20 minutong lakad pababa.',
+	},
+	{
+		q: 'Ano ang pinakamurang paraan papuntang Burnham Park?',
+		a: 'Jeepney — maraming ruta ang dumadaan sa paligid ng parke at minimum fare lamang ang bayad. Magtanong sa driver kung dadaan ng Burnham Park o Session Road.',
+	},
+	{
+		q: 'Gaano kalayo ang Burnham Park mula sa Baguio Cathedral?',
+		a: 'Humigit-kumulang 700 metro o 10 minutong lakad pababa. Madalas itong isama sa walking loop: simbahan, Session Road, at parke sa loob ng kalahating oras.',
+	},
+	{
+		q: 'Saan ang pinakamagandang bababaan kung may kasamang nakatatanda?',
+		a: 'Sa gilid ng Jose Abad Santos Drive malapit sa lagoon — pinakapatag ang daan doon papuntang mga bangko at lilim. Iwasan ang mga pasukan sa itaas na bahagi dahil paakyat ito.',
+	},
+] as const;
+
+const official = OFFICIAL_SOURCES.filter((s) => s.url.startsWith('http'));
+---
+
+<DetailLayout
+	title={meta.title}
+	description={meta.description}
+	hero={meta.hero}
+	heroAlt={meta.heroAlt}
+	eyebrow={meta.eyebrow}
+	h1="Paano pumunta sa Burnham Park — transportasyon at paradahan"
+	intro="Ang Burnham Park ay nasa mismong sentro ng Lungsod ng Baguio, kaya halos lahat ng ruta ay nagtatapos malapit dito. Maari kang maglakad mula Session Road o SM City Baguio, sumakay ng jeepney para sa pinakamurang biyahe, o dumaan ng taxi. Ang tunay na hamon ay hindi ang pagpunta — kundi ang paradahan."
+	slug="how-to-get-there"
+	faqs={faqs}
+>
+	<!-- 1. Saan ito -->
+	<section class="mt-10 card p-5 sm:p-6 border-pine-100 bg-pine-50">
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+			<div>
+				<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700">Lokasyon</p>
+				<p class="mt-1 text-sm text-slate-700 leading-relaxed">
+					Jose Abad Santos Dr, Baguio, 2600 Benguet<br />
+					Katabi ng Session Road, malapit sa Baguio Cathedral at SM City Baguio
+				</p>
+			</div>
+			<div>
+				<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700">Coordinates</p>
+				<p class="mt-1 text-sm text-slate-700 leading-relaxed">
+					{ENTITY.latitude}°N {ENTITY.longitude}°E<br />
+					<span class="text-slate-500">Google Maps: {ENTITY.plusCode}</span>
+				</p>
+			</div>
+			<div>
+				<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700">Buksan sa mapa</p>
+				<p class="mt-1 text-sm leading-relaxed">
+					<a href={ENTITY.mapsShareUrl} target="_blank" rel="noopener noreferrer" class="text-pine-800 font-semibold underline">
+						tignan ang eksaktong lokasyon ↗
+					</a>
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 2. Mga opsyon ng transportasyon -->
+	<section class="mt-12 sm:mt-14" id="transportasyon">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🚌 Mga Paraan ng Pagbiyahe</span>
+			<h2 class="text-balance">Apat na paraan papuntang Burnham Park</h2>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+			{TRANSPORT_OPTIONS.map((t) => (
+				<div class="card p-5 sm:p-6 flex items-start gap-4">
+					<span class="text-3xl shrink-0" aria-hidden="true">{t.icon}</span>
+					<div>
+						<h3 class="font-bold text-pine-950 mb-1.5">{t.title}</h3>
+						<p class="text-sm text-slate-600 leading-relaxed">{t.desc}</p>
+					</div>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<!-- 3. Lakarin mula sa mga landmark -->
+	<section class="mt-12 sm:mt-14" id="lakarin">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🚶 Lakarin Mula sa mga Landmark</span>
+			<h2 class="text-balance">Gaano kalayo ang lakad papuntang parke</h2>
+			<p class="mt-3 text-slate-700 leading-relaxed">
+				Dahil nasa sentro ang parke, mas mabilis itong marating nang naglalakad kaysa sasakyan tuwing
+				oras ng kasagsagan ng trapiko. Narito ang karaniwang distansya mula sa mga lugar na madalas
+				puntahan ng mga bisita.
+			</p>
+		</div>
+		<div class="overflow-x-auto -mx-1 px-1">
+			<table class="w-full min-w-[620px] text-left border-collapse text-sm">
+				<thead>
+					<tr class="text-[0.7rem] uppercase tracking-wider text-slate-500 border-b border-slate-200">
+						<th class="py-2 pr-4 font-semibold">Ruta</th>
+						<th class="py-2 pr-4 font-semibold">Distansya</th>
+						<th class="py-2 pr-4 font-semibold">Oras ng lakad</th>
+						<th class="py-2 font-semibold">Paalala</th>
+					</tr>
+				</thead>
+				<tbody>
+					{WALKING_DISTANCES.map((w) => (
+						<tr class="border-b border-slate-100 last:border-0">
+							<td class="py-3 pr-4 font-semibold text-pine-950">{w.from}</td>
+							<td class="py-3 pr-4 text-slate-700 whitespace-nowrap">{w.dist}</td>
+							<td class="py-3 pr-4 text-slate-700 whitespace-nowrap">{w.walk}</td>
+							<td class="py-3 text-slate-600 leading-relaxed">{w.note}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+	<!-- 4. Mula sa mga terminal at hotel -->
+	<section class="mt-12 sm:mt-14">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🛬 Mula sa Terminal at Hotel</span>
+			<h2 class="text-balance">Mga karaniwang simulang punto ng mga bisita</h2>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+			{fromTerminals.map((f) => (
+				<div class="card p-5">
+					<h3 class="font-bold text-pine-950">{f.from}</h3>
+					<p class="mt-1 text-sm font-semibold text-pine-700">{f.how}</p>
+					<p class="mt-2 text-sm text-slate-600 leading-relaxed">{f.note}</p>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<!-- 5. Paradahan -->
+	<section class="mt-12 sm:mt-14" id="paradahan">
+		<div class="max-w-3xl mb-6 sm:mb-8">
+			<span class="eyebrow">🅿️ Paradahan</span>
+			<h2 class="text-balance">Saan pwedeng iparada ang sasakyan</h2>
+			<p class="mt-3 text-slate-700 leading-relaxed">
+				Limitado ang paradahan sa paligid ng parke. Kung hindi mo kailangan ng sasakyan para sa mismong
+				pagbisita, mas mabilis at mas mura ang taxi, Grab, o jeepney papunta rito. Kung kailangan mong
+				magmaneho, narito ang mga dapat asahan.
+			</p>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+			{parkingTips.map((p) => (
+				<div class="card p-5">
+					<h3 class="font-bold text-pine-950 mb-1.5">{p.title}</h3>
+					<p class="text-sm text-slate-600 leading-relaxed">{p.desc}</p>
+				</div>
+			))}
+		</div>
+		<p class="mt-4 text-sm text-slate-600">
+			Kapag nakarating ka na, gamitin ang
+			<a href="/park-map-and-attractions/" class="text-pine-700 font-semibold underline">mapa ng parke</a>
+			upang planuhin ang pinakamagaan na ruta mula sa iyong pinagparadahan.
+		</p>
+	</section>
+
+	<!-- 6. Opisyal -->
+	<section class="mt-12 sm:mt-14">
+		<div class="rounded-[1.5rem] border border-pine-100 bg-white/80 p-5 sm:p-6">
+			<p class="text-xs font-bold uppercase tracking-[0.2em] text-pine-700 mb-3">🏛️ Mga Opisyal na Sanggunian</p>
+			<p class="text-sm text-slate-700 leading-relaxed mb-4">
+				Ang mga ruta ng jeepney at patakaran sa paradahan ay maaaring magbago dahil sa mga kaganapan at
+				proyekto ng lungsod. Para sa pinakabagong impormasyon（binubuksan sa bagong tab）:
+			</p>
+			<ul class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm">
+				{official.map((s) => (
+					<li>
+						<a
+							href={s.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-start gap-2 font-semibold text-pine-800 underline underline-offset-4 decoration-pine-300 hover:text-pine-950 hover:decoration-pine-600"
+						>
+							<span aria-hidden="true">🔗</span>
+							<span>{s.title}</span>
+						</a>
+					</li>
+				))}
+			</ul>
+		</div>
+	</section>
+</DetailLayout>

@@ -1,0 +1,231 @@
+---
+// Layout para sa mga detalyadong gabay (English slug, nilalamang Filipino).
+// Isang lugar lamang ang pinagmumulan ng TDK, hero, breadcrumb at structured data
+// ng bawat subpahina — upang manatiling magkakaugnay ang mga ito.
+import BaseLayout from './BaseLayout.astro';
+import { SITE, ENTITY, DETAIL_GUIDES, DISCLAIMER } from '../consts';
+
+export interface DetailFaq {
+	q: string;
+	a: string;
+}
+
+export interface Props {
+	title: string;
+	description: string;
+	hero: string;
+	heroAlt: string;
+	eyebrow: string;
+	h1: string;
+	intro: string;
+	slug: string;
+	faqs?: readonly DetailFaq[];
+	updated?: string;
+	lastUpdatedLabel?: string;
+}
+
+const {
+	title,
+	description,
+	hero,
+	heroAlt,
+	eyebrow,
+	h1,
+	intro,
+	slug,
+	faqs = [],
+	updated = '2026',
+	lastUpdatedLabel = 'Huling binago',
+} = Astro.props;
+
+const parkId = `https://${ENTITY.domainName}/#attraction`;
+const pageUrl = new URL(Astro.url.pathname, SITE.siteUrl).toString();
+const heroAbs = hero.startsWith('http') ? hero : new URL(hero, SITE.siteUrl).toString();
+
+const graph: Record<string, unknown>[] = [
+	{
+		'@type': 'WebPage',
+		'@id': `${pageUrl}#webpage`,
+		url: pageUrl,
+		name: title,
+		description,
+		inLanguage: 'fil',
+		isPartOf: { '@id': `https://${ENTITY.domainName}/#website` },
+		about: { '@id': parkId },
+		primaryImageOfPage: { '@type': 'ImageObject', url: heroAbs },
+		breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+	},
+	{
+		'@type': 'BreadcrumbList',
+		'@id': `${pageUrl}#breadcrumb`,
+		itemListElement: [
+			{
+				'@type': 'ListItem',
+				position: 1,
+				name: ENTITY.attractionShortName,
+				item: `https://${ENTITY.domainName}/`,
+			},
+			{ '@type': 'ListItem', position: 2, name: h1, item: pageUrl },
+		],
+	},
+	{
+		'@type': 'TouristAttraction',
+		'@id': parkId,
+		name: ENTITY.attractionFullName,
+		alternateName: [ENTITY.attractionShortName, 'Burnham Park Reservation'],
+		url: `https://${ENTITY.domainName}/`,
+		image: [heroAbs],
+		address: {
+			'@type': 'PostalAddress',
+			streetAddress: ENTITY.streetAddress,
+			addressLocality: ENTITY.cityName,
+			addressRegion: ENTITY.stateProvince,
+			postalCode: ENTITY.postalCode,
+			addressCountry: ENTITY.countryCode2Letter,
+		},
+		geo: {
+			'@type': 'GeoCoordinates',
+			latitude: ENTITY.latitude,
+			longitude: ENTITY.longitude,
+		},
+		hasMap: ENTITY.mapsShareUrl,
+		isAccessibleForFree: true,
+		priceRange: 'Free',
+		openingHoursSpecification: [
+			{
+				'@type': 'OpeningHoursSpecification',
+				dayOfWeek: [
+					'Monday',
+					'Tuesday',
+					'Wednesday',
+					'Thursday',
+					'Friday',
+					'Saturday',
+					'Sunday',
+				],
+				opens: '00:00',
+				closes: '23:59',
+			},
+		],
+	},
+	{
+		'@type': 'WebSite',
+		'@id': `https://${ENTITY.domainName}/#website`,
+		name: SITE.name,
+		url: `https://${ENTITY.domainName}/`,
+		inLanguage: 'fil',
+		publisher: { '@type': 'Organization', name: SITE.author },
+	},
+];
+
+if (faqs.length > 0) {
+	graph.push({
+		'@type': 'FAQPage',
+		'@id': `${pageUrl}#faq`,
+		mainEntity: faqs.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: { '@type': 'Answer', text: f.a },
+		})),
+	});
+}
+
+const structuredData = { '@context': 'https://schema.org', '@graph': graph };
+
+const others = DETAIL_GUIDES.filter((g) => g.slug !== slug);
+---
+
+<BaseLayout
+	title={title}
+	description={description}
+	ogImage={hero}
+	ogImageAlt={heroAlt}
+	ogType="article"
+	structuredData={structuredData}
+>
+	<section class="relative bg-pine-950" aria-label={h1}>
+		<div class="relative w-full h-[300px] sm:h-[340px] md:h-[380px] overflow-hidden">
+			<img
+				src={hero}
+				alt={heroAlt}
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+				class="absolute inset-0 h-full w-full object-cover"
+				style="border-radius:0"
+			/>
+			<div class="absolute inset-0 hero-overlay"></div>
+			<div class="absolute inset-0">
+				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-end pb-8 sm:pb-10">
+					<span class="eyebrow text-white/90" style="text-shadow:0 2px 12px rgba(0,0,0,0.4)">{eyebrow}</span>
+					<h1 class="text-balance text-white font-bold tracking-tight max-w-3xl" style="text-shadow:0 6px 40px rgba(0,0,0,0.55)">
+						{h1}
+					</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="container-page">
+		<nav aria-label="Breadcrumb" class="py-4 text-sm">
+			<ol class="flex flex-wrap items-center gap-2 text-slate-500">
+				<li><a href="/" class="text-pine-800 font-semibold no-underline hover:underline">Burnham Park</a></li>
+				<li aria-hidden="true">/</li>
+				<li class="text-slate-700 font-semibold">{h1}</li>
+			</ol>
+		</nav>
+
+		<p class="text-base sm:text-lg text-slate-700 leading-relaxed max-w-3xl">{intro}</p>
+
+		<slot />
+
+		{
+			faqs.length > 0 && (
+				<section class="mt-14 sm:mt-16" id="mga-tanong">
+					<div class="max-w-3xl mb-6 sm:mb-8">
+						<span class="eyebrow">❓ Mga Madalas Itanong</span>
+						<h2 class="text-balance">Mga tanong tungkol sa pahinang ito</h2>
+					</div>
+					<div class="bg-white rounded-3xl shadow-soft border border-slate-200 overflow-hidden divide-y divide-slate-200">
+						{faqs.map((faq, i) => (
+							<details class="accordion-item group">
+								<summary class="accordion-trigger">
+									<span class="mr-2 text-pine-700 font-bold">{String(i + 1).padStart(2, '0')}.</span>
+									<span class="flex-1">{faq.q}</span>
+									<span class="text-pine-500 text-lg transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+								</summary>
+								<div class="px-5 pb-5">
+									<p class="text-slate-700 leading-relaxed">{faq.a}</p>
+								</div>
+							</details>
+						))}
+					</div>
+				</section>
+			)
+		}
+
+		<nav class="mt-14 sm:mt-16" aria-label="Iba pang gabay">
+			<div class="max-w-3xl mb-6">
+				<span class="eyebrow">🧭 Iba Pang Gabay</span>
+				<h2 class="text-balance">Magpatuloy sa mga detalyadong pahina</h2>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+				{
+					others.map((g) => (
+						<a href={`/${g.slug}/`} class="card card-hover p-5 flex items-start gap-3 no-underline group">
+							<span class="text-2xl shrink-0" aria-hidden="true">{g.icon}</span>
+							<span>
+								<span class="block font-bold text-pine-950 group-hover:text-pine-700">{g.navLabel}</span>
+								<span class="block text-sm text-slate-600 leading-relaxed">{g.blurb}</span>
+							</span>
+						</a>
+					))
+				}
+			</div>
+		</nav>
+
+		<p class="mt-12 mb-4 text-xs text-slate-500 leading-relaxed max-w-3xl">
+			{lastUpdatedLabel}: {updated} · {DISCLAIMER.text}
+		</p>
+	</div>
+</BaseLayout>
