@@ -131,13 +131,13 @@ const legal = {
 								>
 									{s.title} <span aria-hidden="true">↗</span>
 								</a>
-								{s.sync && <span class="text-white/45"> · 同步时间 {s.sync}</span>}
+								{s.sync && <span class="text-white/45"> · Oras ng sync: {s.sync}</span>}
 							</li>
 						))}
 					</ul>
 					<p class="mt-3 text-xs text-white/60 leading-relaxed">
-						Rating at mga review：{GOOGLE_REVIEWS.rating}/{GOOGLE_REVIEWS.ratingScale}
-						（{GOOGLE_REVIEWS.reviewCountFormatted}）· 同步时间 {GOOGLE_REVIEWS.syncLabel} ·
+						Rating at mga review: {GOOGLE_REVIEWS.rating}/{GOOGLE_REVIEWS.ratingScale}
+						({GOOGLE_REVIEWS.reviewCountFormatted}) · Oras ng sync: {GOOGLE_REVIEWS.syncLabel} ·
 						{GOOGLE_REVIEWS.sourceNote}
 					</p>
 					<p class="mt-2 text-xs text-white/60 leading-relaxed">

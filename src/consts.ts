@@ -98,26 +98,26 @@ export const ENTITY_HIERARCHY = [
 // (misattribution) sa nilalamang pag-aari ng mga gumagamit ng Google Maps.
 export const GOOGLE_REVIEWS = {
 	source: 'Google Maps',
-	sourceLabel: '谷歌地图（Google Maps）',
-	sourceLabelFil: 'Google Maps (Google 地图)',
+	sourceLabel: 'Google Maps',
+	sourceLabelFil: 'Google Maps',
 	rating: 4.5,
 	ratingScale: 5,
-	reviewCount: 32833,
-	reviewCountFormatted: '32,833',
+	reviewCount: 32896,
+	reviewCountFormatted: '32,896',
 	category: 'City park',
-	syncLabel: '2026 年 9 月',
-	syncLabelFil: 'Setyembre 2026',
-	// Pangunahing linya ng pinagmulan ( Chinese, ayon sa kinakailangang teksto )
+	syncLabel: 'Oktubre 2026',
+	syncLabelFil: 'Oktubre 2026',
+	// Pangunahing linya ng pinagmulan (Filipino / English na teksto)
 	creditLine:
-		'评分与评价数同步自谷歌地图（Google Maps）用户评价 · 2026 年 9 月 · 点击查看谷歌地图全部评价↗',
+		'Ang rating at bilang ng review ay naka-sync mula sa mga review ng gumagamit ng Google Maps · Oktubre 2026 · I-click para tingnan ang lahat ng review sa Google Maps↗',
 	// Buong pahayag ng pinagmulan at copyright para sa bloke ng mga review
 	sourceNote:
-		'同步自 Google 地图用户评价，同步时间 2026 年 9 月；版权归原作者与 Google 地图所有',
+		'Synced from Google Maps user reviews, synced October 2026; copyright belongs to the original authors and Google Maps.',
 	sourceNoteFil:
-		'Naka-sync mula sa mga review ng gumagamit ng Google Maps, oras ng pag-sync: Setyembre 2026；ang copyright ay pag-aari ng orihinal na may-akda at ng Google Maps.',
-	viewAllLabel: '在谷歌地图查看全部评价',
+		'Naka-sync mula sa mga review ng gumagamit ng Google Maps, oras ng pag-sync: Oktubre 2026; ang copyright ay pag-aari ng orihinal na may-akda at ng Google Maps.',
+	viewAllLabel: 'View all reviews on Google Maps',
 	viewAllLabelFil: 'Tingnan ang lahat ng review sa Google Maps',
-	introLabel: '评价来自谷歌地图用户评价',
+	introLabel: 'Reviews from Google Maps users',
 	reviewsUrl: 'https://maps.app.goo.gl/ADvAac4CUWcDbzdDA',
 } as const;
 
@@ -159,12 +159,12 @@ export const GOOGLE_REVIEW_THEMES = [
 // ---- OFFICIAL / AUTHORITATIVE SOURCES -------------------------------------------
 export const OFFICIAL_SOURCES = [
 	{
-		title: '评价 · Google Maps 用户评价',
+		title: 'Google Maps user reviews',
 		titleFil: 'Rating at mga review ng mga gumagamit ng Google Maps',
 		url: 'https://maps.app.goo.gl/ADvAac4CUWcDbzdDA',
-		sync: '2026 年 9 月',
-		syncFil: 'Setyembre 2026',
-		desc: 'Rating na 4.5 / 5 mula sa 32,833 review ng mga gumagamit ng Google Maps para sa Burnham Park (City park).',
+		sync: 'Oktubre 2026',
+		syncFil: 'Oktubre 2026',
+		desc: 'Rating na 4.5 / 5 mula sa 32,896 review ng mga gumagamit ng Google Maps para sa Burnham Park (City park).',
 		sameSourceNote: true,
 		external: true,
 		kind: 'reviews',
@@ -1037,9 +1037,9 @@ export const PAGE_META = {
 		heroAlt: 'Makasaysayang bahagi ng Burnham Park Baguio na napapalibutan ng mga punong pine',
 	},
 	openingHours: {
-		title: 'Burnham Park Opening Hours & Entrance Fee (Free Entry)',
+		title: 'Burnham Park Opening Hours & Entrance Fee (2026)',
 		description:
-			'Open 24 hours with free entrance. Which Burnham Park activities charge a fee, what closes first, and the safest hours to visit.',
+			'Is Burnham Park open 24 hours? Find the park’s opening times, free entrance information, 2026 boating updates, rental fees and tips for visiting at night.',
 		eyebrow: '🕒 Oras, Bayad at mga Serbisyo',
 		hero: '/gallery/burnham-park-6.jpg',
 		heroAlt: 'Tanawin ng Burnham Park sa umaga habang naglalakad ang mga bisita sa lagoon',

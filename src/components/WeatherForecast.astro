@@ -196,6 +196,13 @@ const adviceBlocks = [
 					{isLive ? 'Kasalukuyan' : 'Karaniwan para sa buwang ito'}
 				</p>
 
+				{!isLive && (
+					<p class="mb-4 rounded-xl bg-amber-50 border border-amber-200 px-3 py-2 text-xs sm:text-sm text-amber-800 leading-relaxed">
+						Hindi ma-load ang live na datos ng panahon — ipinapakita ang karaniwang halaga para sa buwang ito.
+						Awtomatikong ina-refresh ang datos sa pagbukas ng pahina.
+					</p>
+				)}
+
 				<div class="flex items-start gap-4">
 					<span class="text-5xl sm:text-6xl leading-none" aria-hidden="true" data-weather-icon>{current.icon}</span>
 					<div>

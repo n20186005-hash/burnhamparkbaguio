@@ -78,7 +78,11 @@ const faqs = [
 	},
 	{
 		q: 'Magkano ang pamamangka sa Burnham Lagoon?',
-		a: 'May bayad ang pamamangka, ngunit walang iisang opisyal na rate card na nakapaskil — itinatakda ito ng mga concessionaire at nagbabago depende sa panahon at uri ng sasakay. Itanong ang eksaktong presyo sa boat station bago sumakay, at maghanda ng eksaktong pera.',
+		a: 'May bayad ang pamamangka. Noong Setyembre 2026, hiniling ng Lungsod ng Baguio na manatiling ₱250 bawat 30 minuto ang upa ng bangka upang hindi tataas nang kusa. Gayunpaman, itinatakda pa rin ito ng bawat concessionaire at pwede itong magbago depende sa uri ng bangka at oras — itanong ang eksaktong presyo sa boat station bago sumakay, at maghanda ng eksaktong pera.',
+	},
+	{
+		q: 'Bukas ba ang pamamangka sa Burnham Lake ngayong 2026?',
+		a: 'Oo. Matapos ang isang yugto ng rehabilitasyon, muling binuksan ang Burnham Lake (Lagoon) para sa pamamangka noong Setyembre 2026. Available muli ang swan at pedal boat sa boat station, habang nananatiling libre ang pagpasok sa buong parke.',
 	},
 	{
 		q: 'Puwede bang pumasok sa parke tuwing may bagyo o malakas na ulan?',
@@ -113,6 +117,45 @@ const official = OFFICIAL_SOURCES.filter((s) => s.url.startsWith('http'));
 				<p class="mt-1 text-xs text-slate-600">{k.sub}</p>
 			</div>
 		))}
+	</section>
+
+	<!-- 1.5 2026 Burnham Lake Reopening & Boat Rental Update -->
+	<section class="mt-12 sm:mt-14" id="boating-2026">
+		<div class="rounded-[1.5rem] border-2 border-pine-300 bg-pine-50/70 p-6 sm:p-8 shadow-soft">
+			<span class="eyebrow text-pine-800">🛶 2026 Update: Burnham Lake Reopening & Boat Rental</span>
+			<h2 class="text-balance mb-4">Muling binuksan ang Burnham Lake — may pamamangka muli noong Setyembre 2026</h2>
+			<p class="text-slate-700 leading-relaxed mb-4">
+				Matapos ang isang yugto ng rehabilitasyon, muling binuksan ang <strong>Burnham Lake (Lagoon)</strong>
+				para sa pamamangka noong <strong>Setyembre 2026</strong>. Libre pa rin pumasok sa buong parke, at ang
+				lawa ay bahagi na muli ng mga pwedeng gawin sa loob.
+			</p>
+			<ul class="space-y-3 text-sm sm:text-[15px] text-slate-800 leading-relaxed">
+				<li class="flex items-start gap-2">
+					<span aria-hidden="true" class="mt-0.5 font-bold text-pine-700">✓</span>
+					<span><strong>Libre ang pagpasok sa parke.</strong> Walang entrance fee, bukas 24 oras araw-araw.</span>
+				</li>
+				<li class="flex items-start gap-2">
+					<span aria-hidden="true" class="mt-0.5 font-bold text-pine-700">✓</span>
+					<span><strong>Muling bukas ang lawa para sa pamamangka.</strong> Available muli ang swan / pedal boat sa Burnham Lagoon boat station.</span>
+				</li>
+				<li class="flex items-start gap-2">
+					<span aria-hidden="true" class="mt-0.5 font-bold text-pine-700">✓</span>
+					<span>
+						<strong>Bayad sa pagbangka:</strong> Hiniling ng lokal na pamahalaan noong Setyembre 2026 na manatiling
+						<strong>₱250 bawat 30 minuto</strong> ang upa ng bangka, nang hindi tataas nang kusa. Itanong ang
+						eksaktong presyo sa boat station bago sumakay — maaaring magbago depende sa uri ng bangka at oras.
+					</span>
+				</li>
+				<li class="flex items-start gap-2">
+					<span aria-hidden="true" class="mt-0.5 font-bold text-amber-700">!</span>
+					<span>
+						<strong>Kumpirmahin bago bumiyahe.</strong> Ang mga oras ng operasyon at presyo ng concessionaire ay
+						pwedeng magbago dahil sa panahon o kaganapan ng lungsod. Suriin muna sa mismong parke o sa opisyal na
+						abiso ng Lungsod ng Baguio.
+					</span>
+				</li>
+			</ul>
+		</div>
 	</section>
 
 	<!-- 2. Libre vs may bayad -->
@@ -166,11 +209,12 @@ const official = OFFICIAL_SOURCES.filter((s) => s.url.startsWith('http'));
 		</div>
 
 		<p class="mt-4 text-xs sm:text-sm text-slate-500 leading-relaxed">
-			Bakit walang nakalagay na eksaktong halaga? Ang mga bayad sa loob ng parke ay itinatakda ng bawat
-			concessionaire at nagbabago depende sa uri ng sasakay, haba ng oras, at panahon (mas mataas o mas mahaba ang
-			pila tuwing Panagbenga at Kapaskuhan). Mas gusto naming sabihin ang totoo kaysa maglimbag ng numerong maaaring
-			luma na pagdating mo. Gamitin ang gabay na ito bilang checklist: alamin kung alin ang libre, at direktang
-			magtanong sa operator.
+			Paunawa: noong Setyembre 2026, hiniling ng Lungsod ng Baguio na manatiling ₱250 bawat 30 minuto ang upa ng
+			bangka sa lawa, ngunit ang mga bayad sa ibang gawain ay itinatakda pa rin ng bawat concessionaire at pwede
+			itong magbago depende sa uri ng sasakay, haba ng oras, at panahon (mas mataas o mas mahaba ang pila tuwing
+			Panagbenga at Kapaskuhan). Mas gusto naming sabihin ang totoo kaysa maglimbag ng numerong maaaring luma na
+			pagdating mo. Gamitin ang gabay na ito bilang checklist: alamin kung alin ang libre, at direktang magtanong
+			sa operator.
 		</p>
 	</section>
 
